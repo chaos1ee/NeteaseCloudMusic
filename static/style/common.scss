@@ -1,0 +1,20 @@
+/** 项目中的公共类 **/
+
+// 红色向上的箭头
+.arrow-up-red {
+  position: relative;
+  &::after {
+    content: ".";
+    display: block;
+    position: absolute;
+    visibility: hidden;
+    top: 64px;
+    left: 50%;
+    width: 12px;
+    height: 7px;
+    margin-left: -6px;
+    background-image: url('/static/image/topbar.png');
+    background-position: -226px 0;
+    overflow: hidden;
+  }
+}
