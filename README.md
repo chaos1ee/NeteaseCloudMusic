@@ -1,25 +1,17 @@
-<<<<<<< HEAD
-# cloud-music
+# Netease Cloud Music 网易云音乐
 
-> A Vue.js project
+使用Vue.js开发的仿网易云音乐PC页面的项目。
 
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 开发环境
 npm run dev
 
-# build for production with minification
+# 生产环境
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-=======
-# NeteaseCloudMusic
->>>>>>> 730d1d51dea79bab593080bf3f857538786ef7e2
