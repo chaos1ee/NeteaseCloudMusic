@@ -2,7 +2,7 @@
   <div v-if="show" class="sub-nav">
     <div class="wrapper">
       <ul class="nav">
-        <router-link v-for="(route ,key) in routes" :key="key" :to="{name: key}" tag="li">
+        <router-link  v-for="(route ,key) in routes" :key="key" :to="{name: key}" tag="li">
           <a href="javascript:void(0)">
             <em>{{ route }}</em>
           </a>
@@ -82,13 +82,14 @@ export default {
     };
   },
   watch: {
-    $route(to, from) {
-      if (_.indexOf(_.keys(this.routes), to.name) > -1 || to.name == "Home") {
-        this.show = true;
-      } else {
-        this.show = false;
-      }
-    }
+    //
+    //$route(to, from) {
+    //  if (_.indexOf(_.keys(this.routes), to.name) > -1 || to.name == "Home") {
+    //    this.show = true;
+    //  } else {
+    //    this.show = false;
+    //  }
+    //}
   }
 };
 </script>

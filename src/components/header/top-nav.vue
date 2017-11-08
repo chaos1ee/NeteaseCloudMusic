@@ -1,6 +1,7 @@
 <template>
   <ul class="top-nav">
-    <router-link v-for="(route ,key) in routes" :key="key" :to="{name: key}" tag="li">
+    <router-link class="nav-item" @click.native="process(index)" v-for="(route ,key, index) in routes" :key="key" :to="{name: key}"
+      tag="li" exact>
       <span>
         <a href="javascript:void(0)">
           <em>{{ route }}</em>
@@ -27,6 +28,13 @@
   li {
     position: relative;
 
+    &.active1 {
+      background-color: #000;
+    }
+    &.active1 sub {
+      visibility: visible;
+    }
+
     a {
       padding: 0 19px;
       text-align: center;
@@ -49,15 +57,13 @@
       background-position: -226px 0;
       visibility: hidden;
     }
-
-    &.active sub {
-      visibility: visible;
-    }
   }
 }
 </style>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "top-nav",
   data() {
@@ -71,6 +77,11 @@ export default {
         Download: "下载客户端"
       }
     };
+  },
+  methods: {
+    process(index) {
+      this.$store.commit("display", index);
+    }
   }
 };
 </script>

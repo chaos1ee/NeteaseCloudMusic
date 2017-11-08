@@ -19,12 +19,12 @@ export default {
     };
   },
   computed: {
-    ...mapState(["count"]),
-    ...mapGetters(["count"])
+    count() {
+      return this.$store.state.count;
+    }
   },
   methods: {
-    ...mapMutations(["add", "reduce"]),
-    ...mapActions(["addAsync"])
+    ...mapMutations(["add", "reduce"])
   }
 };
 </script>

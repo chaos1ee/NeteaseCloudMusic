@@ -1,12 +1,7 @@
 <template>
   <div id="app">
-    <!-- 头部组件 -->
     <cloud-header></cloud-header>
-    <!-- 网页主体 -->
-    <div class="content">
-      <router-view></router-view>
-    </div>
-    <!-- 底部组件 -->
+    <router-view></router-view>
     <cloud-footer></cloud-footer>
   </div>
 </template>
@@ -14,18 +9,9 @@
 <script>
 import CloudHeader from "./components/header/header";
 import CloudFooter from "./components/footer/footer";
-// import {mapMutations} from "vuex";
 
 export default {
   name: "home",
-  data() {
-    return {
-      subnavShow: true
-    };
-  },
-  methods: {
-    // ...mapMutations(["getPath"])
-  },
   components: {
     CloudHeader,
     CloudFooter
@@ -39,12 +25,16 @@ export default {
 
 html,
 body {
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   font-size: 12px;
 }
 
 #app {
+  width: 100%;
+  height: 100%;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
