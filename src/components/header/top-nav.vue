@@ -1,6 +1,6 @@
 <template>
   <ul class="top-nav">
-    <router-link class="nav-item" @click.native="process(index)" v-for="(route ,key, index) in routes" :key="key" :to="{name: key}"
+    <router-link :class="{ active: nav===index}" @click.native="toogle1(index)"  v-for="(route ,key, index) in routes" :key="key" :to="{name: key}"
       tag="li" exact>
       <span>
         <a href="javascript:void(0)">
@@ -28,10 +28,10 @@
   li {
     position: relative;
 
-    &.active1 {
+    &.active {
       background-color: #000;
     }
-    &.active1 sub {
+    &.active sub {
       visibility: visible;
     }
 
@@ -62,7 +62,7 @@
 </style>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "top-nav",
@@ -78,10 +78,11 @@ export default {
       }
     };
   },
+  computed: {
+    ...mapState(["nav"])
+  },
   methods: {
-    process(index) {
-      this.$store.commit("display", index);
-    }
+    ...mapMutations(["toogle1", 'toogle2'])
   }
 };
 </script>

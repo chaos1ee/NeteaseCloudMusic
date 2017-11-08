@@ -1,8 +1,8 @@
 <template>
-  <div v-if="show" class="sub-nav">
+  <div v-if="nav == 0" class="sub-nav">
     <div class="wrapper">
       <ul class="nav">
-        <router-link  v-for="(route ,key) in routes" :key="key" :to="{name: key}" tag="li">
+        <router-link :class="{ active: subnav===index}" @click.native="toogle2(index)" v-for=" (route ,key, index) in routes " :key="key " :to="{name: key} " tag="li" exact>
           <a href="javascript:void(0)">
             <em>{{ route }}</em>
           </a>
@@ -40,6 +40,9 @@
         height: 34px;
         text-align: center;
 
+        &.active em {
+          background-color: #9b0909;
+        }
         a {
           float: left;
           height: 34px;
@@ -66,6 +69,8 @@
 </style>
 
 <script>
+import { mapState, mapMutations } from "vuex";
+
 export default {
   name: "sub-nav",
   data() {
@@ -81,15 +86,11 @@ export default {
       show: true
     };
   },
-  watch: {
-    //
-    //$route(to, from) {
-    //  if (_.indexOf(_.keys(this.routes), to.name) > -1 || to.name == "Home") {
-    //    this.show = true;
-    //  } else {
-    //    this.show = false;
-    //  }
-    //}
+  computed: {
+    ...mapState(["nav","subnav"])
+  },
+  methods: {
+    ...mapMutations(["toogle1","toogle2"])
   }
 };
 </script>
