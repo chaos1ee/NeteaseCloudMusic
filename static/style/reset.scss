@@ -188,18 +188,6 @@ em {
   font-size: inherit;
 }
 
-
-/** 清除浮动 **/
-
-.clearfix::after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-
-.clearfix {
-  overflow: hidden;
-  _zoom: 1;
+li {
+  list-style: none;
 }

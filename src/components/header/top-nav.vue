@@ -1,69 +1,57 @@
 <template>
-  <div class="nav">
-    <ul>
-      <router-link :to="{name: 'Discover'}" tag="li">
-        <a>发现音乐</a>
-      </router-link>
-      <router-link :to="{name: 'Music'}" tag="li">
-        <a>我的音乐</a>
-      </router-link>
-      <router-link :to="{name: 'Friend'}" tag="li">
-        <a>朋友</a>
-      </router-link>
-      <router-link :to="{name: 'Shop'}" tag="li">
-        <a>商城</a>
-      </router-link>
-      <router-link :to="{name: 'Musician'}" tag="li">
-        <a>音乐人</a>
-      </router-link>
-      <router-link :to="{name: 'Download'}" tag="li">
-        <a>下载客户端</a>
-      </router-link>
-    </ul>
-  </div>
+  <ul class="top-nav">
+    <router-link v-for="(route ,key) in routes" :key="key" :to="{name: key}" tag="li">
+      <span>
+        <a href="javascript:void(0)">
+          <em>{{ route }}</em>
+          <sub class="bg-topbar">&nbsp;</sub>
+        </a>
+      </span>
+    </router-link>
+  </ul>
 </template>
 
 <style lang="scss" scoped>
-.topnav {
+.top-nav {
   float: left;
-  top: 64px;
-  left: 50%;
-  width: 12px;
-  height: 7px;
-  margin-left: -6px;
-  background-image: url("/static/image/topbar.png");
-  background-position: -226px 0;
-  overflow: hidden;
-  li {
+
+  li,
+  span,
+  a,
+  em {
     float: left;
-    list-style: none;
+    height: 70px;
+    font-size: 14px;
+  }
+
+  li {
     position: relative;
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      visibility: hidden;
-      top: 64px;
-      left: 50%;
-      width: 12px;
-      height: 7px;
-      margin-left: -6px;
-      background-image: url("/static/image/topbar.png");
-      background-position: -226px 0;
-      overflow: hidden;
-    }
-    &.active::after {
-      visibility: visible;
-    }
+
     a {
-      font-size: 1.2em;
-      display: block;
       padding: 0 19px;
       text-align: center;
       line-height: 70px;
+
       &:hover {
         background-color: #000;
       }
+    }
+
+    sub {
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 64px;
+      width: 12px;
+      height: 7px;
+      margin-left: -6px;
+      overflow: hidden;
+      background-position: -226px 0;
+      visibility: hidden;
+    }
+
+    &.active sub {
+      visibility: visible;
     }
   }
 }
@@ -71,6 +59,18 @@
 
 <script>
 export default {
-  name: "top-nav"
+  name: "top-nav",
+  data() {
+    return {
+      routes: {
+        Home: "发现音乐",
+        Music: "我的音乐",
+        Friend: "我的朋友",
+        Shop: "商城",
+        Musician: "音乐人",
+        Download: "下载客户端"
+      }
+    };
+  }
 };
 </script>

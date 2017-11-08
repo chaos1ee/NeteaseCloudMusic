@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <div class="playlist">
     list
   </div>
 </template>

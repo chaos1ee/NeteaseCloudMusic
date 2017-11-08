@@ -4,25 +4,9 @@
       <span class="el-dropdown-link">登录</span>
       <i class="arrow-down bg-topList"></i>
       <el-dropdown-menu class="dropmenu" slot="dropdown">
-        <el-dropdown-item>
-          <i class="icon-mb"></i>
-          <em>手机号登录</em>
-        </el-dropdown-item>
-        <el-dropdown-item divided>
-          <i class="icon-wx"></i>
-          <em>微信登录</em>
-        </el-dropdown-item>
-        <el-dropdown-item divided>
-          <i class="icon-qq"></i>
-          <em>QQ登录</em>
-        </el-dropdown-item>
-        <el-dropdown-item divided>
-          <i class="icon-sina"></i>
-          <em>新浪微博登录</em>
-        </el-dropdown-item>
-        <el-dropdown-item divided>
-          <i class="icon-net"></i>
-          <em>网易邮箱账号登录</em>
+        <el-dropdown-item v-for="(value, key) in login" :key="key">
+            <i :class="'icon-'+key"></i>
+            <em>{{value}}登录</em>
         </el-dropdown-item>
         <div class="arrow-up"></div>
       </el-dropdown-menu>
@@ -38,21 +22,22 @@
   margin: 20px 0 0 20px;
   padding: 0 22px 0 0;
   background-position: right -46px;
-  .arrow-down {
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    width: 14px;
-    height: 8px;
-    margin-left: -7px;
-    background-position: -20px 0;
-  }
 }
 </style>
 
 <script>
 export default {
-  name: "login"
+  name: "login",
+  data() {
+    return {
+      login: {
+        mb: "手机号",
+        wx: "微信",
+        qq: "QQ",
+        sina: "新浪微博",
+        net: "网易邮箱"
+      }
+    };
+  }
 };
 </script>
-

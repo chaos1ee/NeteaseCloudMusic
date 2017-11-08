@@ -1,6 +1,6 @@
 <template>
-  <div class="rank">
-    2
+  <div class="djradio">
+    radio
   </div>
 </template>
 

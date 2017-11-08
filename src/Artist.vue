@@ -1,5 +1,5 @@
 <template>
-  <div class="singer">
+  <div class="artist">
     singer
   </div>
 </template>
