@@ -1,5 +1,5 @@
 <template>
-  <div class="recommend">
+  <div class="home">
     <div class="banner">
       <el-carousel trigger="click" height="336px">
         <el-carousel-item v-for="item in banners" :key="item.targetId">

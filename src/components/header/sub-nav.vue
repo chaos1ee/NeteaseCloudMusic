@@ -2,9 +2,9 @@
   <div v-if="show" class="sub-nav">
     <div class="wrapper">
       <ul class="nav">
-        <router-link v-for="(route ,key) in routes" :key="route" :to="{name: route}" tag="li">
+        <router-link v-for="(route ,key) in routes" :key="key" :to="{name: key}" tag="li">
           <a href="javascript:void(0)">
-            <em>{{ key }}</em>
+            <em>{{ route }}</em>
           </a>
         </router-link>
       </ul>
@@ -67,23 +67,23 @@
 
 <script>
 export default {
-  name: "top-nav",
+  name: "sub-nav",
   data() {
     return {
       routes: {
-        推荐: Discover,
-        排行榜: TopList,
-        歌单: PlayList,
-        主播电台: DJRadio,
-        歌手: Artist,
-        新碟上架: Album
+        Discover: "推荐",
+        TopList: "排行榜",
+        PlayList: "歌单",
+        DJRadio: "主播电台",
+        Artist: "歌手",
+        Album: "新碟上架"
       },
       show: true
     };
   },
   watch: {
     $route(to, from) {
-      if (_.toArray(this.routes).indexOf(to.name) > -1 || to.name == "Home") {
+      if (_.indexOf(_.keys(this.routes), to.name) > -1 || to.name == "Home") {
         this.show = true;
       } else {
         this.show = false;
