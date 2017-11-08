@@ -89,7 +89,8 @@ export default new Router({
         path: 'download',
         name: 'Download',
         component: Download
-      }
+      },
+      // 添加歌单页面路由
     ]
   }]
 })

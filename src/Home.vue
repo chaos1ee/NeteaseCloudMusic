@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import CloudHeader from "./components/cloud-header";
+import CloudHeader from "./components/header/cloud-header";
 import CloudFooter from "./components/cloud-footer";
 // import { mapMutations } from "vuex";
 

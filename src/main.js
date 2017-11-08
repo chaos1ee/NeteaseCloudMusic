@@ -7,7 +7,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '../static/style/element-variables.scss'
 import store from './store'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
+const _ = require('lodash');
+
+Vue.use(VueAxios, axios)
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false

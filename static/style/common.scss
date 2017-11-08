@@ -1,20 +1,52 @@
 /** 项目中的公共类 **/
 
-// 红色向上的箭头
-.arrow-up-red {
-  position: relative;
-  &::after {
-    content: ".";
-    display: block;
-    position: absolute;
-    visibility: hidden;
-    top: 64px;
-    left: 50%;
-    width: 12px;
-    height: 7px;
-    margin-left: -6px;
-    background-image: url('/static/image/topbar.png');
-    background-position: -226px 0;
-    overflow: hidden;
-  }
+// 浮动类
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+.clearfix::after {
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+
+// 填充类
+// 处理字体类
+.ft-wp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+.ft-12 {
+  font-size: 12px;
+}
+
+.ft-14 {
+  font-size: 14px;
+}
+
+// 本项目中的特有类
+$topBar: '/static/image/topbar.png';
+$topList: '/static/image/toplist.png';
+.bg-topbar {
+  background-image: url($topBar);
+  background-repeat: no-repeat;
+}
+
+.bg-toplist {
+  background-image: url($topList);
+  background-repeat: no-repeat;
 }

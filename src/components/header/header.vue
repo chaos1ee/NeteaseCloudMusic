@@ -5,30 +5,28 @@
         <h1 class="logo">
           <a href="javascript:void(0)"></a>
         </h1>
-
         <div class="topnav">
           <ul>
-            <router-link class="arrow-up-red" :to="{name: 'Discover'}" tag="li">
+            <router-link :to="{name: 'Discover'}" tag="li">
               <a>发现音乐</a>
             </router-link>
-            <router-link class="arrow-up-red" :to="{name: 'Music'}" tag="li">
+            <router-link :to="{name: 'Music'}" tag="li">
               <a>我的音乐</a>
             </router-link>
-            <router-link class="arrow-up-red" :to="{name: 'Friend'}" tag="li">
+            <router-link :to="{name: 'Friend'}" tag="li">
               <a>朋友</a>
             </router-link>
-            <router-link class="arrow-up-red" :to="{name: 'Shop'}" tag="li">
+            <router-link :to="{name: 'Shop'}" tag="li">
               <a>商城</a>
             </router-link>
-            <router-link class="arrow-up-red" :to="{name: 'Musician'}" tag="li">
+            <router-link :to="{name: 'Musician'}" tag="li">
               <a>音乐人</a>
             </router-link>
-            <router-link class="arrow-up-red" :to="{name: 'Download'}" tag="li">
+            <router-link :to="{name: 'Download'}" tag="li">
               <a>下载客户端</a>
             </router-link>
           </ul>
         </div>
-
         <div class="login">
           <el-dropdown :show-timeout="0" :hide-timeout="0">
             <span class="el-dropdown-link">登录</span>
@@ -97,10 +95,34 @@ $toplistImg: "/static/image/toplist.png";
 
   .topnav {
     float: left;
+    top: 64px;
+    left: 50%;
+    width: 12px;
+    height: 7px;
+    margin-left: -6px;
+    background-image: url("/static/image/topbar.png");
+    background-position: -226px 0;
+    overflow: hidden;
 
     li {
       float: left;
       list-style: none;
+      position: relative;
+
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        visibility: hidden;
+        top: 64px;
+        left: 50%;
+        width: 12px;
+        height: 7px;
+        margin-left: -6px;
+        background-image: url("/static/image/topbar.png");
+        background-position: -226px 0;
+        overflow: hidden;
+      }
 
       &.active::after {
         visibility: visible;
@@ -148,3 +170,4 @@ export default {
   name: "cloud-header"
 };
 </script>
+

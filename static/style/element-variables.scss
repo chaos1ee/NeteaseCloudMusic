@@ -2,6 +2,9 @@
  * 覆盖element-ui原有的样式 
 */
 
+
+/** 自定义el-dropdown**/
+
 $toplistImg: '/static/image/toplist.png';
 .el-dropdown-link {
   display: block;
@@ -84,33 +87,25 @@ $toplistImg: '/static/image/toplist.png';
   }
 }
 
-
-/** 移除dropmenu的内外填充 **/
-
+// 移除dropmenu的内外填充
 .el-dropdown-menu {
   margin: 0;
   padding: 0;
 }
 
-
-/** 改变dropmenu-item划过时的颜色 **/
-
+// 改变dropmenu-item划过时的颜色
 .el-dropdown-menu__item {
   &:hover {
     background-color: #333 !important;
   }
 }
 
-
-/** 移除dropmenu自带的箭头 **/
-
+// 移除dropmenu自带的箭头
 .el-popper .popper__arrow {
   display: none;
 }
 
-
-/** 移除分割线白边，将分割线宽度改为1px，改变分割线颜色 **/
-
+// 移除分割线白边，将分割线宽度改为1px，改变分割线颜色
 .el-dropdown-menu__item--divided {
   margin-top: 0;
   border-color: #313030;
