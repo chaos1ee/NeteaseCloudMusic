@@ -5,12 +5,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // nav保存的是激活状态的上部导航的索引
     nav: 0,
-    count: 0
+    // subnav保存的是激活状态的下部导航的索引
+    subnav: 0
   },
   mutations: {
-    display(state, index) {
+    // 改变处于激活状态的上部导航的索引
+    toogle1(state, index) {
       state.nav = index;
+      state.subnav = 0
+    },
+    // 改变处于激活状态的下部导航的索引
+    toogle2(state, index) {
+      state.subnav = index;
     }
   }
 })
