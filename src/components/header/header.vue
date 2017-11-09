@@ -13,8 +13,6 @@
 
 <style lang="scss" scoped>
 .header {
-  position: absolute;
-  top: 0;
   width: 100%;
   z-index: 100;
 

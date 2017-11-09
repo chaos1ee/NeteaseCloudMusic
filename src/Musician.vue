@@ -1,15 +1,10 @@
 <template>
-  <five-px></five-px>
 </template>
 
 <script>
-import FivePx from "./components/five-px-line";
-
 export default {
   name: "musician",
-  components: {
-    FivePx
-  }
+  components: {}
 };
 </script>
 

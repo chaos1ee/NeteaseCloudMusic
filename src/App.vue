@@ -8,13 +8,17 @@
 
 <script>
 import CloudHeader from "./components/header/header";
-import CloudFooter from "./components/footer/footer";
+import CloudFooter from "./components/footer";
+import { mapActions } from "vuex";
 
 export default {
   name: "home",
   components: {
     CloudHeader,
     CloudFooter
+  },
+  created() {
+    // this.$store.dispatch("fetchData");
   }
 };
 </script>
@@ -26,7 +30,6 @@ export default {
 html,
 body {
   width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
   font-size: 12px;
@@ -34,7 +37,6 @@ body {
 
 #app {
   width: 100%;
-  height: 100%;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

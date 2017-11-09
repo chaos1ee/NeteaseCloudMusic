@@ -23,6 +23,7 @@
     float: left;
     height: 70px;
     font-size: 14px;
+    color: #ccc;
   }
 
   li {
@@ -39,7 +40,6 @@
       padding: 0 19px;
       text-align: center;
       line-height: 70px;
-
       &:hover {
         background-color: #000;
       }
@@ -82,7 +82,7 @@ export default {
     ...mapState(["nav"])
   },
   methods: {
-    ...mapMutations(["toogle1", 'toogle2'])
+    ...mapMutations(["toogle1", "toogle2"])
   }
 };
 </script>
