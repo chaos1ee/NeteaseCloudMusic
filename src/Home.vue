@@ -12,7 +12,7 @@
         <div class="wr">
           <div class="wr2">
             <div class="hot">
-              <title-bar class="bh">
+              <title-bar>
                 <a slot="title" class="bt">热门推荐</a>
                 <div slot="subtitle" class="st">
                   <a class="bsl" href="javascript:void(0)">华语</a>
@@ -27,7 +27,7 @@
                 </div>
               </title-bar>
               <ul class="bc clearfix">
-                <li v-for="(item,key) in hot.data" :key="key">
+                <li v-for="(item,key) in hot" :key="key">
                   <cover :item="item"></cover>
                   <describe>
                     <a slot="desc" :href="'/playlist?'+item.id">{{item.name}}</a>
@@ -36,11 +36,11 @@
               </ul>
             </div>
             <div class="personalized">
-              <title-bar class="bh">
+              <title-bar class="t-bar">
                 <a slot="title" class="bt">个性化推荐</a>
               </title-bar>
               <ul class="bc clearfix">
-                <li v-for="(item,key) in personalized.data" :key="key">
+                <li v-for="(item,key) in personalized" :key="key">
                   <cover :item="item"></cover>
                   <describe>
                     <a slot="desc" :href="'/playlist?'+item.id">{{item.name}}</a>
@@ -52,18 +52,18 @@
               </ul>
             </div>
             <div class="new">
-              <title-bar class="bh">
+              <title-bar class="t-bar">
                 <a slot="title" class="bt">新碟上架</a>
                 <div slot="more" class="more">
                   <a href="javascript:void(0)">更多</a>
                   <i class="icon"></i>
                 </div>
               </title-bar>
-              <div class="album">
+              <div class="newAlbum">
                 <div class="inner">
                   <el-carousel height="180px" trigger="click" :autoplay="false" indicator-position="none" arrow="always">
                     <el-carousel-item v-for="(item,index) in 2" :key="item">
-                      <ul v-for="item in album.data" :key="item.id">
+                      <ul v-for="item in newAlbum" :key="item.id">
                         <li>
                           <img :src="item.picUrl">
                         </li>
@@ -74,7 +74,7 @@
               </div>
             </div>
             <div class="bill">
-              <title-bar class="bh">
+              <title-bar class="t-bar">
                 <a slot="title" class="bt">榜单</a>
                 <div slot="more" class="more">
                   <a href="javascript:void(0)">更多</a>
@@ -82,7 +82,7 @@
                 </div>
               </title-bar>
               <div class="b-list">
-                <dl class="b-block" v-for="(item ,index) in bill.data" :key="item.id">
+                <dl class="b-block" v-for="(item ,index) in bill" :key="item.id">
                   <dt class="top">
                     <div class="b-cover cover">
                       <img :src="item.coverImgUrl">
@@ -108,7 +108,6 @@
                   </dd>
                 </dl>
               </div>
-
             </div>
           </div>
         </div>
@@ -156,11 +155,7 @@
   width: 100%;
 }
 
-.bh {
-  height: 33px;
-  padding: 0 10px 0 34px;
-  background: url("/static/image/index.png") no-repeat -225px -156px;
-  border-bottom: 2px solid #c10d0c;
+.t-bar {
   .bt {
     float: left;
     font-size: 20px;
@@ -204,7 +199,7 @@
   }
 }
 
-.album {
+.newAlbum {
   position: relative;
   height: 186px;
   margin: 20px 0 37px;
@@ -336,68 +331,41 @@ import TitleBar from "./components/titlebar";
 import Cover from "./components/cover";
 import Describe from "./components/desc";
 import Copywriter from "./components/copywriter";
-
 import { mapState, mapMutations } from "vuex";
-
-const SUCCESS = 200;
 
 const API = {
   banner: "/api/banner",
   music: "/api/personalized",
   radio: "/api/personalized/djprogram",
   personalized: "/api/recommend/resource",
-  album: "/api/top/album?limit=10",
-  b1: "/api/top/list?idx=3",
-  b2: "/api/top/list?idx=0",
-  b3: "/api/top/list?idx=2"
+  newAlbum: "/api/top/album?limit=10",
+  bill1: "/api/top/list?idx=3",
+  bill2: "/api/top/list?idx=0",
+  bill3: "/api/top/list?idx=2"
 };
 
 export default {
+  components: {
+    TitleBar,
+    Cover,
+    Describe,
+    Copywriter
+  },
   data() {
     return {
       banner: [],
-      hot: {
-        header: {
-          title: "热门推荐",
-          subTitle: ["华语", "流行", "摇滚", "民谣", "电子"],
-          more: true
-        },
-        type: 0,
-        data: []
-      },
-      personalized: {
-        header: {
-          title: "个性化推荐",
-          more: false
-        },
-        type: 1,
-        data: []
-      },
-      album: {
-        header: {
-          title: "新碟上架",
-          more: true
-        },
-        type: 2,
-        data: []
-      },
-      bill: {
-        header: {
-          title: "榜单",
-          more: true
-        },
-        type: 3,
-        data: []
-      }
+      hot: [],
+      personalized: [],
+      newAlbum: [],
+      bill: []
     };
   },
   created() {
-    //this.$store.dispatch("fetchData");
     this.fetchData();
   },
   methods: {
     /** 
-       * @description 访问对象API中的全部接口 
+       * @description 访问对象API中的全部接口
        */
     accessAll() {
       let temp = [];
@@ -412,7 +380,16 @@ export default {
     fetchData() {
       this.axios.all(this.accessAll()).then(
         this.axios.spread(
-          (banner, music, radio, personalized, album, b1, b2, b3) => {
+          (
+            banner,
+            music,
+            radio,
+            personalized,
+            newAlbum,
+            bill1,
+            bill2,
+            bill3
+          ) => {
             // banner栏
             this.banner = banner.data.banners;
             // 热门推荐
@@ -422,37 +399,32 @@ export default {
             );
             this._moveItem(data, 3, 5);
             this._moveItem(data, 5, 6);
-            this.hot.data = data;
+            this.hot = data;
             // 个性化推荐
-            this.personalized.data = personalized.data.recommend;
+            this.personalized = personalized.data.recommend;
             // 新碟上架
-            this.album.data = album.data.albums;
+            this.newAlbum = newAlbum.data.newAlbums;
             // 榜单
-            this.bill.data = _.concat(
-              b1.data.result,
-              b2.data.result,
-              b3.data.result
+            this.bill = _.concat(
+              bill1.data.result,
+              bill2.data.result,
+              bill3.data.result
             );
-            _.forEach(this.bill.data, (value, index) => {
+            _.forEach(this.bill, (value, index) => {
               value.tracks.splice(10);
             });
           }
         )
       );
     },
-    /** * @description 移动数组中的项 
-       * * @param {array} arr - 给定数组 
-       * * @param {number} to - 该项在数组中要移到的位置 * @param {number} from- 该项在数组中的起始位置
+    /** @description 移动数组中的项 
+       * @param {array} arr - 给定数组 
+       * @param {number} to - 该项在数组中要移到的位置
+       * @param {number} from- 该项在数组中的起始位置
        */
     _moveItem(arr, to, from) {
       arr.splice(to, 0, ...arr.splice(from, 1));
     }
-  },
-  components: {
-    TitleBar,
-    Cover,
-    Describe,
-    Copywriter
   }
 };
 </script>

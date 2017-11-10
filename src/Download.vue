@@ -1,5 +1,5 @@
 <template>
-
+<div class="download"></div>
 </template>
 
 <script>
@@ -10,5 +10,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.download {
+  min-height: 700px;
+}
 </style>

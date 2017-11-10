@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    <cloud-header></cloud-header>
+    <my-header></my-header>
     <router-view></router-view>
-    <cloud-footer></cloud-footer>
+    <my-footer></my-footer>
   </div>
 </template>
 
 <script>
-import CloudHeader from "./components/header/header";
-import CloudFooter from "./components/footer";
+import MyHeader from "./components/header";
+import MyFooter from "./components/footer";
 import { mapActions } from "vuex";
 
 export default {
   name: "home",
   components: {
-    CloudHeader,
-    CloudFooter
+    MyHeader,
+    MyFooter
   },
   created() {
     // this.$store.dispatch("fetchData");

@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.album {
+  min-height: 700px;
+}
 </style>

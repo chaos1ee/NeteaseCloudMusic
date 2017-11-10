@@ -12,5 +12,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.music {
+  min-height: 700px;
+}
 </style>
