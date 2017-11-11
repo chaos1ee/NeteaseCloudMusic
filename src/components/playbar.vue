@@ -7,7 +7,26 @@
           <a class="locker" href="javascript:void(0)" @click.self="lock"></a>
         </div>
         <div class="blank"></div>
-        <div class="player"></div>
+        <div class="player">
+          <div class="btns">
+            <a href="javascript:void(0)">上一曲</a>
+            <a href="javascript:void(0)">播放</a>
+            <a href="javascript:void(0)">下一曲</a>
+          </div>
+          <div class="m-cover">
+            <img src="" alt="...">
+          </div>
+          <div class="play">
+            <div class="words">
+              <span class="title"></span>
+              <span class="artist"></span>
+            </div>
+            <div class="progress">
+              
+            </div>
+          </div>
+          <div class="ctrl"></div>
+        </div>
         <div class="hand">展开播放条</div>
       </div>
     </transition>
