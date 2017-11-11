@@ -20,7 +20,11 @@ export default {
   props: ["item"],
   computed: {
     count() {
-      return _.floor(_.divide(this.item.playCount, 10000)) + "万";
+      let num =
+        this.item.playCount ||
+        this.item.playcount ||
+        this.item.program.listenerCount;
+      return num > 100000 ? _.floor(_.divide(num, 10000)) + "万" : num;
     }
   }
 };

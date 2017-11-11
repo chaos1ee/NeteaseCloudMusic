@@ -96,7 +96,7 @@
   .enter li:nth-child(3) a {
     background-position: 0 0;
   }
-  .enter li:nth-child(4)a {
+  .enter li:nth-child(4) a {
     background-position: -60px 0;
   }
 }

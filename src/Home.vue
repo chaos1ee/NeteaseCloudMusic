@@ -1,12 +1,6 @@
 <template>
   <div class="home">
-    <div class="banner">
-      <el-carousel trigger="click" height="336px">
-        <el-carousel-item v-for="item in banner" :key="item.targetId">
-          <img :src="item.pic">
-        </el-carousel-item>
-      </el-carousel>
-    </div>
+    <banner :banner="banner"></banner>
     <div class="discover-module clearfix">
       <div class="m-left">
         <div class="wr">
@@ -121,11 +115,6 @@
 .home {
   width: 100%;
   background: #f5f5f5;
-}
-
-.banner {
-  width: 982px;
-  margin: 0 auto;
 }
 
 .discover-module {
@@ -327,6 +316,7 @@
 </style>
 
 <script>
+import Banner from "./components/banner";
 import TitleBar from "./components/titlebar";
 import Cover from "./components/cover";
 import Describe from "./components/desc";
@@ -346,6 +336,7 @@ const API = {
 
 export default {
   components: {
+    Banner,
     TitleBar,
     Cover,
     Describe,
@@ -397,8 +388,8 @@ export default {
               _.slice(music.data.result, 0, 5),
               _.slice(radio.data.result, 0, 3)
             );
-            this._moveItem(data, 3, 5);
-            this._moveItem(data, 5, 6);
+            this.moveItem(data, 3, 5);
+            this.moveItem(data, 5, 6);
             this.hot = data;
             // 个性化推荐
             this.personalized = personalized.data.recommend;
@@ -422,7 +413,7 @@ export default {
        * @param {number} to - 该项在数组中要移到的位置
        * @param {number} from- 该项在数组中的起始位置
        */
-    _moveItem(arr, to, from) {
+    moveItem(arr, to, from) {
       arr.splice(to, 0, ...arr.splice(from, 1));
     }
   }

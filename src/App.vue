@@ -3,19 +3,22 @@
     <my-header></my-header>
     <router-view></router-view>
     <my-footer></my-footer>
+    <my-playbar></my-playbar>
   </div>
 </template>
 
 <script>
 import MyHeader from "./components/header";
 import MyFooter from "./components/footer";
+import MyPlaybar from "./components/playbar";
 import { mapActions } from "vuex";
 
 export default {
   name: "home",
   components: {
     MyHeader,
-    MyFooter
+    MyFooter,
+    MyPlaybar
   },
   created() {
     // this.$store.dispatch("fetchData");
