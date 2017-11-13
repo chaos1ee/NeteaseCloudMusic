@@ -72,7 +72,6 @@ $topList: '/static/image/toplist.png';
   margin: 9px 5px 9px 10px;
 }
 
-// 封面
 .cover {
   position: relative;
   display: block;
@@ -116,6 +115,7 @@ $topList: '/static/image/toplist.png';
     width: 16px;
     height: 17px;
     background-position: 0 0;
+    cursor: pointer;
   }
   .icon-headset {
     float: left;
