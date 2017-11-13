@@ -8,12 +8,12 @@
       <div class="blank"></div>
       <div class="player">
         <div class="btns">
-          <a class="prev" href="javascript:void(0)">上一曲</a>
-          <a class="ply" @click="playOrPause" href="javascript:void(0)">播放</a>
-          <a class="next" href="javascript:void(0)">下一曲</a>
+          <a class="prev" @click="playPrev" href="javascript:void(0)">上一曲</a>
+          <a class="ply" @click="playPause" href="javascript:void(0)">播放</a>
+          <a class="next" @click="playNext" href="javascript:void(0)">下一曲</a>
         </div>
         <div class="m-cover">
-          <img :src="playing.coverImg">
+          <img :src="playing.cover">
           <a class="msk" href="javascript:void(0)"></a>
         </div>
         <div class="play">
@@ -301,26 +301,28 @@ export default {
     return {
       // 锁定状态
       locked: false,
-      // Audio实例对象
-      audio: {},
+      index: 0,
       playing: {
-        coverImag: null,
-        name: "",
-        artist: ""
+        name: null,
+        cover: null,
+        artist: null,
+        url: null
       }
     };
   },
   created() {
-    this.createAudioContext();
+    this.audio = this.createAudioContext();
   },
-  computed: mapState({
-    playList: state => state.playList
-  }),
+  updated() {},
+  computed: {
+    ...mapState(["playList"])
+  },
   watch: {
     playList: function() {
-      this.playing.name = this.playList[0].name;
-      this.playing.artist = this.playList[0].ar[0].name;
-      this.playing.coverImg = this.playList[0].al.picUrl;
+      this.changeMusic(0);
+    },
+    index: function(newIndex) {
+      this.changeMusic(newIndex);
     }
   },
   methods: {
@@ -344,33 +346,38 @@ export default {
       }
     },
     createAudioContext() {
-      this.audio = new Audio();
-      this.audio.preload = true;
-      this.audio.controls = false;
+      let audio = new Audio();
+      audio.controls = false;
+      return audio;
+
+      //this.audio.autoplay = true;
+      //this.audio.loop = true;
     },
-    playOrPause() {
-      //if(this.audio.paused)
-      let id = this.playList[0].id;
-      this.playing.name = this.playList[0].name;
-      this.playing.artist = this.playList[0].ar[0].name;
-      this.playing.coverImg = this.playList[0].al.picUrl;
-      this.getMusicUrl(id)
-        .then(url => {
-          this.audio.src = url;
-          this.audio.play();
-        })
-        .catch(err => {
-          console.error(err.message);
-        });
+    // 三种播放模式
+    // 1 单曲循环 loop
+    // 2 随机播放 random
+    // 3 顺序播放 order
+    playNext() {
+      this.index == this.playList.length - 1 ? (this.index = 0) : this.index++;
+      //this.changeMusic(this.index);
     },
-    playNext() {},
-    playPrev() {},
+    playPrev() {
+      if (this.model == "loop") {
+      } else if (this.model == "random") {
+        // 随机数
+        this.index = _.random(0, this.playList.length);
+      } else {
+        this.index == 0
+          ? (this.index = this.playList.length - 1)
+          : this.index--;
+      }
+    },
     // 返回一个promise对象
     // resolved 返回音乐url
-    getMusicUrl(id) {
+    _getMusicUrl(index) {
       return new Promise((resolve, reject) => {
         this.axios
-          .get("/api/music/url?id=" + id)
+          .get("/api/music/url?id=" + this.playList[index].id)
           .then(res => {
             resolve(res.data.data[0].url);
           })
@@ -378,7 +385,35 @@ export default {
             reject(err);
           });
       });
-    }
+    },
+    playPause() {
+      if (this.audio.paused) {
+        if (this.audio.src) {
+          this.audio.play();
+        }
+      } else {
+        this.audio.pause();
+      }
+    },
+    // index变化时触发歌曲更新
+    changeMusic(index) {
+      this._getMusicUrl(index)
+        .then(url => {
+          this.playing.cover = this.playList[index].al.picUrl;
+          this.playing.name = this.playList[index].name;
+          this.playing.artist = this.playList[index].ar[0].name;
+
+          this.audio.src = url;
+          if (this.audio.paused) {
+            this.audio.play();
+          }
+        })
+        .catch(err => {
+          console.error(err.message);
+        });
+    },
+
+    changeVolume() {}
   }
 };
 </script>
