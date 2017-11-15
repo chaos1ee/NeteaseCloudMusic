@@ -364,8 +364,8 @@ export default {
   },
   methods: {
     /** 
-       * @description 访问对象API中的全部接口
-       */
+      * @description 访问对象API中的全部接口
+      */
     accessAll() {
       let temp = [];
       _.forEach(API, value => {
@@ -374,8 +374,8 @@ export default {
       return temp;
     },
     /** 
-       * @description 异步并行获取数据并分别保存到各个对象中 
-       */
+      * @description 异步并行获取数据并分别保存到各个对象中 
+      */
     fetchData() {
       this.axios.all(this.accessAll()).then(
         this.axios.spread(

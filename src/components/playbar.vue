@@ -101,7 +101,9 @@
   height: 67px;
   z-index: 1000;
   background-position: 0 -380px;
-} // 未上锁状态
+}
+
+// 未上锁状态
 .locker {
   display: block;
   width: 18px;
@@ -183,7 +185,6 @@
       background-position: -40px -204px;
     }
   }
-
   .ply.paused {
     background-position: 0 -165px;
 
@@ -443,6 +444,7 @@ export default {
     ...mapState(["playList"])
   },
   watch: {
+    // 更换歌单时，自动播放歌单内第一首歌
     playList: function() {
       this.changeMusic(0);
     },

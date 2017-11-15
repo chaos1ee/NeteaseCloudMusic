@@ -1,5 +1,6 @@
 <template>
   <p class="desc">
+    <slot name="slgon"></slot>
     <slot name="desc"></slot>   
   </p>
 </template>
