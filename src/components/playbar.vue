@@ -1,5 +1,5 @@
 <template>
-  <div class="playbar" ref="player" @mouseenter="playerShow" @mouseleave="playerHide">
+  <div class="playbar" ref="player" @mouseenter="playerShow" @mouseleave="playerHide" :class="{active: isActive, locked: isLocked}">
     <div class="p-wr">
       <div class="bg"></div>
       <div class="p-right">
@@ -9,7 +9,7 @@
       <div class="player">
         <div class="btns">
           <a class="prev" @click="playPrev" href="javascript:void(0)">上一曲</a>
-          <a class="ply" @click="playPause" href="javascript:void(0)">播放</a>
+          <a class="ply" :class="{paused: isPaused}" @click="playPause" href="javascript:void(0)">播放</a>
           <a class="next" @click="playNext" href="javascript:void(0)">下一曲</a>
         </div>
         <div class="m-cover">
@@ -22,24 +22,37 @@
             <span class="artist ft-brk">{{playing.artist}}</span>
           </div>
           <div class="progress">
-            <div class="barbg">
-              <div class="rdy"> </div>
-              <div class="cur">
-                <span class="btn">
-                  <i></i>
-                </span>
-              </div>
-            </div>
+            <el-slider class="progress-bar" v-model="disX" :show-tooltip="false" height="9px"></el-slider>
+            <span class="time">
+              <em>{{ time  |timeFormat}}</em>
+              / {{ duration | timeFormat}}
+            </span>
           </div>
         </div>
-        <div class="ctrl"></div>
+        <div class="ctrl">
+          <el-slider v-show="volumeBarShow" class="volume-bar" height="93px" vertical v-model="volume" :show-tooltip="false"></el-slider>
+          <a @click="volumeBarToggle" class="icon-vol" href="javascript:void(0)"></a>
+          <a class="icon-loop" href="javascript:boid(0)"></a>
+          <span class="add">
+            <a class="icon-list" href="javascript:void(0)"></a>
+          </span>
+        </div>
       </div>
-      <div class="hand">展开播放条</div>
+    </div>
+    <div class="hand">展开播放条</div>
+
+    <div class="list">
+      <div class="listhd">
+
+      </div>
+      <div class="listbd">
+
+      </div>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .playbar {
   position: fixed;
   bottom: -47px;
@@ -171,7 +184,7 @@
     }
   }
 
-  .ply.pause {
+  .ply.paused {
     background-position: 0 -165px;
 
     &:hover {
@@ -240,78 +253,190 @@
     width: 493px;
     position: relative;
 
-    .barbg,
-    .rdy,
-    .cur {
-      width: 493px;
-      background-image: url("/static/image/statbar.png");
-      background-repeat: no-repeat;
+    .time {
+      position: absolute;
+      top: -3px;
+      right: -95px;
+      color: #797979;
+      text-shadow: 0 1px 0 #121212;
     }
 
-    .barbg {
-      width: 493px;
-      height: 9px;
-      background-position: right 0;
+    em {
+      text-align: left;
+      color: #a1a1a1;
     }
+  }
+}
 
-    .rdy {
-      width: 0;
-      height: 9px;
-      background-position: right -30px;
+.progress-bar {
+  width: 493px;
+  height: 9px;
+  background-position: right 0;
+
+  &,
+  .el-slider__runway .el-slider__bar {
+    background-image: url("/static/image/statbar.png");
+    background-repeat: no-repeat;
+  }
+  .el-slider__runway {
+    margin: 0;
+    height: 9px;
+    background: transparent;
+  }
+  .el-slider__bar {
+    height: 9px;
+    background-color: inherit;
+    background-position: left -66px;
+  }
+  .el-slider__button-wrapper {
+    top: -7px;
+    width: 22px;
+    height: 24px;
+    background: url("/static/image/iconall.png") 0 -250px;
+
+    .el-slider__button {
+      background-color: transparent;
+      border: 0;
+      width: 22px;
+      height: 24px;
+      border-radius: 0;
     }
+  }
+}
 
-    .cur {
+.ctrl,
+.icon-vol,
+.icon-loop,
+.icon-list,
+.volume-bar {
+  background-image: url("/static/image/playbar.png");
+  background-repeat: no-repeat;
+}
+
+.ctrl {
+  float: left;
+  position: relative;
+  width: 113px;
+  padding-left: 13px;
+  background-position: -147px -238px;
+
+  .volume-bar.el-slider {
+    position: absolute;
+    top: -113px;
+    left: 9px;
+    clear: both;
+    width: 32px;
+    height: 113px;
+    background-position: 0 -503px;
+    .el-slider__runway {
       position: absolute;
       top: 0;
       left: 0;
-      width: 0;
-      height: 9px;
-      background-position: left -66px;
-    }
-    .btn {
-      position: absolute;
-      top: -7px;
-      right: -13px;
-      width: 22px;
-      height: 24px;
-      margin-left: -11px;
-      background-position: 0 -250px;
-      background: url("/static/image/ply_btn.png") no-repeat;
+      width: 32px;
+      height: 101px;
+      margin: 10px 0;
+      background-color: transparent;
     }
 
-    i {
-      visibility: hidden;
-      position: absolute;
-      left: 5px;
-      top: 5px;
-      width: 12px;
-      height: 12px;
-      background: url("/static/image/loading.gif");
+    .el-slider__bar {
+      height: 93px;
+      margin: 0 14px 0;
+      background-color: #c20c0c;
     }
+
+    .el-slider__button-wrapper {
+      left: 7px;
+      width: 18px;
+      height: 20px;
+      background-image: url("/static/image/iconall.png");
+      background-position: -40px -250px;
+      background-repeat: no-repeat;
+    }
+
+    .el-slider__button {
+      width: 18px;
+      height: 20px;
+      border: 0;
+      background-image: url("/static/image/iconall.png");
+      background-position: -40px -250px;
+      background-repeat: no-repeat;
+      background-color: transparent;
+
+      &:hover,
+      &.dragging {
+        transform: scale(1) !important;
+      }
+    }
+  }
+
+  .icon-vol {
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin: 11px 2px 0 0;
+    text-indent: -999px;
+    background-position: -2px -248px;
+  }
+
+  .icon-loop {
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin: 11px 2px 0 0;
+    text-indent: -999px;
+    background-position: -66px -344px;
+  }
+
+  .add {
+    float: left;
+    width: 59px;
+    height: 36px;
+    position: relative;
+  }
+
+  .icon-list {
+    display: block;
+    width: 38px;
+    height: 25px;
+    margin: 11px 2px 0 0;
+    padding-left: 21px;
+    background-position: -42px -68px;
+    line-height: 27px;
+    text-align: center;
+    color: #666;
+    text-shadow: 0 1px 0 #080707;
+    text-indent: 0;
   }
 }
 </style>
 
 <script>
 import { mapState } from "vuex";
+const PROGRESS_LENGTH = 493;
 
 export default {
   name: "playBar",
   data() {
     return {
-      // 锁定状态
-      locked: false,
+      isActive: false,
+      isLocked: false,
+      isPaused: false,
       index: 0,
       playing: {
         name: null,
         cover: null,
         artist: null,
         url: null
-      }
+      },
+      duration: 0,
+      disX: 0,
+      time: 0,
+      volume: 50,
+      volumeBarShow: false
     };
   },
   created() {
-    this.audio = this.createAudioContext();
+    this.initAudio();
   },
   updated() {},
   computed: {
@@ -321,37 +446,72 @@ export default {
     playList: function() {
       this.changeMusic(0);
     },
+    // 监听index，每当变化时切换歌曲
     index: function(newIndex) {
       this.changeMusic(newIndex);
     }
   },
+  filters: {
+    timeFormat(time) {
+      let m = _.floor(_.floor(time) / 60);
+      let s = _.floor(_.floor(time) % 60);
+      if (m < 10) {
+        m = "0" + m;
+      }
+      if (s < 10) {
+        s = "0" + s;
+      }
+      return m + ":" + s;
+    }
+  },
   methods: {
     playerShow() {
-      if (!this.locked) {
-        this.$refs.player.classList.add("active");
+      if (!this.isLocked) {
+        this.isActive = true;
       }
     },
     playerHide() {
-      if (!this.locked) {
-        this.$refs.player.classList.remove("active");
+      if (!this.isLocked) {
+        this.isActive = false;
       }
     },
     lock() {
-      if (!this.locked) {
-        this.locked = true;
-        this.$refs.player.classList.add("active", "locked");
+      if (!this.isLocked) {
+        this.isActive = true;
+        this.isLocked = true;
       } else {
-        this.locked = false;
-        this.$refs.player.classList.remove("active", "locked");
+        this.isActive = false;
+        this.isLocked = false;
       }
     },
-    createAudioContext() {
-      let audio = new Audio();
-      audio.controls = false;
-      return audio;
-
-      //this.audio.autoplay = true;
-      //this.audio.loop = true;
+    volumeBarToggle() {
+      this.volumeBarShow = !this.volumeBarShow;
+    },
+    initAudio() {
+      this.audio = new Audio();
+      this.audio.autoplay = true;
+      this.audio.addEventListener("canplay", () => {
+        this.duration = this.audio.duration;
+      });
+      this.audio.addEventListener("timeupdate", () => {
+        this.audio.volume = _.round(this.volume / 100, 1);
+        this.time = this.audio.currentTime;
+        this.disX = this.audio.currentTime / this.audio.duration * 100;
+      });
+      this.audio.addEventListener("ended", () => {
+        this.playNext();
+      });
+    },
+    playPause() {
+      if (this.audio.paused) {
+        if (this.audio.src) {
+          this.isPaused = true;
+          this.audio.play();
+        }
+      } else {
+        this.isPaused = false;
+        this.audio.pause();
+      }
     },
     // 三种播放模式
     // 1 单曲循环 loop
@@ -359,7 +519,6 @@ export default {
     // 3 顺序播放 order
     playNext() {
       this.index == this.playList.length - 1 ? (this.index = 0) : this.index++;
-      //this.changeMusic(this.index);
     },
     playPrev() {
       if (this.model == "loop") {
@@ -386,15 +545,6 @@ export default {
           });
       });
     },
-    playPause() {
-      if (this.audio.paused) {
-        if (this.audio.src) {
-          this.audio.play();
-        }
-      } else {
-        this.audio.pause();
-      }
-    },
     // index变化时触发歌曲更新
     changeMusic(index) {
       this._getMusicUrl(index)
@@ -402,18 +552,16 @@ export default {
           this.playing.cover = this.playList[index].al.picUrl;
           this.playing.name = this.playList[index].name;
           this.playing.artist = this.playList[index].ar[0].name;
-
           this.audio.src = url;
           if (this.audio.paused) {
+            this.isPaused = true;
             this.audio.play();
           }
         })
         .catch(err => {
           console.error(err.message);
         });
-    },
-
-    changeVolume() {}
+    }
   }
 };
 </script>
