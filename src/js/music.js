@@ -3,16 +3,11 @@ let MusicPlayer = (function () {
 
   function Init(list) {
     // 私有方法与属性
-
-    this.list = list || {};
-
     this.audio = new Audio();
     this.audio.controls = false;
     this.audio.preload = true;
 
     let index = 0;
-
-
     _getMusicId(index) {
 
     }
@@ -29,7 +24,7 @@ let MusicPlayer = (function () {
 
   return {
     create(list) {
-      return player ? player || new Init(list);
+      return player ? player || new Init();
     }
   }
 })();

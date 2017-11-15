@@ -142,8 +142,16 @@
 
 .hot {
   width: 100%;
+  height: 523px;
 }
 
+.personalized {
+  height: 289px;
+}
+
+.new {
+  height: 243px;
+}
 .t-bar {
   .bt {
     float: left;
