@@ -145,10 +145,6 @@
   height: 523px;
 }
 
-.personalized {
-  height: 289px;
-}
-
 .new {
   height: 243px;
 }

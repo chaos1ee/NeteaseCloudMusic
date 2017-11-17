@@ -36,10 +36,22 @@ export default {
       this.axios
         .get("/api/playlist/detail?id=" + this.item.id)
         .then(res => {
-          this.$store.commit("addToPlayList", res.data.playlist.tracks);
+          let data = [];
+
+          // 筛选数据，存入vuex
+          _.forEach(res.data.playlist.tracks, track => {
+            let temp = {};
+            temp.id = track.id;
+            temp.name = track.name;
+            temp.cover = track.al.picUrl;
+            temp.artist = track.ar[0].name;
+            temp.duration = _.floor(track.dt / 1000);
+            data.push(temp);
+          });
+          this.$store.commit("addToPlayList", data);
         })
         .catch(err => {
-          throw new Error(err.name + ":" + err.message);
+          console.error(err.name + ":" + err.message);
         });
     }
   }

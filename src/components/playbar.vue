@@ -13,18 +13,18 @@
           <a class="next" @click="playNext" href="javascript:void(0)">下一曲</a>
         </div>
         <div class="m-cover">
-          <img :src="playing.cover">
+          <img :src="cover">
           <a class="msk" href="javascript:void(0)"></a>
         </div>
         <div class="play">
           <div class="words">
-            <span class="title ft-brk">{{playing.name}}</span>
-            <span class="artist ft-brk">{{playing.artist}}</span>
+            <span class="title ft-brk">{{ name}}</span>
+            <span class="artist ft-brk">{{artist}}</span>
           </div>
           <div class="progress">
             <el-slider class="progress-bar" v-model="disX" :show-tooltip="false" height="9px"></el-slider>
             <span class="time">
-              <em>{{ time  |timeFormat}}</em>
+              <em>{{ currentTime | timeFormat}}</em>
               / {{ duration | timeFormat}}
             </span>
           </div>
@@ -32,23 +32,16 @@
         <div class="ctrl">
           <el-slider v-show="volumeBarShow" class="volume-bar" height="93px" vertical v-model="volume" :show-tooltip="false"></el-slider>
           <a @click="volumeBarToggle" class="icon-vol" href="javascript:void(0)"></a>
-          <a class="icon-loop" href="javascript:boid(0)"></a>
+          <a class="icon-loop" href="javascript:void(0)"></a>
           <span class="add">
-            <a class="icon-list" href="javascript:void(0)"></a>
+            <a @click="showList" class="icon-list" href="javascript:void(0)">{{playList.length}}</a>
           </span>
         </div>
       </div>
     </div>
     <div class="hand">展开播放条</div>
 
-    <div class="list">
-      <div class="listhd">
-
-      </div>
-      <div class="listbd">
-
-      </div>
-    </div>
+    <play-list v-show="listShow" :currentTime="currentTime"></play-list>
   </div>
 </template>
 
@@ -101,9 +94,7 @@
   height: 67px;
   z-index: 1000;
   background-position: 0 -380px;
-}
-
-// 未上锁状态
+} // 未上锁状态
 .locker {
   display: block;
   width: 18px;
@@ -412,28 +403,27 @@
 </style>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
+import PlayList from "./playlist";
+
 const PROGRESS_LENGTH = 493;
 
 export default {
   name: "playBar",
+  components: {
+    PlayList
+  },
   data() {
     return {
       isActive: false,
       isLocked: false,
-      isPaused: false,
-      index: 0,
-      playing: {
-        name: null,
-        cover: null,
-        artist: null,
-        url: null
-      },
-      duration: 0,
+      isPaused: true,
       disX: 0,
       time: 0,
       volume: 50,
-      volumeBarShow: false
+      currentTime: 0,
+      volumeBarShow: false,
+      listShow: false
     };
   },
   created() {
@@ -441,32 +431,39 @@ export default {
   },
   updated() {},
   computed: {
-    ...mapState(["playList"])
+    ...mapState(["playList", "index"]),
+    cover() {
+      return this.playList.length > 0 ? this.playList[this.index].cover : null;
+    },
+    artist() {
+      return this.playList.length > 0 ? this.playList[this.index].artist : null;
+    },
+    name() {
+      return this.playList.length > 0 ? this.playList[this.index].name : null;
+    },
+    duration() {
+      return this.playList.length > 0
+        ? this.playList[this.index].duration
+        : null;
+    }
   },
   watch: {
-    // 更换歌单时，自动播放歌单内第一首歌
-    playList: function() {
-      this.changeMusic(0);
-    },
     // 监听index，每当变化时切换歌曲
-    index: function(newIndex) {
-      this.changeMusic(newIndex);
+    index(newIndex) {
+      this.changeMusic(this.playList[this.index].id);
     }
   },
   filters: {
     timeFormat(time) {
       let m = _.floor(_.floor(time) / 60);
       let s = _.floor(_.floor(time) % 60);
-      if (m < 10) {
-        m = "0" + m;
-      }
-      if (s < 10) {
-        s = "0" + s;
-      }
+      if (m < 10) m = "0" + m;
+      if (s < 10) s = "0" + s;
       return m + ":" + s;
     }
   },
   methods: {
+    ...mapMutations(["changeIndex"]),
     playerShow() {
       if (!this.isLocked) {
         this.isActive = true;
@@ -486,18 +483,21 @@ export default {
         this.isLocked = false;
       }
     },
+    showList() {
+      this.listShow = !this.listShow;
+    },
     volumeBarToggle() {
       this.volumeBarShow = !this.volumeBarShow;
     },
     initAudio() {
       this.audio = new Audio();
       this.audio.autoplay = true;
-      this.audio.addEventListener("canplay", () => {
-        this.duration = this.audio.duration;
-      });
+      //this.audio.addEventListener("canplay", () => {
+      //  this.duration = this.audio.duration;
+      //});
       this.audio.addEventListener("timeupdate", () => {
         this.audio.volume = _.round(this.volume / 100, 1);
-        this.time = this.audio.currentTime;
+        this.currentTime = this.audio.currentTime;
         this.disX = this.audio.currentTime / this.audio.duration * 100;
       });
       this.audio.addEventListener("ended", () => {
@@ -515,30 +515,28 @@ export default {
         this.audio.pause();
       }
     },
-    // 三种播放模式
+    // 三种播放模式(待开发)
     // 1 单曲循环 loop
     // 2 随机播放 random
     // 3 顺序播放 order
     playNext() {
-      this.index == this.playList.length - 1 ? (this.index = 0) : this.index++;
+      let index = this.index;
+      let len = this.playList.length;
+      index == len - 1 ? (index = 0) : index++;
+      this.$store.commit("changeIndex", index);
     },
     playPrev() {
-      if (this.model == "loop") {
-      } else if (this.model == "random") {
-        // 随机数
-        this.index = _.random(0, this.playList.length);
-      } else {
-        this.index == 0
-          ? (this.index = this.playList.length - 1)
-          : this.index--;
-      }
+      let index = this.index;
+      let len = this.playList.length;
+      index == 0 ? (index = len - 1) : index--;
+      this.$store.commit("changeIndex", index);
     },
     // 返回一个promise对象
     // resolved 返回音乐url
-    _getMusicUrl(index) {
+    _getMusicUrl(id) {
       return new Promise((resolve, reject) => {
         this.axios
-          .get("/api/music/url?id=" + this.playList[index].id)
+          .get("/api/music/url?id=" + id)
           .then(res => {
             resolve(res.data.data[0].url);
           })
@@ -548,12 +546,9 @@ export default {
       });
     },
     // index变化时触发歌曲更新
-    changeMusic(index) {
-      this._getMusicUrl(index)
+    changeMusic(id) {
+      this._getMusicUrl(id)
         .then(url => {
-          this.playing.cover = this.playList[index].al.picUrl;
-          this.playing.name = this.playList[index].name;
-          this.playing.artist = this.playList[index].ar[0].name;
           this.audio.src = url;
           if (this.audio.paused) {
             this.isPaused = true;
