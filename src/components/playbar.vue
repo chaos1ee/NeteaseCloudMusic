@@ -1,54 +1,65 @@
 <template>
-  <div class="playbar" ref="player" @mouseenter="playerShow" @mouseleave="playerHide" :class="{active: isActive, locked: isLocked}">
-    <div class="p-wr">
-      <div class="bg"></div>
-      <div class="p-right">
-        <a class="locker" href="javascript:void(0)" @click.self="lock"></a>
-      </div>
-      <div class="blank"></div>
-      <div class="player">
-        <div class="btns">
-          <a class="prev" @click="playPrev" href="javascript:void(0)">上一曲</a>
-          <a class="ply" :class="{paused: isPaused}" @click="playPause" href="javascript:void(0)">播放</a>
-          <a class="next" @click="playNext" href="javascript:void(0)">下一曲</a>
+  <div class="m-bar">
+    <div class="playbar" ref="player" @mouseenter="playerShow" @mouseleave="playerHide" :class="{active: isActive, locked: isLocked}">
+      <div class="p-wr">
+        <div class="bg"></div>
+        <div class="p-right">
+          <a class="locker" href="javascript:void(0)" @click.self="lock"></a>
         </div>
-        <div class="m-cover">
-          <img :src="cover">
-          <a class="msk" href="javascript:void(0)"></a>
-        </div>
-        <div class="play">
-          <div class="words">
-            <span class="title ft-brk">{{ name}}</span>
-            <span class="artist ft-brk">{{artist}}</span>
+        <div class="blank"></div>
+        <div class="player">
+          <div class="btns">
+            <a class="prev" @click="playPrev" href="javascript:void(0)">上一曲</a>
+            <a class="ply" :class="{paused: isPaused}" @click="playPause" href="javascript:void(0)">播放</a>
+            <a class="next" @click="playNext" href="javascript:void(0)">下一曲</a>
           </div>
-          <div class="progress">
-            <el-slider class="progress-bar" v-model="disX" :show-tooltip="false" height="9px"></el-slider>
-            <span class="time">
-              <em>{{ currentTime | timeFormat}}</em>
-              / {{ duration | timeFormat}}
+          <div class="m-cover">
+            <img :src="cover">
+            <a class="msk" href="javascript:void(0)"></a>
+          </div>
+          <div class="play">
+            <div class="words">
+              <span class="title ft-brk">{{ name}}</span>
+              <span class="artist ft-brk">{{artist}}</span>
+            </div>
+            <div class="progress">
+              <el-slider class="progress-bar" v-model="disX" :show-tooltip="false" height="9px"></el-slider>
+              <span class="time">
+                <em>{{ currentTime | timeFormat}}</em>
+                / {{ duration | timeFormat}}
+              </span>
+            </div>
+          </div>
+          <div class="ctrl">
+            <el-slider v-show="volumeBarShow" class="volume-bar" height="93px" vertical v-model="volume" :show-tooltip="false"></el-slider>
+            <a @click="volumeBarToggle" class="icon-vol" href="javascript:void(0)"></a>
+            <a class="icon-loop" href="javascript:void(0)"></a>
+            <span class="add">
+              <a @click="showList" class="icon-list" href="javascript:void(0)">{{playList.length}}</a>
             </span>
           </div>
         </div>
-        <div class="ctrl">
-          <el-slider v-show="volumeBarShow" class="volume-bar" height="93px" vertical v-model="volume" :show-tooltip="false"></el-slider>
-          <a @click="volumeBarToggle" class="icon-vol" href="javascript:void(0)"></a>
-          <a class="icon-loop" href="javascript:void(0)"></a>
-          <span class="add">
-            <a @click="showList" class="icon-list" href="javascript:void(0)">{{playList.length}}</a>
-          </span>
-        </div>
       </div>
-    </div>
-    <div class="hand">展开播放条</div>
+      <div class="hand">展开播放条</div>
 
-    <play-list v-show="listShow" :currentTime="currentTime"></play-list>
+      <play-list v-show="listShow" :currentTime="currentTime"></play-list>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-.playbar {
+.m-bar {
   position: fixed;
-  bottom: -47px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 0;
+  z-index: 9999;
+}
+.playbar {
+  position: absolute;
+  top: -53px;
   left: 0;
   right: 0;
   width: 100%;
