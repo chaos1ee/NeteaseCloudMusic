@@ -59,7 +59,7 @@
 }
 .playbar {
   position: absolute;
-  top: -53px;
+  top: -7px;
   left: 0;
   right: 0;
   width: 100%;
@@ -67,7 +67,7 @@
   transition: all 0.2s ease-out;
 
   &.active {
-    bottom: 0;
+    top: -53px;
   }
 }
 
@@ -86,10 +86,10 @@
 }
 
 .bg {
-  position: absolute;
+  //position: absolute;
   top: 0;
   left: 0;
-  width: calc(100vw - 83px);
+  //width: calc(100vw - 83px);
   height: 47px;
   margin-right: 68px;
   padding-top: 6px;
@@ -128,6 +128,7 @@
 .blank {
   position: absolute;
   right: 0;
+  top: 0;
   width: 15px;
   height: 53px;
   background-position: 0 0;
@@ -459,6 +460,10 @@ export default {
     }
   },
   watch: {
+    // 监听歌单是否有变化
+    playList() {
+      this.changeMusic(this.playList[this.index].id);
+    },
     // 监听index，每当变化时切换歌曲
     index(newIndex) {
       this.changeMusic(this.playList[this.index].id);
