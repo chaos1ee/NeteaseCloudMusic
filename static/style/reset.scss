@@ -83,6 +83,10 @@ video {
   background: transparent;
 }
 
+a:focus {
+  outline: none;
+}
+
 body {
   line-height: 1;
 }
