@@ -35,7 +35,7 @@
       <div class="msk2"></div>
       <div class="lyric">
         <div v-if="lyric">
-          <p v-for="line in lyric" :time="line[0]">{{ line[1] }}</p>
+          <p v-for="line in lyric" ref="lines">{{ line[1] }}</p>
         </div>
         <div v-else>
           <p>纯音乐，请欣赏</p>
@@ -270,6 +270,8 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
+const REGULAR_COLOR = "#989898";
+const ACTIVE_COLOR = "#fff";
 
 export default {
   name: "play-list",
@@ -281,9 +283,19 @@ export default {
   },
   watch: {
     index(newIndex) {
+      _.forEach(this.$refs.lines, line => {
+        line.style.color = REGULAR_COLOR;
+      });
       this.getLyric(this.playList[this.index].id);
     },
-    currentTime() {}
+    currentTime() {
+      let i = 0;
+      while (this.currentTime > this.lyric[i][0]) {
+        if (i > 0) this.$refs.lines[i - 1].style.color = REGULAR_COLOR;
+        this.$refs.lines[i].style.color = ACTIVE_COLOR;
+        i++;
+      }
+    }
   },
   computed: {
     ...mapState(["playList", "index"]),
