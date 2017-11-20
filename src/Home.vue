@@ -29,22 +29,6 @@
                 </li>
               </ul>
             </div>
-            <div class="personalized">
-              <title-bar class="t-bar">
-                <a slot="title" class="bt">个性化推荐</a>
-              </title-bar>
-              <ul class="bc clearfix">
-                <li v-for="(item,key) in personalized" :key="key">
-                  <cover :item="item"></cover>
-                  <describe>
-                    <a slot="desc" :href="'/playlist?'+item.id">{{item.name}}</a>
-                  </describe>
-                  <copywriter>
-                    <a slot="copywriter" :href="'/playlist?'+item.id">{{item.copywriter}}</a>
-                  </copywriter>
-                </li>
-              </ul>
-            </div>
             <div class="new">
               <title-bar class="t-bar">
                 <a slot="title" class="bt">新碟上架</a>
