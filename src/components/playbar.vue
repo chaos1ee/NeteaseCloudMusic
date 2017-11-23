@@ -466,11 +466,13 @@
     watch: {
       // 监听歌单是否有变化
       playList() {
-        this.changeMusic(this.playList[this.index].id);
+        this.fetchAudioAndPlay(this.playList[this.index].id)
+        //this.changeMusic(this.playList[this.index].id);
       },
       // 监听index，每当变化时切换歌曲
       index(newIndex) {
-        this.changeMusic(this.playList[this.index].id);
+        this.fetchAudioAndPlay(this.playList[this.index].id)
+        //this.changeMusic(this.playList[this.index].id);
       }
     },
     filters: {
@@ -511,7 +513,7 @@
       },
       initAudio() {
         this.audio = new Audio();
-        this.audio.autoplay = true;
+        //this.audio.autoplay = true;
         this.audio.preload = "auto";
         //this.audio.addEventListener("canplay", () => {
         //  this.duration = this.audio.duration;
@@ -521,6 +523,7 @@
           this.currentTime = this.audio.currentTime;
           this.disX = this.audio.currentTime / this.audio.duration * 100;
         });
+        
         this.audio.addEventListener("ended", () => {
           this.playNext();
         });
@@ -552,32 +555,18 @@
         index == 0 ? (index = len - 1) : index--;
         this.$store.commit("changeIndex", index);
       },
-      // 返回一个promise对象
-      // resolved 返回音乐url
-      _getMusicUrl(id) {
-        return new Promise((resolve, reject) => {
-          this.axios
-            .get("/api/music/url?id=" + id)
-            .then(res => {
-              resolve(res.data.data[0].url);
-            })
-            .catch(err => {
-              reject(err);
-            });
-        });
-      },
-      // index变化时触发歌曲更新
-      changeMusic(id) {
-        this._getMusicUrl(id)
+      fetchAudioAndPlay(id) {
+        this.audio.load();
+        this.axios.get("/api/music/url?id=" + id)
+          .then(res => res.data.data[0].url)
           .then(url => {
             this.audio.src = url;
-            // this.isPaused = true;
-            this.audio.play();
+            return this.audio.play();
           })
           .catch(err => {
             console.error(err.message);
           });
-      }
+      }, 
     }
   };
 

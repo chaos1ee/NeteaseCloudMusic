@@ -13,11 +13,12 @@
       </div>
     </div>
     <div class="listbd">
-      <div class="listbdc">
-        <ul>
-          <li v-for="track in playList" :key="track.id">
+      <div class="listbdc" @mousewheel.prevent="scroll(10,$refs.musicList, $refs.scrollBar1, $event)">
+        <ul ref="musicList">
+          <li v-for="(track, idx) in playList" :key="track.id" :class="{playing: idx == index}"
+            @click="changeIndex(idx)">
             <div class="col col-1">
-              <div class="ico-play"></div>
+              <div :class="{'ico-play': idx == index}"></div>
             </div>
             <div class="col col-2">{{track.name}}</div>
             <div class="col col-3"></div>
@@ -30,19 +31,17 @@
         </ul>
       </div>
       <div class="bline">
-        <span class="scrol" style="height:100px;"></span>
+        <span class="scrol" style="height:38px;" ref="scrollBar1"></span>
       </div>
       <div class="msk2"></div>
-      <div class="lyric">
-        <div v-if="lyric">
-          <p v-for="line in lyric" ref="lines">{{ line[1] }}</p>
-        </div>
-        <div v-else>
-          <p>纯音乐，请欣赏</p>
+      <div class="lyric" @mousewheel.prevent="scroll(10 , $refs.lyricList, $refs.scrollBar2, $event)">
+        <div ref="lyricList">
+          <p v-if="lyric"  v-for="(line, index) in lyric" ref="lines" :key="index">{{ line[1] }}</p>
+          <p v-else>纯音乐，请欣赏</p>
         </div>
       </div>
       <div class="bline bline-2">
-        <div class="scrol"></div>
+        <div class="scrol" style="height:38px;" ref="scrollBar2"></div>
       </div>
     </div>
   </div>
@@ -67,7 +66,6 @@
   .listhdc {
     position: relative;
     height: 40px;
-
     h4 {
       position: absolute;
       left: 25px;
@@ -77,7 +75,6 @@
       font-size: 14px;
       color: #e2e2e2;
     }
-
     .clear {
       position: absolute;
       left: 490px;
@@ -111,7 +108,6 @@
       white-space: nowrap;
       word-wrap: normal;
     }
-
     .close {
       position: absolute;
       top: 6px;
@@ -147,7 +143,6 @@
     background-position: -1014px 0;
     background-repeat: repeat-y;
     background-image: url("/static/image/playlist_bg.png");
-
     .listbdc {
       position: absolute;
       left: 2px;
@@ -155,17 +150,22 @@
       z-index: 4;
       height: 260px;
       width: 553px;
+      color: #ccc;
       overflow: hidden;
-
       ul {
+        position: absolute;
+        top: 0;
+        left: 0;
         overflow: hidden;
         li {
           float: left;
           width: 100%;
-
+          &.playing {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+          }
           .col-1 {
             width: 10px;
-
             .ico-play {
               width: 10px;
               height: 13px;
@@ -175,30 +175,24 @@
               background-repeat: no-repeat;
             }
           }
-
           .col-2 {
             width: 256px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            color: #fff;
           }
-
           .col-3 {
             position: relative;
             width: 78px;
           }
-
           .col-4 {
             width: 70px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            color: #fff;
           }
           .col-5 {
             width: 35px;
-            color: #fff;
           }
           .col-6 {
             width: 37px;
@@ -217,7 +211,6 @@
     height: 260px;
     background: #000;
     opacity: 0.5;
-
     .scrol {
       position: absolute;
       left: 0;
@@ -251,7 +244,12 @@
     width: 354px;
     height: 219px;
     overflow: hidden;
-
+    div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
     p {
       color: #989898;
       word-wrap: break-word;
@@ -266,23 +264,28 @@
     left: auto;
     right: 2px;
   }
-
 </style>
 
 <script>
-  import {
-    mapState,
-    mapMutations
-  } from "vuex";
+  import { mapState, mapMutations } from "vuex";
+  //import scroll from "./js/scroll";
+
   const REGULAR_COLOR = "#989898";
   const ACTIVE_COLOR = "#fff";
+  const MUSIC_LINEHEIGHT = 28;
+  const LYRIC_LINEHEIGHT = 32;
+
+  const WH = 260;
+  const BH = 40;
+
 
   export default {
     name: "play-list",
     props: ["currentTime"],
     data() {
       return {
-        lyric: null
+        lyric: null,
+        top1: 0
       };
     },
     watch: {
@@ -293,15 +296,15 @@
         this.getLyric(this.playList[this.index].id);
       },
       currentTime() {
-        let i = 0;
+        let i = 0,
+          len = this.lyric.length;
         if (this.lyric) {
-          while (this.currentTime > this.lyric[i][0]) {
+          while (this.currentTime > this.lyric[i][0] && i < len - 1) {
             if (i > 0) this.$refs.lines[i - 1].style.color = REGULAR_COLOR;
             this.$refs.lines[i].style.color = ACTIVE_COLOR;
             i++;
           }
         }
-
       }
     },
     computed: {
@@ -326,6 +329,7 @@
       }
     },
     methods: {
+      ...mapMutations(["changeIndex"]),
       getLyric(id) {
         this.axios
           .get("/api/lyric?id=" + id)
@@ -333,11 +337,6 @@
             this.lyric = this.tLyric = null;
             if (res.data.lrc.lyric != undefined) {
               this.lyric = this.processLyric(res.data.lrc.lyric);
-              //console.log(this.lyric);
-            }
-            if (res.data.tlyric.lyric) {
-              this.tLyric = this.processLyric(res.data.tlyric.lyric);
-              this.mixLyric(this.lyric, this.tLyric);
             }
           })
           .catch(err => {
@@ -345,6 +344,8 @@
           });
       },
       // 处理歌词
+      // 处理过后的歌词格式
+      // [[秒数, 歌词], [秒数, 歌词], ...]
       processLyric(lyric) {
         let pattern = /\[\d{2}:\d{2}\.\d{2,3}\]/g;
         let words = _.slice(_.split(lyric, pattern), 1);
@@ -366,9 +367,39 @@
         });
         return result;
       },
-      // 将外文歌词与翻译混合
-      mixLyric(lyric, tLyric) {}
+      scroll(step, list, bar, e) {
+        let dir = e.deltaY > 0 ? "down" : "up";
+        let style1 = window.getComputedStyle(bar, null);
+        let style2 = window.getComputedStyle(list, null);
+        const BH = parseInt(style1.height);
+        const LH = parseInt(style2.height);
+        let top1 = parseInt(style1.top);
+        let top2 = parseInt(style2.top);
+
+        if (dir == 'down' && top1 <= WH - BH) {
+          if (top1 + step > WH - BH) {
+            top1 = WH - BH;
+            top2 = WH - LH;
+          } else {
+            top1 += step;
+            top2 -= step * (LH - WH) / (WH - BH);
+          }
+          bar.style.top = top1 + 'px';
+          list.style.top = top2 + 'px';
+        }
+
+        if (dir == 'up' && top1 >= 0) {
+          if (top1 - step < 0) {
+            top1 = 0;
+            top2 = 0;
+          } else {
+            top1 -= step;
+            top2 += step * (LH - WH) / (WH - BH)
+          }
+        }
+        bar.style.top = top1 + 'px';
+        list.style.top = top2 + 'px';
+      }
     }
   };
-
 </script>
