@@ -332,7 +332,7 @@
       ...mapMutations(["changeIndex"]),
       getLyric(id) {
         this.axios
-          .get("/lyric?id=" + id)
+          .get("/api/lyric?id=" + id)
           .then(res => {
             this.lyric = this.tLyric = null;
             if (res.data.lrc.lyric != undefined) {

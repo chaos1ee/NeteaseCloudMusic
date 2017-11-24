@@ -307,14 +307,13 @@
   import { mapState, mapMutations } from "vuex";
 
   const API = {
-    banner: "/banner",
-    music: "/personalized",
-    radio: "/personalized/djprogram",
-    personalized: "/recommend/resource",
-    newAlbum: "/top/album?limit=10",
-    bill1: "/top/list?idx=3",
-    bill2: "/top/list?idx=0",
-    bill3: "/top/list?idx=2"
+    banner: "/api/banner",
+    music: "/api/personalized",
+    radio: "/api/personalized/djprogram",
+    newAlbum: "/api/top/album?limit=10",
+    bill1: "/api/top/list?idx=3",
+    bill2: "/api/top/list?idx=0",
+    bill3: "/api/top/list?idx=2"
   };
 
   export default {
@@ -354,16 +353,7 @@
       fetchData() {
         this.axios.all(this.accessAll()).then(
           this.axios.spread(
-            (
-              banner,
-              music,
-              radio,
-              personalized,
-              newAlbum,
-              bill1,
-              bill2,
-              bill3
-            ) => {
+            (banner, music, radio, newAlbum, bill1, bill2, bill3) => {
               // banner栏
               this.banner = banner.data.banners;
               // 热门推荐
@@ -375,7 +365,7 @@
               this.moveItem(data, 5, 6);
               this.hot = data;
               // 个性化推荐
-              this.personalized = personalized.data.recommend;
+              //this.personalized = personalized.data.recommend;
               // 新碟上架
               this.newAlbum = newAlbum.data.newAlbums;
               // 榜单

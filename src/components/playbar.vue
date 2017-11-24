@@ -526,7 +526,7 @@
       fetchAudioAndPlay(id) {
         this.audio.load();
         this.axios
-          .get("/music/url?id=" + id)
+          .get("/api/music/url?id=" + id)
           .then(res => res.data.data[0].url)
           .then(url => {
             this.audio.src = url;
