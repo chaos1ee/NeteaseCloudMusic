@@ -435,12 +435,10 @@
       // 监听歌单是否有变化
       playList() {
         this.fetchAudioAndPlay(this.playList[this.index].id);
-        //this.changeMusic(this.playList[this.index].id);
       },
       // 监听index，每当变化时切换歌曲
       index(newIndex) {
         this.fetchAudioAndPlay(this.playList[this.index].id);
-        //this.changeMusic(this.playList[this.index].id);
       }
     },
     filters: {
@@ -523,10 +521,10 @@
         index == 0 ? (index = len - 1) : index--;
         this.$store.commit("changeIndex", index);
       },
+      // 通过音乐Id获取音乐url
       fetchAudioAndPlay(id) {
-        this.audio.load();
         this.axios
-          .get("/api/music/url?id=" + id)
+          .get("/music/url?id=" + id)
           .then(res => res.data.data[0].url)
           .then(url => {
             this.audio.src = url;

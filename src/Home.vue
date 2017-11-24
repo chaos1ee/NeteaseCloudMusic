@@ -307,13 +307,13 @@
   import { mapState, mapMutations } from "vuex";
 
   const API = {
-    banner: "/api/banner",
-    music: "/api/personalized",
-    radio: "/api/personalized/djprogram",
-    newAlbum: "/api/top/album?limit=10",
-    bill1: "/api/top/list?idx=3",
-    bill2: "/api/top/list?idx=0",
-    bill3: "/api/top/list?idx=2"
+    banner: "/banner",
+    music: "/personalized",
+    radio: "/personalized/djprogram",
+    newAlbum: "/top/album?limit=10",
+    bill1: "/top/list?idx=3",
+    bill2: "/top/list?idx=0",
+    bill3: "/top/list?idx=2"
   };
 
   export default {
@@ -338,8 +338,8 @@
     },
     methods: {
       /** 
-         * @description 访问对象API中的全部接口
-         */
+               * @description 访问对象API中的全部接口
+               */
       accessAll() {
         let temp = [];
         _.forEach(API, value => {
@@ -348,8 +348,8 @@
         return temp;
       },
       /** 
-         * @description 异步并行获取数据并分别保存到各个对象中 
-         */
+               * @description 异步并行获取数据并分别保存到各个对象中 
+               */
       fetchData() {
         this.axios.all(this.accessAll()).then(
           this.axios.spread(
@@ -382,10 +382,10 @@
         );
       },
       /** @description 移动数组中的项 
-         * @param {array} arr - 给定数组 
-         * @param {number} to - 该项在数组中要移到的位置
-         * @param {number} from- 该项在数组中的起始位置
-         */
+               * @param {array} arr - 给定数组 
+               * @param {number} to - 该项在数组中要移到的位置
+               * @param {number} from- 该项在数组中的起始位置
+               */
       moveItem(arr, to, from) {
         arr.splice(to, 0, ...arr.splice(from, 1));
       }

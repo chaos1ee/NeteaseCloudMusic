@@ -10,7 +10,7 @@ export default new Vuex.Store({
     // 播放列表
     playList: [],
     // 正在播放的歌曲在播放列表中的索引
-    index: null
+    index: 0
   },
   mutations: {
     // 更新播放列表

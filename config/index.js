@@ -32,12 +32,33 @@ module.exports = {
     assetsPublicPath: '/',
     // 设置代理
     proxyTable: {
-      '/api': {
+      '/banner': {
         target: 'http://localhost:3000',
         changeOrigin: true,
-        pathRewrite: {
-          '^/api': '/'
-        }
+      },
+      '/personalized': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      },
+      '/personalized/djprogram': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+      '/top': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      },
+      '/music': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      },
+      '/lyric': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      },
+      '/playlist': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

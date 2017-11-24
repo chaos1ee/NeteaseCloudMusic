@@ -19,12 +19,12 @@
             <div class="col col-1">
               <div :class="{'ico-play': idx == index}"></div>
             </div>
-            <div class="col col-2">{{track.name}}</div>
+            <div class="col col-2">{{ track.name }}</div>
             <div class="col col-3"></div>
             <div class="col col-4">
-              <span title="artist">{{track.artist}}</span>
+              <span title="artist">{{ track.artist }}</span>
             </div>
-            <div class="col col-5">{{track.duration|timeFormat}}</div>
+            <div class="col col-5">{{ track.duration | timeFormat}}</div>
             <div class="col col-6"></div>
           </li>
         </ul>
@@ -36,7 +36,9 @@
       <div class="lyric" @mousewheel.prevent="scroll(10 , $refs.lyricList, $refs.scrollBar2, $event)">
         <div ref="lyricList">
           <div v-if="lyric">
-            <p v-for="(line, index) in lyric" ref="lines" :key="index">{{ line[1] }}</p>
+            <p v-for="(line, index) in lyric" ref="lines" :key="index">
+              {{ line[1] }}
+            </p>
           </div>
           <div v-else>
             <p>纯音乐，请欣赏</p>
@@ -289,12 +291,19 @@
       };
     },
     watch: {
+      playList() {
+        _.forEach(this.$refs.lines, line => {
+          line.style.color = REGULAR_COLOR;
+        });
+        this.getLyric(this.playList[this.index].id);
+      },
       index(newIndex) {
         _.forEach(this.$refs.lines, line => {
           line.style.color = REGULAR_COLOR;
         });
         this.getLyric(this.playList[this.index].id);
       },
+      // 根据时间线标记正在播放的歌词
       currentTime() {
         let i = 0,
           len = this.lyric.length;
@@ -332,7 +341,7 @@
       ...mapMutations(["changeIndex"]),
       getLyric(id) {
         this.axios
-          .get("/api/lyric?id=" + id)
+          .get("/lyric?id=" + id)
           .then(res => {
             this.lyric = this.tLyric = null;
             if (res.data.lrc.lyric != undefined) {
@@ -368,7 +377,7 @@
         return result;
       },
       scroll(step, list, bar, e) {
-        console.log(e);
+        //console.log(e);
         let dir = e.deltaY > 0 ? "down" : "up";
         let style1 = window.getComputedStyle(bar, null);
         let style2 = window.getComputedStyle(list, null);

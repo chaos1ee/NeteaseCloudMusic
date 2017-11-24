@@ -34,7 +34,7 @@
       // 获取歌单内所有歌曲
       getList() {
         this.axios
-          .get("/api/playlist/detail?id=" + this.item.id)
+          .get("/playlist/detail?id=" + this.item.id)
           .then(res => {
             let data = [];
 
