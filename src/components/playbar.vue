@@ -66,7 +66,6 @@
     width: 100%;
     z-index: 999;
     transition: all 0.2s ease-out;
-
     &.active {
       top: -53px;
     }
@@ -112,14 +111,12 @@
     height: 18px;
     margin: 6px 0 0 17px;
     background-position: -80px -380px;
-
     &:hover {
       background-position: -80px -400px;
     }
   } // 上锁状态
   .playbar.locked .locker {
     background-position: -100px -380px;
-
     &:hover {
       background-position: -100px -400px;
     }
@@ -170,15 +167,12 @@
       cursor: pointer;
       z-index: 10000;
     }
-
     .prev {
       background-position: 0 -130px;
-
       &:hover {
         background-position: -30px -130px;
       }
     }
-
     .ply {
       width: 36px;
       height: 36px;
@@ -190,15 +184,12 @@
     }
     .ply.paused {
       background-position: 0 -165px;
-
       &:hover {
         background-position: -40px -165px;
       }
     }
-
     .next {
       background-position: -80px -130px;
-
       &:hover {
         background-position: -110px -130px;
       }
@@ -211,12 +202,10 @@
     width: 34px;
     height: 34px;
     margin: 6px 15px 0 0;
-
     img {
       width: 34px;
       height: 34px;
     }
-
     .msk {
       position: absolute;
       top: 0;
@@ -232,7 +221,6 @@
     float: left;
     position: relative;
     width: 608px;
-
     .words {
       height: 28px;
       overflow: hidden;
@@ -240,23 +228,19 @@
       text-shadow: 0 1px 0 #171717;
       line-height: 28px;
     }
-
     .title {
       float: left;
       max-width: 300px;
     }
-
     .artist {
       float: left;
       max-width: 220px;
       margin-left: 15px;
       color: #9b9b9b;
     }
-
     .progress {
       width: 493px;
       position: relative;
-
       .time {
         position: absolute;
         top: -3px;
@@ -264,7 +248,6 @@
         color: #797979;
         text-shadow: 0 1px 0 #121212;
       }
-
       em {
         text-align: left;
         color: #a1a1a1;
@@ -276,7 +259,6 @@
     width: 493px;
     height: 9px;
     background-position: right 0;
-
     &,
     .el-slider__runway .el-slider__bar {
       background-image: url("/static/image/statbar.png");
@@ -297,7 +279,6 @@
       width: 22px;
       height: 24px;
       background: url("/static/image/iconall.png") 0 -250px;
-
       .el-slider__button {
         background-color: transparent;
         border: 0;
@@ -323,7 +304,6 @@
     width: 113px;
     padding-left: 13px;
     background-position: -147px -238px;
-
     .volume-bar.el-slider {
       position: absolute;
       top: -113px;
@@ -341,13 +321,11 @@
         margin: 10px 0;
         background-color: transparent;
       }
-
       .el-slider__bar {
         height: 93px;
         margin: 0 14px 0;
         background-color: #c20c0c;
       }
-
       .el-slider__button-wrapper {
         left: 7px;
         width: 18px;
@@ -356,7 +334,6 @@
         background-position: -40px -250px;
         background-repeat: no-repeat;
       }
-
       .el-slider__button {
         width: 18px;
         height: 20px;
@@ -365,14 +342,12 @@
         background-position: -40px -250px;
         background-repeat: no-repeat;
         background-color: transparent;
-
         &:hover,
         &.dragging {
           transform: scale(1) !important;
         }
       }
     }
-
     .icon-vol {
       float: left;
       width: 25px;
@@ -381,7 +356,6 @@
       text-indent: -999px;
       background-position: -2px -248px;
     }
-
     .icon-loop {
       float: left;
       width: 25px;
@@ -390,14 +364,12 @@
       text-indent: -999px;
       background-position: -66px -344px;
     }
-
     .add {
       float: left;
       width: 59px;
       height: 36px;
       position: relative;
     }
-
     .icon-list {
       display: block;
       width: 38px;
@@ -412,14 +384,10 @@
       text-indent: 0;
     }
   }
-
 </style>
 
 <script>
-  import {
-    mapState,
-    mapMutations
-  } from "vuex";
+  import { mapState, mapMutations } from "vuex";
   import PlayList from "./playlist";
 
   const PROGRESS_LENGTH = 493;
@@ -458,20 +426,20 @@
         return this.playList.length > 0 ? this.playList[this.index].name : null;
       },
       duration() {
-        return this.playList.length > 0 ?
-          this.playList[this.index].duration :
-          null;
+        return this.playList.length > 0
+          ? this.playList[this.index].duration
+          : null;
       }
     },
     watch: {
       // 监听歌单是否有变化
       playList() {
-        this.fetchAudioAndPlay(this.playList[this.index].id)
+        this.fetchAudioAndPlay(this.playList[this.index].id);
         //this.changeMusic(this.playList[this.index].id);
       },
       // 监听index，每当变化时切换歌曲
       index(newIndex) {
-        this.fetchAudioAndPlay(this.playList[this.index].id)
+        this.fetchAudioAndPlay(this.playList[this.index].id);
         //this.changeMusic(this.playList[this.index].id);
       }
     },
@@ -523,7 +491,7 @@
           this.currentTime = this.audio.currentTime;
           this.disX = this.audio.currentTime / this.audio.duration * 100;
         });
-        
+
         this.audio.addEventListener("ended", () => {
           this.playNext();
         });
@@ -557,7 +525,8 @@
       },
       fetchAudioAndPlay(id) {
         this.audio.load();
-        this.axios.get("/api/music/url?id=" + id)
+        this.axios
+          .get("/music/url?id=" + id)
           .then(res => res.data.data[0].url)
           .then(url => {
             this.audio.src = url;
@@ -566,8 +535,7 @@
           .catch(err => {
             console.error(err.message);
           });
-      }, 
+      }
     }
   };
-
 </script>

@@ -15,8 +15,7 @@
     <div class="listbd">
       <div class="listbdc" @mousewheel.prevent="scroll(10,$refs.musicList, $refs.scrollBar1, $event)">
         <ul ref="musicList">
-          <li v-for="(track, idx) in playList" :key="track.id" :class="{playing: idx == index}"
-            @click="changeIndex(idx)">
+          <li v-for="(track, idx) in playList" :key="track.id" :class="{playing: idx == index}" @click="changeIndex(idx)">
             <div class="col col-1">
               <div :class="{'ico-play': idx == index}"></div>
             </div>
@@ -36,8 +35,12 @@
       <div class="msk2"></div>
       <div class="lyric" @mousewheel.prevent="scroll(10 , $refs.lyricList, $refs.scrollBar2, $event)">
         <div ref="lyricList">
-          <p v-if="lyric"  v-for="(line, index) in lyric" ref="lines" :key="index">{{ line[1] }}</p>
-          <p v-else>纯音乐，请欣赏</p>
+          <div v-if="lyric">
+            <p v-for="(line, index) in lyric" ref="lines" :key="index">{{ line[1] }}</p>
+          </div>
+          <div v-else>
+            <p>纯音乐，请欣赏</p>
+          </div>
         </div>
       </div>
       <div class="bline bline-2">
@@ -272,12 +275,9 @@
 
   const REGULAR_COLOR = "#989898";
   const ACTIVE_COLOR = "#fff";
-  const MUSIC_LINEHEIGHT = 28;
-  const LYRIC_LINEHEIGHT = 32;
 
   const WH = 260;
   const BH = 40;
-
 
   export default {
     name: "play-list",
@@ -332,7 +332,7 @@
       ...mapMutations(["changeIndex"]),
       getLyric(id) {
         this.axios
-          .get("/api/lyric?id=" + id)
+          .get("/lyric?id=" + id)
           .then(res => {
             this.lyric = this.tLyric = null;
             if (res.data.lrc.lyric != undefined) {
@@ -368,6 +368,7 @@
         return result;
       },
       scroll(step, list, bar, e) {
+        console.log(e);
         let dir = e.deltaY > 0 ? "down" : "up";
         let style1 = window.getComputedStyle(bar, null);
         let style2 = window.getComputedStyle(list, null);
@@ -376,7 +377,7 @@
         let top1 = parseInt(style1.top);
         let top2 = parseInt(style2.top);
 
-        if (dir == 'down' && top1 <= WH - BH) {
+        if (dir == "down" && top1 <= WH - BH) {
           if (top1 + step > WH - BH) {
             top1 = WH - BH;
             top2 = WH - LH;
@@ -384,21 +385,21 @@
             top1 += step;
             top2 -= step * (LH - WH) / (WH - BH);
           }
-          bar.style.top = top1 + 'px';
-          list.style.top = top2 + 'px';
+          bar.style.top = top1 + "px";
+          list.style.top = top2 + "px";
         }
 
-        if (dir == 'up' && top1 >= 0) {
+        if (dir == "up" && top1 >= 0) {
           if (top1 - step < 0) {
             top1 = 0;
             top2 = 0;
           } else {
             top1 -= step;
-            top2 += step * (LH - WH) / (WH - BH)
+            top2 += step * (LH - WH) / (WH - BH);
           }
         }
-        bar.style.top = top1 + 'px';
-        list.style.top = top2 + 'px';
+        bar.style.top = top1 + "px";
+        list.style.top = top2 + "px";
       }
     }
   };
