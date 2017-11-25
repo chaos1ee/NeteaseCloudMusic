@@ -1,7 +1,0 @@
-@mixin pt($height) {
-  padding-top: $height;
-}
-
-.pt-5 {
-  @include pt(5px);
-}

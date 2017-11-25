@@ -76,7 +76,7 @@
   .blank,
   .locker,
   .msk {
-    background: url("/static/image/playbar.png") no-repeat 9999px 9999px;
+    background: url("../assets/image/playbar.png") no-repeat 9999px 9999px;
   }
 
   .p-wr {
@@ -162,7 +162,7 @@
       margin-right: 8px;
       margin-top: 5px;
       text-indent: -9999px;
-      background-image: url("/static/image/playbar.png");
+      background-image: url("../assets/image/playbar.png");
       background-repeat: no-repeat;
       cursor: pointer;
       z-index: 10000;
@@ -261,7 +261,7 @@
     background-position: right 0;
     &,
     .el-slider__runway .el-slider__bar {
-      background-image: url("/static/image/statbar.png");
+      background-image: url("../assets/image/statbar.png");
       background-repeat: no-repeat;
     }
     .el-slider__runway {
@@ -278,7 +278,7 @@
       top: -7px;
       width: 22px;
       height: 24px;
-      background: url("/static/image/iconall.png") 0 -250px;
+      background: url("../assets/image/iconall.png") 0 -250px;
       .el-slider__button {
         background-color: transparent;
         border: 0;
@@ -294,7 +294,7 @@
   .icon-loop,
   .icon-list,
   .volume-bar {
-    background-image: url("/static/image/playbar.png");
+    background-image: url("../assets/image/playbar.png");
     background-repeat: no-repeat;
   }
 
@@ -330,7 +330,7 @@
         left: 7px;
         width: 18px;
         height: 20px;
-        background-image: url("/static/image/iconall.png");
+        background-image: url("../assets/image/iconall.png");
         background-position: -40px -250px;
         background-repeat: no-repeat;
       }
@@ -338,7 +338,7 @@
         width: 18px;
         height: 20px;
         border: 0;
-        background-image: url("/static/image/iconall.png");
+        background-image: url("../assets/image/iconall.png");
         background-position: -40px -250px;
         background-repeat: no-repeat;
         background-color: transparent;

@@ -32,13 +32,13 @@
       <div class="msk2"></div>
       <v-bar wrapper="lyric" vBar="bline" vBarInternal="scrol">
         <div v-if="lyric">
-            <p v-for="(line, index) in lyric" ref="lines" :key="index">
-              {{ line[1] }}
-            </p>
-          </div>
-          <div v-else>
-            <p>纯音乐，请欣赏</p>
-          </div>
+          <p v-for="(line, index) in lyric" ref="lines" :key="index">
+            {{ line[1] }}
+          </p>
+        </div>
+        <div v-else>
+          <p>纯音乐，请欣赏</p>
+        </div>
       </v-bar>
     </div>
   </div>
@@ -55,7 +55,7 @@
     .listhd {
       height: 41px;
       padding: 0 5px;
-      background: url("/static/image/playlist_bg.png") 0 0 no-repeat;
+      background: url("../assets/image/playlist_bg.png") 0 0 no-repeat;
     }
   }
 
@@ -84,7 +84,7 @@
         width: 13px;
         height: 16px;
         background-position: -51px 0;
-        background-image: url("/static/image/playlist.png");
+        background-image: url("../assets/image/playlist.png");
         background-repeat: no-repeat;
         margin: 1px 6px 0 0;
       }
@@ -114,7 +114,7 @@
       text-indent: -999px;
       cursor: pointer;
       background-position: -195px 9px;
-      background-image: url("/static/image/playlist.png");
+      background-image: url("../assets/image/playlist.png");
       background-repeat: no-repeat;
     }
   }
@@ -138,7 +138,7 @@
     overflow: hidden;
     background-position: -1014px 0;
     background-repeat: repeat-y;
-    background-image: url("/static/image/playlist_bg.png");
+    background-image: url("../assets/image/playlist_bg.png");
     .listbdc {
       position: absolute;
       left: 2px;
@@ -168,7 +168,7 @@
               height: 13px;
               margin-top: 8px;
               background-position: -182px 0;
-              background-image: url("/static/image/playlist.png");
+              background-image: url("../assets/image/playlist.png");
               background-repeat: no-repeat;
             }
           }
@@ -242,8 +242,7 @@
 
 <script>
   import { mapState, mapMutations } from "vuex";
-  //import scroll from "./js/scroll";
-  import VBar from 'v-bar';
+  import VBar from "v-bar";
 
   const REGULAR_COLOR = "#989898";
   const ACTIVE_COLOR = "#fff";

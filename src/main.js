@@ -8,7 +8,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueVirtualScroller from 'vue-virtual-scroller'
 // 自定义element-ui样式表
-import '../static/style/element-variables.scss'
+import './assets/style/element-variables.scss'
 // 按需引入element-ui组件
 import { Menu, MenuItem, Dropdown, DropdownMenu, DropdownItem, Carousel, CarouselItem, Slider } from 'element-ui'
 

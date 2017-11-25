@@ -107,7 +107,7 @@
     margin: 0 auto;
     border: 1px solid #d3d3d3;
     border-width: 0 1px;
-    background: url("/static/image/wrap1.png") repeat-y 100% 100%;
+    background: url("../assets/image/wrap1.png") repeat-y 100% 100%;
   }
 
   .m-left {
@@ -159,7 +159,7 @@
         height: 12px;
         margin-left: 4px;
         vertical-align: middle;
-        background: url("/static/image/index.png") no-repeat 0 -240px;
+        background: url("../assets/image/index.png") no-repeat 0 -240px;
       }
     }
   }
@@ -206,7 +206,7 @@
       height: 472px;
       margin-top: 20px;
       padding-left: 1px;
-      background: url("/static/image/index_bill.png") no-repeat;
+      background: url("../assets/image/index_bill.png") no-repeat;
     }
     .b-block {
       float: left;
@@ -253,7 +253,7 @@
         height: 22px;
         margin-right: 10px;
         text-indent: -9999px;
-        background-image: url("/static/image/index.png");
+        background-image: url("../assets/image/index.png");
         background-repeat: no-repeat;
       }
       .btn-play {
@@ -299,11 +299,11 @@
 </style>
 
 <script>
-  import Banner from "./components/banner";
-  import TitleBar from "./components/titlebar";
-  import Cover from "./components/cover";
-  import Describe from "./components/desc";
-  import Copywriter from "./components/copywriter";
+  import Banner from "../components/banner";
+  import TitleBar from "../components/titlebar";
+  import Cover from "../components/cover";
+  import Describe from "../components/desc";
+  import Copywriter from "../components/copywriter";
   import { mapState, mapMutations } from "vuex";
 
   const API = {
@@ -338,8 +338,8 @@
     },
     methods: {
       /** 
-               * @description 访问对象API中的全部接口
-               */
+                 * @description 访问对象API中的全部接口
+                 */
       accessAll() {
         let temp = [];
         _.forEach(API, value => {
@@ -348,8 +348,8 @@
         return temp;
       },
       /** 
-               * @description 异步并行获取数据并分别保存到各个对象中 
-               */
+                 * @description 异步并行获取数据并分别保存到各个对象中 
+                 */
       fetchData() {
         this.axios.all(this.accessAll()).then(
           this.axios.spread(
@@ -382,10 +382,10 @@
         );
       },
       /** @description 移动数组中的项 
-               * @param {array} arr - 给定数组 
-               * @param {number} to - 该项在数组中要移到的位置
-               * @param {number} from- 该项在数组中的起始位置
-               */
+                 * @param {array} arr - 给定数组 
+                 * @param {number} to - 该项在数组中要移到的位置
+                 * @param {number} from- 该项在数组中的起始位置
+                 */
       moveItem(arr, to, from) {
         arr.splice(to, 0, ...arr.splice(from, 1));
       }

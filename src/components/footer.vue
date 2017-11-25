@@ -42,68 +42,68 @@
 </template>
 
 <style lang="scss" scoped>
-.footer {
-  position: relative;
-  height: 140px;
-  overflow: hidden;
-  border-top: 1px solid #d3d3d3;
-  background-color: #f2f2f2;
-  .ft-main {
-    width: 980px;
-    margin: 0 auto;
+  .footer {
+    position: relative;
+    height: 140px;
+    overflow: hidden;
+    border-top: 1px solid #d3d3d3;
+    background-color: #f2f2f2;
+    .ft-main {
+      width: 980px;
+      margin: 0 auto;
+    }
+    .copy {
+      float: left;
+      width: 490px;
+      padding-top: 35px;
+      line-height: 24px;
+    }
+    .cl a {
+      color: #999;
+    }
+    .line {
+      margin: 0 8px 0 10px;
+      color: #c2c2c2;
+    }
+    .cr,
+    .cr a {
+      color: #666;
+    }
+    .group {
+      margin-right: 14px;
+    }
+    .enter {
+      float: right;
+      width: 330px;
+      margin-top: 21px;
+    }
+    .enter a {
+      float: left;
+      width: 60px;
+      height: 70px;
+      font-size: 0;
+      margin-left: 30px;
+      background-image: url("../assets/image/foot_enter.png");
+      background-repeat: no-repeat;
+    }
+    .enter li:nth-child(1) a {
+      margin-left: 0;
+      background-position: -60px -80px;
+    }
+    .enter li:nth-child(2) a {
+      background-position: 0 -80px;
+    }
+    .enter li:nth-child(3) a {
+      background-position: 0 0;
+    }
+    .enter li:nth-child(4) a {
+      background-position: -60px 0;
+    }
   }
-  .copy {
-    float: left;
-    width: 490px;
-    padding-top: 35px;
-    line-height: 24px;
-  }
-  .cl a {
-    color: #999;
-  }
-  .line {
-    margin: 0 8px 0 10px;
-    color: #c2c2c2;
-  }
-  .cr,
-  .cr a {
-    color: #666;
-  }
-  .group {
-    margin-right: 14px;
-  }
-  .enter {
-    float: right;
-    width: 330px;
-    margin-top: 21px;
-  }
-  .enter a {
-    float: left;
-    width: 60px;
-    height: 70px;
-    font-size: 0;
-    margin-left: 30px;
-    background-image: url("/static/image/foot_enter.png");
-    background-repeat: no-repeat;
-  }
-  .enter li:nth-child(1) a {
-    margin-left: 0;
-    background-position: -60px -80px;
-  }
-  .enter li:nth-child(2) a {
-    background-position: 0 -80px;
-  }
-  .enter li:nth-child(3) a {
-    background-position: 0 0;
-  }
-  .enter li:nth-child(4) a {
-    background-position: -60px 0;
-  }
-}
 </style>
 
 <script>
-export default {
-  name: "cloud-footer"
-};
+  export default {
+    name: "cloud-footer"
+  };
 </script>

@@ -38,8 +38,8 @@
 }
 
 // 本项目中的特有类
-$topBar: '/static/image/topbar.png';
-$topList: '/static/image/toplist.png';
+$topBar: './assets/image/topbar.png';
+$topList: './assets/image/toplist.png';
 .bg-topbar {
   background-image: url($topBar);
   background-repeat: no-repeat;
@@ -57,7 +57,7 @@ $topList: '/static/image/toplist.png';
   bottom: 5px;
   width: 16px;
   height: 17px;
-  background-image: url("/static/image/iconall.png");
+  background-image: url("./assets/image/iconall.png");
   background-position: 0 0;
   background-repeat: no-repeat;
 }
@@ -66,7 +66,7 @@ $topList: '/static/image/toplist.png';
   float: left;
   width: 14px;
   height: 11px;
-  background-image: url("/static/image/iconall.png");
+  background-image: url("./assets/image/iconall.png");
   background-position: 0 -24px;
   background-repeat: no-repeat;
   margin: 9px 5px 9px 10px;
@@ -79,12 +79,12 @@ $topList: '/static/image/toplist.png';
   height: 140px;
   .bottom,
   .msk {
-    background-image: url("/static/image/coverall.png");
+    background-image: url("./assets/image/coverall.png");
     background-repeat: no-repeat;
   }
   .icon-play,
   .icon-headset {
-    background-image: url("/static/image/iconall.png");
+    background-image: url("./assets/image/iconall.png");
     background-repeat: no-repeat;
   }
   img {

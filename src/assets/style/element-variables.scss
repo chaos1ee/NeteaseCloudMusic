@@ -5,7 +5,7 @@
 
 /** 自定义el-dropdown**/
 
-$toplistImg: '/static/image/toplist.png';
+$toplistImg: '../image/toplist.png';
 .el-dropdown-link {
   display: block;
   position: relative;
@@ -125,46 +125,4 @@ $toplistImg: '/static/image/toplist.png';
 .el-menu--horizontal .el-menu-item {
   vertical-align: middle;
   line-height: 100%;
-}
-
-.tttttopnav {
-  float: left;
-  li,
-  span,
-  a,
-  em {
-    float: left;
-    height: 70px;
-    font-size: 14px;
-    color: #ccc;
-  }
-  li {
-    position: relative;
-    &.active {
-      background-color: #000;
-    }
-    &.active sub {
-      visibility: visible;
-    }
-    a {
-      padding: 0 19px;
-      text-align: center;
-      line-height: 70px;
-      &:hover {
-        background-color: #000;
-      }
-    }
-    sub {
-      display: block;
-      position: absolute;
-      left: 50%;
-      top: 64px;
-      width: 12px;
-      height: 7px;
-      margin-left: -6px;
-      overflow: hidden;
-      background-position: -226px 0;
-      visibility: hidden;
-    }
-  }
 }
