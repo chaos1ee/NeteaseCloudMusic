@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="listbd">
-      <div class="listbdc" @mousewheel.prevent="scroll(10,$refs.musicList, $refs.scrollBar1, $event)">
+      <v-bar wrapper="listbdc" vBar="bline" vBarInternal="scrol">
         <ul ref="musicList">
           <li v-for="(track, idx) in playList" :key="track.id" :class="{playing: idx == index}" @click="changeIndex(idx)">
             <div class="col col-1">
@@ -28,14 +28,10 @@
             <div class="col col-6"></div>
           </li>
         </ul>
-      </div>
-      <div class="bline">
-        <span class="scrol" style="height:38px;" ref="scrollBar1"></span>
-      </div>
+      </v-bar>
       <div class="msk2"></div>
-      <div class="lyric" @mousewheel.prevent="scroll(10 , $refs.lyricList, $refs.scrollBar2, $event)">
-        <div ref="lyricList">
-          <div v-if="lyric">
+      <v-bar wrapper="lyric" vBar="bline" vBarInternal="scrol">
+        <div v-if="lyric">
             <p v-for="(line, index) in lyric" ref="lines" :key="index">
               {{ line[1] }}
             </p>
@@ -43,16 +39,12 @@
           <div v-else>
             <p>纯音乐，请欣赏</p>
           </div>
-        </div>
-      </div>
-      <div class="bline bline-2">
-        <div class="scrol" style="height:38px;" ref="scrollBar2"></div>
-      </div>
+      </v-bar>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .playlist {
     position: absolute;
     left: 50%;
@@ -60,12 +52,11 @@
     width: 986px;
     height: 301px;
     margin-left: -493px;
-  }
-
-  .listhd {
-    height: 41px;
-    padding: 0 5px;
-    background: url("/static/image/playlist_bg.png") 0 0 no-repeat;
+    .listhd {
+      height: 41px;
+      padding: 0 5px;
+      background: url("/static/image/playlist_bg.png") 0 0 no-repeat;
+    }
   }
 
   .listhdc {
@@ -154,7 +145,7 @@
       top: 0;
       z-index: 4;
       height: 260px;
-      width: 553px;
+      width: 564px;
       color: #ccc;
       overflow: hidden;
       ul {
@@ -165,6 +156,7 @@
         li {
           float: left;
           width: 100%;
+          height: 28px;
           &.playing {
             background-color: rgba(0, 0, 0, 0.3);
             color: #fff;
@@ -206,74 +198,52 @@
         }
       }
     }
-  }
-
-  .bline {
-    position: absolute;
-    left: 555px;
-    top: -1px;
-    width: 6px;
-    height: 260px;
-    background: #000;
-    opacity: 0.5;
-    .scrol {
+    .lyric {
       position: absolute;
-      left: 0;
+      right: 0;
       top: 0;
-      width: 4px;
-      height: 100px;
-      border-radius: 5px;
-      cursor: pointer;
-      background: #a6a6a6;
-      border: 1px solid #a6a6a6;
-      opacity: 0.8;
+      z-index: 4;
+      width: 422px;
+      height: 260px;
+      overflow: hidden;
+      p {
+        color: #989898;
+        word-wrap: break-word;
+        text-align: center;
+        line-height: 32px;
+        height: auto !important;
+        transition: color 0.7s linear;
+      }
     }
-  }
-
-  .msk2 {
-    position: absolute;
-    top: 2;
-    z-index: 3;
-    width: 420px;
-    height: 250px;
-    background: #121212;
-    opacity: 0.01;
-  }
-
-  .lyric {
-    position: absolute;
-    right: 40px;
-    top: 0;
-    z-index: 4;
-    margin: 21px 0 20px 0;
-    width: 354px;
-    height: 219px;
-    overflow: hidden;
-    div {
+    .msk2 {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
+      top: 2;
+      z-index: 3;
+      width: 420px;
+      height: 250px;
+      background: #121212;
+      opacity: 0.01;
     }
-    p {
-      color: #989898;
-      word-wrap: break-word;
-      text-align: center;
-      line-height: 32px;
-      height: auto !important;
-      transition: color 0.7s linear;
+    .bline {
+      width: 6px;
+      background-color: #000;
+      opacity: 0.5;
+      .scrol {
+        width: 4px;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #a6a6a6;
+        border: 1px solid #a6a6a6;
+        opacity: 0.8;
+      }
     }
-  }
-
-  .bline-2 {
-    left: auto;
-    right: 2px;
   }
 </style>
 
 <script>
   import { mapState, mapMutations } from "vuex";
   //import scroll from "./js/scroll";
+  import VBar from 'v-bar';
 
   const REGULAR_COLOR = "#989898";
   const ACTIVE_COLOR = "#fff";
@@ -284,6 +254,9 @@
   export default {
     name: "play-list",
     props: ["currentTime"],
+    components: {
+      VBar
+    },
     data() {
       return {
         lyric: null,
@@ -375,40 +348,6 @@
           result.push(temp);
         });
         return result;
-      },
-      scroll(step, list, bar, e) {
-        //console.log(e);
-        let dir = e.deltaY > 0 ? "down" : "up";
-        let style1 = window.getComputedStyle(bar, null);
-        let style2 = window.getComputedStyle(list, null);
-        const BH = parseInt(style1.height);
-        const LH = parseInt(style2.height);
-        let top1 = parseInt(style1.top);
-        let top2 = parseInt(style2.top);
-
-        if (dir == "down" && top1 <= WH - BH) {
-          if (top1 + step > WH - BH) {
-            top1 = WH - BH;
-            top2 = WH - LH;
-          } else {
-            top1 += step;
-            top2 -= step * (LH - WH) / (WH - BH);
-          }
-          bar.style.top = top1 + "px";
-          list.style.top = top2 + "px";
-        }
-
-        if (dir == "up" && top1 >= 0) {
-          if (top1 - step < 0) {
-            top1 = 0;
-            top2 = 0;
-          } else {
-            top1 -= step;
-            top2 += step * (LH - WH) / (WH - BH);
-          }
-        }
-        bar.style.top = top1 + "px";
-        list.style.top = top2 + "px";
       }
     }
   };
