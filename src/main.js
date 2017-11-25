@@ -3,19 +3,29 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import '../static/style/element-variables.scss'
 import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-
-const _ = require('lodash');
+import VueVirtualScroller from 'vue-virtual-scroller'
+// 自定义element-ui样式表
+import '../static/style/element-variables.scss'
+// 按需引入element-ui组件
+import { Menu, MenuItem, Dropdown, DropdownMenu, DropdownItem, Carousel, CarouselItem, Slider } from 'element-ui'
 
 Vue.use(VueAxios, axios)
-Vue.use(ElementUI)
+Vue.use(VueVirtualScroller)
+Vue.use(Menu)
+Vue.use(MenuItem)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
+Vue.use(Slider)
 
 Vue.config.productionTip = false
+
+const _ = require('lodash')
 
 /* eslint-disable no-new */
 new Vue({
