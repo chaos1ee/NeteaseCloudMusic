@@ -262,12 +262,13 @@
         top1: 0
       };
     },
+    computed: {},
     watch: {
       playList() {
-        this.lyricRoll();
+        this.lyricRoll(this.index);
       },
       index(newIndex) {
-        this.lyricRoll();
+        this.lyricRoll(newIndex);
       },
       // 根据时间线标记正在播放的歌词
       currentTime() {
@@ -344,11 +345,12 @@
       },
       // 歌词滚动
       lyricRoll(index) {
-        if (this.playList[this.index].type == 0) {
+        this.lyric = null;
+        if (this.playList[index].type == 0) {
           _.forEach(this.$refs.lines, line => {
             line.style.color = REGULAR_COLOR;
           });
-          this.getLyric(this.playList[this.index].id);
+          this.getLyric(this.playList[index].id);
         }
       }
     }

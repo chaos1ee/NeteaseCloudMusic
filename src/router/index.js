@@ -7,12 +7,12 @@ import Friend from 'views/Friend'
 import Shop from 'views/Shop'
 import Musician from 'views/Musician'
 import Download from 'views/Download'
-
 import TopList from 'views/TopList'
 import PlayList from 'views/PlayList'
 import DJRadio from 'views/DJRadio'
 import Artist from 'views/Artist'
 import Album from 'views/Album'
+import PlaylistDetail from 'views/PlaylistDetail'
 
 Vue.use(Router)
 
@@ -79,5 +79,9 @@ export default new Router({
     path: '/discover/album',
     name: 'Album',
     component: Album
+  },
+  {
+    path: '/playlist/:id',
+    component: PlaylistDetail
   }]
 })
