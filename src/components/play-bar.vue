@@ -390,12 +390,12 @@
 
 <script>
   import { mapState, mapMutations } from "vuex";
-  import PlayList from "./musicMenu.vue";
+  import PlayList from "./music-menu.vue";
 
   const PROGRESS_LENGTH = 493;
 
   export default {
-    name: "playBar",
+    name: "PlayBar",
     components: {
       PlayList
     },
@@ -530,21 +530,21 @@
         this.audio.play();
       }
       /**
-         *fetchAudioAndPlay(id) {
-          this.axios
-            .get("/music/url?id=" + id)
-            .then(res => res.data.data[0].url)
-            .then(url => {
-              console.log(url);
-              this.audio.src = url;
-              return this.audio.play();
-            })
-            .catch(err => {
-              console.error(err.message);
-            });
-        }
-         *
-         */
+             *fetchAudioAndPlay(id) {
+              this.axios
+                .get("/music/url?id=" + id)
+                .then(res => res.data.data[0].url)
+                .then(url => {
+                  console.log(url);
+                  this.audio.src = url;
+                  return this.audio.play();
+                })
+                .catch(err => {
+                  console.error(err.message);
+                });
+            }
+             *
+             */
     }
   };
 </script>

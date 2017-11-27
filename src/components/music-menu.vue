@@ -264,22 +264,16 @@
     },
     watch: {
       playList() {
-        _.forEach(this.$refs.lines, line => {
-          line.style.color = REGULAR_COLOR;
-        });
-        this.getLyric(this.playList[this.index].id);
+        this.lyricRoll();
       },
       index(newIndex) {
-        _.forEach(this.$refs.lines, line => {
-          line.style.color = REGULAR_COLOR;
-        });
-        this.getLyric(this.playList[this.index].id);
+        this.lyricRoll();
       },
       // 根据时间线标记正在播放的歌词
       currentTime() {
-        let i = 0,
-          len = this.lyric.length;
+        let i = 0;
         if (this.lyric) {
+          let len = this.lyric.length;
           while (this.currentTime > this.lyric[i][0] && i < len - 1) {
             if (i > 0) this.$refs.lines[i - 1].style.color = REGULAR_COLOR;
             this.$refs.lines[i].style.color = ACTIVE_COLOR;
@@ -347,6 +341,15 @@
           result.push(temp);
         });
         return result;
+      },
+      // 歌词滚动
+      lyricRoll(index) {
+        if (this.playList[this.index].type == 0) {
+          _.forEach(this.$refs.lines, line => {
+            line.style.color = REGULAR_COLOR;
+          });
+          this.getLyric(this.playList[this.index].id);
+        }
       }
     }
   };
