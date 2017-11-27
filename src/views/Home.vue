@@ -85,8 +85,8 @@
     },
     methods: {
       /** 
-               * @description 访问对象API中的全部接口
-               */
+                 * @description 访问对象API中的全部接口
+                 */
       accessAll() {
         let temp = [];
         _.forEach(API, value => {
@@ -95,8 +95,8 @@
         return temp;
       },
       /** 
-               * @description 异步并行获取数据并分别保存到各个对象中 
-               */
+                 * @description 异步并行获取数据并分别保存到各个对象中 
+                 */
       fetchData() {
         this.axios.all(this.accessAll()).then(
           this.axios.spread(
@@ -104,7 +104,6 @@
               // banner栏
               this.banner = banner.data.banners;
               // 热门推荐
-              console.log(music.data);
               let data = _.concat(
                 _.slice(music.data.result, 0, 5),
                 _.slice(radio.data.result, 0, 3)
@@ -131,10 +130,10 @@
         );
       },
       /** @description 移动数组中的项 
-               * @param {array} arr - 给定数组 
-               * @param {number} to - 该项在数组中要移到的位置
-               * @param {number} from- 该项在数组中的起始位置
-               */
+                 * @param {array} arr - 给定数组 
+                 * @param {number} to - 该项在数组中要移到的位置
+                 * @param {number} from- 该项在数组中的起始位置
+                 */
       moveItem(arr, to, from) {
         arr.splice(to, 0, ...arr.splice(from, 1));
       }

@@ -17,9 +17,10 @@
         <ul class="bc clearfix">
             <li v-for="(item,key) in covers" :key="key">
                 <cover :item="item"></cover>
-                <describe>
+                <div class="desc">
+                    <i class="radio-icon" v-if="item.type == 1"></i>
                     <a slot="desc" :href="'/playlist?'+item.id">{{item.name}}</a>
-                </describe>
+                </div>
             </li>
         </ul>
     </div>
@@ -38,6 +39,19 @@
           overflow: hidden;
           padding: 0 0 30px 42px;
           line-height: 1.4;
+          .desc {
+            width: 100%;
+            margin: 8px 0 3px;
+            font-size: 14px;
+            .radio-icon {
+              display: inline-block;
+              position: relative;
+              top: 3px;
+              width: 35px;
+              height: 15px;
+              background: url("../assets/image/icon.png") no-repeat -31px -658px;
+            }
+          }
         }
       }
     }
@@ -45,7 +59,6 @@
 
 
 <script>
-    import Describe from "./desc";
     import TitleBar from "./title-bar";
     import Cover from "./cover";
 
@@ -54,8 +67,7 @@
       props: ["covers"],
       components: {
         TitleBar,
-        Cover,
-        Describe
+        Cover
       }
     };
 </script>

@@ -64,7 +64,7 @@
           temp.id = this.item.program.mainSong.id;
           temp.type = 1;
           temp.name = this.item.name;
-          temp.cove = this.item.picUrl;
+          temp.cover = this.item.picUrl;
           temp.artist = this.item.program.mainSong.artists[0].name;
           temp.duration = _.floor(this.item.program.duration / 1000);
           data.push(temp);

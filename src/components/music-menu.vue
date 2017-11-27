@@ -37,7 +37,7 @@
           </p>
         </div>
         <div v-else>
-          <p>纯音乐，请欣赏</p>
+          <p style="lineHeight:270px;">纯音乐，请欣赏</p>
         </div>
       </v-bar>
     </div>
