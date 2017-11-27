@@ -50,12 +50,14 @@
 <style lang="scss">
   .m-bar {
     position: fixed;
+    zoom: 1;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
     height: 0;
     z-index: 9999;
+    transform: translateZ(0);
   }
 
   .playbar {
@@ -522,12 +524,10 @@
         this.$store.commit("changeIndex", index);
       },
       // 通过音乐Id获取音乐url
-
       fetchAudioAndPlay(id) {
         this.audio.src = "http://music.163.com/song/media/outer/url?id=" + id + ".mp3";
         this.audio.play();
       }
-
       /**
        *fetchAudioAndPlay(id) {
         this.axios
