@@ -5,14 +5,13 @@
 </template>
 
 <script>
-export default {
-  name: "musician",
-  components: {}
-};
+  export default {
+    name: "musician"
+  };
 </script>
 
 <style lang="scss" scoped>
-.musician {
-  min-height: 700px;
-}
+  .musician {
+    min-height: 700px;
+  }
 </style>

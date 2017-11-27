@@ -390,7 +390,7 @@
 
 <script>
   import { mapState, mapMutations } from "vuex";
-  import PlayList from "./playlist";
+  import PlayList from "./musicMenu.vue";
 
   const PROGRESS_LENGTH = 493;
 
@@ -428,9 +428,9 @@
         return this.playList.length > 0 ? this.playList[this.index].name : null;
       },
       duration() {
-        return this.playList.length > 0 ?
-          this.playList[this.index].duration :
-          null;
+        return this.playList.length > 0
+          ? this.playList[this.index].duration
+          : null;
       }
     },
     watch: {
@@ -525,26 +525,26 @@
       },
       // 通过音乐Id获取音乐url
       fetchAudioAndPlay(id) {
-        this.audio.src = "http://music.163.com/song/media/outer/url?id=" + id + ".mp3";
+        this.audio.src =
+          "http://music.163.com/song/media/outer/url?id=" + id + ".mp3";
         this.audio.play();
       }
       /**
-       *fetchAudioAndPlay(id) {
-        this.axios
-          .get("/music/url?id=" + id)
-          .then(res => res.data.data[0].url)
-          .then(url => {
-            console.log(url);
-            this.audio.src = url;
-            return this.audio.play();
-          })
-          .catch(err => {
-            console.error(err.message);
-          });
-      }
-       *
-       */
-
+         *fetchAudioAndPlay(id) {
+          this.axios
+            .get("/music/url?id=" + id)
+            .then(res => res.data.data[0].url)
+            .then(url => {
+              console.log(url);
+              this.audio.src = url;
+              return this.audio.play();
+            })
+            .catch(err => {
+              console.error(err.message);
+            });
+        }
+         *
+         */
     }
   };
 </script>

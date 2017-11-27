@@ -1,7 +1,7 @@
 <template>
   <div class="cover">
     <img class="cp" :src="item.picUrl"></img>
-    <a class="msk" :href="'/playlist?'+item.id"></a>
+    <a class="msk" :href="'/discover/playlist?'+item.id"></a>
     <div class="bottom">
       <span @click="getList" class="icon-play"></span>
       <span class="icon-headset"></span>

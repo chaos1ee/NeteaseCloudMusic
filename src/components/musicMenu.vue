@@ -1,5 +1,5 @@
 <template>
-  <div class="playlist">
+  <div class="music-menu">
     <div class="listhd">
       <div class="listhdc">
         <h4>播放列表
@@ -45,7 +45,7 @@
 </template>
 
 <style lang="scss">
-  .playlist {
+  .music-menu {
     position: absolute;
     left: 50%;
     bottom: 47px;
@@ -251,7 +251,7 @@
   const BH = 40;
 
   export default {
-    name: "play-list",
+    name: "MusicMenu",
     props: ["currentTime"],
     components: {
       VBar

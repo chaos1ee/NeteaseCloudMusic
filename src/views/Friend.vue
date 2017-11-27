@@ -5,16 +5,15 @@
 </template>
 
 <style lang="scss" scoped>
-.friend {
-  min-height: 700px;
-}
+  .friend {
+    min-height: 700px;
+  }
 </style>
 
 <script>
-export default {
-  name: "friend",
-  components: {}
-};
+  export default {
+    name: "friend"
+  };
 </script>
 
 

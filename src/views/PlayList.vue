@@ -4,12 +4,15 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+  .playlist {
+    min-height: 700px;
+  }
+</style>
+
 <script>
-export default {};
+  export default {
+    name: "playlist"
+  };
 </script>
 
-<style lang="scss" scoped>
-.playlist {
-  min-height: 700px;
-}
-</style>
