@@ -1,80 +1,49 @@
 <template>
   <div class="home">
     <banner :banner="banner"></banner>
-    <div class="discover-module clearfix">
-      <div class="m-left">
-        <div class="wr">
-          <div class="wr2">
-            <hot-recommend :covers="hot"></hot-recommend>
-            <new-album :albums="newAlbum"></new-album>
-            <bill :bills="bills"></bill>
-          </div>
-        </div>
+    <common-layout>
+      <div slot="left">
+        <hot-recommend :covers="hot"></hot-recommend>
+        <new-album :albums="newAlbum"></new-album>
+        <bill :bills="bills"></bill>
       </div>
-      <div class="m-right">
+      <div slot="right">
         <div class="login">
           <p>登录网易云音乐，可以享受无限收藏的乐趣，并且无限同步到手机</p>
           <a href="javscript:void(0)">用户登录</a>
         </div>
         <div class="singer">
-
         </div>
       </div>
-    </div>
+    </common-layout>
   </div>
 </template>
 
 <style lang="scss" scoped>
   .home {
-    width: 100%;
-    background: #f5f5f5;
-    .discover-module {
-      width: 980px;
-      min-height: 700px;
-      margin: 0 auto;
-      border: 1px solid #d3d3d3;
-      border-width: 0 1px;
-      background: url("../assets/image/wrap1.png") repeat-y 100% 100%;
-      .m-left {
-        float: left;
-        width: 100%;
-        margin-right: -250px;
-        .wr {
-          margin-right: 251px;
-        }
-        .wr2 {
-          padding: 20px 20px 40px;
-        }
+    .login {
+      height: 126px;
+      background: url("../assets/image/index.png") no-repeat 0 0;
+      p {
+        width: 205px;
+        margin: 0 auto;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        line-height: 22px;
+        color: #666;
       }
-      .m-right {
-        float: right;
-        width: 250px;
-        zoom: 1;
-        .login {
-          height: 126px;
-          background: url("../assets/image/index.png") no-repeat 0 0;
-          p {
-            width: 205px;
-            margin: 0 auto;
-            padding-top: 16px;
-            padding-bottom: 16px;
-            line-height: 22px;
-            color: #666;
-          }
-          a {
-            display: block;
-            width: 100px;
-            height: 31px;
-            line-height: 31px;
-            margin: 0 auto;
-            text-align: center;
-            color: #fff;
-            text-shadow: 0 1px 0 #8a060b;
-            background: url("../assets/image/index.png") no-repeat 0 -195px;
-            &:hover {
-              background-position: -110px -195px;
-            }
-          }
+      a {
+        display: block;
+        width: 100px;
+        height: 31px;
+        line-height: 31px;
+        margin: 0 auto;
+        text-align: center;
+        color: #fff;
+        text-shadow: 0 1px 0 #8a060b;
+        background: url("../assets/image/index.png") no-repeat 0 -195px;
+        &:hover {
+          background-position: -110px -195px;
         }
       }
     }
@@ -83,6 +52,7 @@
 
 <script>
   import Banner from "../components/banner";
+  import CommonLayout from "../components/common-layout";
   import HotRecommend from "../components/hot-recommend";
   import NewAlbum from "../components/new-album";
   import Bill from "../components/bill";
@@ -102,6 +72,7 @@
   export default {
     components: {
       Banner,
+      CommonLayout,
       HotRecommend,
       NewAlbum,
       Bill
@@ -120,8 +91,8 @@
     },
     methods: {
       /** 
-       * @description 访问对象API中的全部接口
-       */
+           * @description 访问对象API中的全部接口
+           */
       accessAll() {
         let temp = [];
         _.forEach(API, value => {
@@ -130,8 +101,8 @@
         return temp;
       },
       /** 
-       * @description 异步并行获取数据并分别保存到各个对象中 
-       */
+           * @description 异步并行获取数据并分别保存到各个对象中 
+           */
       fetchData() {
         this.axios.all(this.accessAll()).then(
           this.axios.spread(
@@ -165,10 +136,10 @@
         );
       },
       /** @description 移动数组中的项 
-       * @param {array} arr - 给定数组 
-       * @param {number} to - 该项在数组中要移到的位置
-       * @param {number} from- 该项在数组中的起始位置
-       */
+           * @param {array} arr - 给定数组 
+           * @param {number} to - 该项在数组中要移到的位置
+           * @param {number} from- 该项在数组中的起始位置
+           */
       moveItem(arr, to, from) {
         arr.splice(to, 0, ...arr.splice(from, 1));
       }
