@@ -9,24 +9,10 @@
     </title-bar>
     <el-carousel height="184px" trigger="click" :autoplay="false" i ndicator-position="none" arrow="always" indicator-position="none">
       <el-carousel-item>
-        <div class="album" v-for="album in albums1" :key="album.id">
-          <div class="album-cover">
-            <img class="album-img" :src="album.picUrl">
-            <a class="album-msk" href="javascript:void(0)"></a>
-          </div>
-          <p class="album-name ft-brk">{{ album.name }}</p>
-          <p class="album-artist ft-brk">{{ album.artist.name}}</p>
-        </div>
+        <album v-for="album in albums1" :key="album" :album="album"></album>
       </el-carousel-item>
       <el-carousel-item>
-        <div class="album" v-for="album in albums2" :key="album.id">
-          <div class="album-cover">
-            <img class="album-img" :src="album.picUrl">
-            <a class="album-msk" href="javascript:void(0)"></a>
-          </div>
-          <p class="album-name ft-brk">{{ album.name }}</p>
-          <p class="album-artist ft-brk">{{ album.artist.name}}</p>
-        </div>
+        <album v-for="album in albums2" :key="album" :album="album"></album>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -107,10 +93,13 @@
 
 <script>
   import TitleBar from "./title-bar";
+  import Album from "./album";
+
   export default {
     name: "NewAlbum",
     components: {
-      TitleBar
+      TitleBar,
+      Album
     },
     props: ["albums"],
     computed: {
