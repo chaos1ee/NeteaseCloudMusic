@@ -1,7 +1,7 @@
 <template>
   <div class="banner" ref="banner">
     <div class="banner-inner">
-      <el-carousel trigger="click" height="336px" @change="toggleBannerBgColor($event)">
+      <el-carousel trigger="click" height="336px" @change="toggleBannerBgColor">
         <el-carousel-item v-for="item in banner" :key="item.targetId">
           <img :src="item.pic">
         </el-carousel-item>
@@ -66,7 +66,8 @@
     props: ["banner"],
     data() {
       return {
-        color: ["#88837d", "#200f19", "#000000", "#000000", "#ffffff", "#464d57"]
+        color: ["#88837d", "#200f19", "#000000", "#000000", "#ffffff", "#464d57"],
+        index: 0
       };
     },
     methods: {

@@ -23,7 +23,7 @@
               <span class="artist ft-brk">{{artist}}</span>
             </div>
             <div class="progress">
-              <el-slider class="progress-bar" v-model="disX" :show-tooltip="false" height="9px"></el-slider>
+              <el-slider class="progress-bar" v-model="disX" :show-tooltip="false" height="9px" @change="changeProgress"></el-slider>
               <span class="time">
                 <em>{{ currentTime | timeFormat}}</em>
                 / {{ duration | timeFormat}}
@@ -483,11 +483,8 @@
       },
       initAudio() {
         this.audio = new Audio();
-        //this.audio.autoplay = true;
+        this.audio.autoplay = true;
         this.audio.preload = "auto";
-        //this.audio.addEventListener("canplay", () => {
-        //  this.duration = this.audio.duration;
-        //});
         this.audio.addEventListener("timeupdate", () => {
           this.audio.volume = _.round(this.volume / 100, 1);
           this.currentTime = this.audio.currentTime;
@@ -530,6 +527,11 @@
         this.audio.src =
           "http://music.163.com/song/media/outer/url?id=" + id + ".mp3";
         this.audio.play();
+      },
+      changeProgress(pos) {
+        this.audio.currentTime = pos / 100 * this.audio.duration;
+        //console.log(pos / 100 * );
+        //this.audio.currentTime = ;
       }
     }
   };
