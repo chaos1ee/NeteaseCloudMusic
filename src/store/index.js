@@ -6,7 +6,8 @@ Vue.use(Vuex)
 const IS_MUSIC = 0;
 const IS_RADIO = 1;
 
-import { formatMusicData, formatDjData } from './formatDate.js';
+import { formatMusicData, formatDjData } from './js/formatDate.js';
+import Storage from './js/storage.js';
 
 export default new Vuex.Store({
   state: {
@@ -16,18 +17,23 @@ export default new Vuex.Store({
     index: 0
   },
   mutations: {
-
     // 更新索引
     changeIndex(state, index) {
       state.index = index;
     },
+    // 在播放列表中注入项
     getRadio(state, item) {
       state.playList.push(formatDjData(item));
       state.index = state.playList.length - 1;
     },
+    // 更新播放列表
     updateList(state, list) {
       state.index = 0;
       state.playList = list;
+    },
+    // 清空播放列表
+    clearList(state) {
+      state.playList = [];
     }
   },
   actions: {
