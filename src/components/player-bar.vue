@@ -1,6 +1,6 @@
 <template>
   <div class="m-bar">
-    <div class="playbar" ref="player" @mouseenter="playerShow" @mouseleave="playerHide" :class="{active: isActive, locked: isLocked}">
+    <div class="player-bar" ref="player" @mouseenter="playerShow" @mouseleave="playerHide" :class="{active: isActive, locked: isLocked}">
       <div class="p-wr">
         <div class="bg"></div>
         <div class="p-right">
@@ -35,14 +35,13 @@
             <a @click="volumeBarToggle" class="icon-vol" href="javascript:void(0)"></a>
             <a class="icon-loop" href="javascript:void(0)"></a>
             <span class="add">
-              <a @click="showList" class="icon-list" href="javascript:void(0)">{{playList.length}}</a>
+              <a @click="toggle" class="icon-list" href="javascript:void(0)">{{playList.length}}</a>
             </span>
           </div>
         </div>
       </div>
       <div class="hand">展开播放条</div>
-
-      <play-list v-show="listShow" :currentTime="currentTime"></play-list>
+      <player-menu v-show="menuShow" @hide="menuShow = false" :currentTime="currentTime"></player-menu>
     </div>
   </div>
 </template>
@@ -60,7 +59,7 @@
     transform: translateZ(0);
   }
 
-  .playbar {
+  .player-bar {
     position: absolute;
     top: -7px;
     left: 0;
@@ -390,14 +389,14 @@
 
 <script>
   import { mapState, mapMutations } from "vuex";
-  import PlayList from "./music-menu.vue";
+  import PlayerMenu from "./player-menu";
 
   const PROGRESS_LENGTH = 493;
 
   export default {
-    name: "PlayBar",
+    name: "PlayerBar",
     components: {
-      PlayList
+      PlayerMenu
     },
     data() {
       return {
@@ -409,11 +408,14 @@
         volume: 50,
         currentTime: 0,
         volumeBarShow: false,
-        listShow: false
+        menuShow: false
       };
     },
     created() {
       this.initAudio();
+      this.$on("hideMenu", a => {
+        console.log(a);
+      });
     },
     updated() {},
     computed: {
@@ -473,8 +475,8 @@
           this.isLocked = false;
         }
       },
-      showList() {
-        this.listShow = !this.listShow;
+      toggle() {
+        this.menuShow = !this.menuShow;
       },
       volumeBarToggle() {
         this.volumeBarShow = !this.volumeBarShow;
@@ -529,22 +531,6 @@
           "http://music.163.com/song/media/outer/url?id=" + id + ".mp3";
         this.audio.play();
       }
-      /**
-             *fetchAudioAndPlay(id) {
-              this.axios
-                .get("/music/url?id=" + id)
-                .then(res => res.data.data[0].url)
-                .then(url => {
-                  console.log(url);
-                  this.audio.src = url;
-                  return this.audio.play();
-                })
-                .catch(err => {
-                  console.error(err.message);
-                });
-            }
-             *
-             */
     }
   };
 </script>

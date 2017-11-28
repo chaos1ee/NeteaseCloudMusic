@@ -9,10 +9,10 @@
     </title-bar>
     <el-carousel height="184px" trigger="click" :autoplay="false" i ndicator-position="none" arrow="always" indicator-position="none">
       <el-carousel-item>
-        <album v-for="album in albums1" :key="album" :album="album"></album>
+        <album v-for="album in albums1" :key="album.id" :album="album"></album>
       </el-carousel-item>
       <el-carousel-item>
-        <album v-for="album in albums2" :key="album" :album="album"></album>
+        <album v-for="album in albums2" :key="album.id" :album="album"></album>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -50,41 +50,6 @@
           height: 184px;
           padding-top: 28px;
           margin-left: 15px;
-          .album {
-            display: inline-block;
-            width: 118px;
-            height: 150px;
-            margin-left: 12px;
-            .album-cover {
-              position: relative;
-              width: 100px;
-              height: 100px;
-              margin-bottom: 7px;
-              .album-img {
-                width: 100%;
-                height: 100%;
-              }
-              .album-msk {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 118px;
-                height: 100px;
-                background: url("../assets/image/coverall.png") no-repeat 0 -570px;
-              }
-            }
-            .album-name {
-              width: 90%;
-              line-height: 19px;
-              overflow: hidden;
-            }
-            .album-artist {
-              width: 90%;
-              line-height: 18px;
-              overflow: hidden;
-              color: #666;
-            }
-          }
         }
       }
     }

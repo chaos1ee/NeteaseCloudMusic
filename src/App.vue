@@ -3,14 +3,14 @@
     <my-header></my-header>
     <router-view></router-view>
     <my-footer></my-footer>
-    <play-bar></play-bar>
+    <player-bar></player-bar>
   </div>
 </template>
 
 <script>
   import MyHeader from "./components/header";
   import MyFooter from "./components/footer";
-  import PlayBar from "./components/play-bar";
+  import PlayerBar from "./components/player-bar";
   import { mapActions } from "vuex";
 
   export default {
@@ -18,7 +18,7 @@
     components: {
       MyHeader,
       MyFooter,
-      PlayBar
+      PlayerBar
     }
   };
 </script>

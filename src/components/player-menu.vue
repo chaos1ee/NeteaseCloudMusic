@@ -1,5 +1,5 @@
 <template>
-  <div class="music-menu">
+  <div class="player-menu">
     <div class="listhd">
       <div class="listhdc">
         <h4>播放列表
@@ -9,7 +9,7 @@
           <span class="icon-del"></span>清除
         </a>
         <p class="title">{{title}}</p>
-        <span class="close">关闭</span>
+        <span class="close" @click="$emit('hide')">关闭</span>
       </div>
     </div>
     <div class="listbd">
@@ -45,7 +45,7 @@
 </template>
 
 <style lang="scss">
-  .music-menu {
+  .player-menu {
     position: absolute;
     left: 50%;
     bottom: 47px;
@@ -251,7 +251,7 @@
   const BH = 40;
 
   export default {
-    name: "MusicMenu",
+    name: "PLayerMenu",
     props: ["currentTime"],
     components: {
       VBar
