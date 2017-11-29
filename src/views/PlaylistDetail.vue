@@ -1,6 +1,11 @@
 <template>
   <div class="playlist-detail">
-    <common-layout>
+    <div class="loading" v-if="loading">
+      加载中，请稍后...
+    </div>
+    <div class="error" v-if="error"> {{ error }}</div>
+    <div class="content" v-if="playlist">
+      <common-layout>
       <div slot="left">
         <div class="pl-info">
           <div class="pl-avatar">
@@ -46,12 +51,18 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi inventore veniam et vitae, quibusdam assumenda porro aut sunt cupiditate repellat debitis perspiciatis eligendi beatae aperiam quam obcaecati doloremque consequatur perferendis!
         </div>
       </div>
-    </common-layout>
+      </common-layout>
+    </div>
+    
   </div>
 </template>
 
 <style lang="scss" scoped>
   .playlist-detail {
+    .loading {
+      color: red;
+      font-size: 16px;
+    }
     width: 100%;
     .pl-info {
       height: 300px;
@@ -112,7 +123,6 @@
         }
       }
     }
-
     .pl-aside {
       float: right;
       width: 178px;
@@ -131,6 +141,8 @@
     },
     data() {
       return {
+        loading: false,
+        error: null,
         playlist: null
       };
     },
@@ -142,11 +154,17 @@
     },
     methods: {
       fetchList() {
-        this.playlist = null;
+        this.error = this.playlist = null;
+        this.loading = true;
         this.axios
           .get("/playlist/detail?id=" + this.$route.params.id)
-          .then(res => (this.playlist = res.data))
+          .then(res => {
+            this.loading = false;
+            this.playlist = res.data;
+
+          })
           .catch(err => {
+            this.error = err.toString();
             console.error(err.message);
           });
       }
