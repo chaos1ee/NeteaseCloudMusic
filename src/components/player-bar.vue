@@ -25,8 +25,8 @@
             <div class="progress">
               <el-slider class="progress-bar" v-model="disX" :show-tooltip="false" height="9px" @change="changeProgress"></el-slider>
               <span class="time">
-                <em>{{ currentTime | timeFormat}}</em>
-                / {{ duration | timeFormat}}
+                <em>{{ currentTime | timeFormat }}</em>
+                / {{ duration | timeFormat }}
               </span>
             </div>
           </div>
@@ -417,7 +417,6 @@
         console.log(a);
       });
     },
-    updated() {},
     computed: {
       ...mapState(["playList", "index"]),
       cover() {

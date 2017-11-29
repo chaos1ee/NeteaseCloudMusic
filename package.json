@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.17.0",
+    "date-fns": "^1.29.0",
     "element-ui": "^2.0.2",
     "v-bar": "^3.0.0",
     "vue": "^2.5.2",
