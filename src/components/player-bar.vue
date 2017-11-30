@@ -116,7 +116,7 @@
       background-position: -80px -400px;
     }
   } // 上锁状态
-  .playbar.locked .locker {
+  .player-bar.locked .locker {
     background-position: -100px -380px;
     &:hover {
       background-position: -100px -400px;
