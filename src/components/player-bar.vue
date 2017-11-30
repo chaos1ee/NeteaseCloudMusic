@@ -430,9 +430,9 @@
         return this.playList.length > 0 ? this.playList[this.index].name : null;
       },
       duration() {
-        return this.playList.length > 0
-          ? this.playList[this.index].duration
-          : null;
+        return this.playList.length > 0 ?
+          this.playList[this.index].duration :
+          null;
       }
     },
     watch: {

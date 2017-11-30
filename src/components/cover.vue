@@ -16,6 +16,7 @@
 
 <script>
   import { mapMutations, mapActions } from "vuex";
+  import Storage from "../assets/js/storage";
 
   const IS_MUSIC = 0;
   const IS_RADIO = 1;
@@ -39,7 +40,7 @@
         if (this.item.type != undefined && this.item.type == 1) {
           this.$store.commit("getRadio", this.item);
         } else {
-          this.$store.dispatch("getMusic", this.item);
+          this.$store.dispatch("getMusicList", this.item);
         }
       }
     }

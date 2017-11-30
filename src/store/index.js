@@ -6,8 +6,8 @@ Vue.use(Vuex)
 const IS_MUSIC = 0;
 const IS_RADIO = 1;
 
-import { formatMusicData, formatDjData } from './js/formatData.js';
-import Storage from './js/storage.js';
+import { formatMusicData, formatDjData } from '../assets/js/formatData.js';
+import Storage from '../assets/js/storage';
 
 export default new Vuex.Store({
   state: {
@@ -37,21 +37,27 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getMusic({ commit, state }, item) {
-      this._vm.axios
-        .get("/playlist/detail?id=" + item.id)
-        .then(res => {
-          if (res.data.playlist.tracks != undefined) {
-            let temp = [];
-            _.forEach(res.data.playlist.tracks, track => {
-              temp.push(formatMusicData(track));
-            });
-            commit('updateList', temp);
-          }
-        })
-        .catch(err => {
-          console.error(err.name + ":" + err.message);
-        });
+    getMusicList({ commit, state }, item) {
+      if (Storage.get(item.id) !== null) {
+        commit('updateList', JSON.parse(Storage.get(item.id)));
+      } else {
+        this._vm.axios
+          .get("/playlist/detail?id=" + item.id)
+          .then(res => {
+            if (res.data.playlist.tracks != undefined) {
+              let temp = [];
+              _.forEach(res.data.playlist.tracks, track => {
+                temp.push(formatMusicData(track));
+              });
+              commit('updateList', temp);
+              Storage.save(item.id, JSON.stringify(temp));
+            }
+          })
+          .catch(err => {
+            console.error(err.name + ":" + err.message);
+          });
+      }
+
     }
   }
 })
