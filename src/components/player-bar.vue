@@ -389,6 +389,7 @@
 
 <script>
   import { mapState, mapMutations } from "vuex";
+  import format from "./js/format.js";
   import PlayerMenu from "./player-menu";
 
   const PROGRESS_LENGTH = 493;
@@ -446,11 +447,7 @@
     },
     filters: {
       timeFormat(time) {
-        let m = _.floor(_.floor(time) / 60);
-        let s = _.floor(_.floor(time) % 60);
-        if (m < 10) m = "0" + m;
-        if (s < 10) s = "0" + s;
-        return m + ":" + s;
+        return format(time);
       }
     },
     methods: {

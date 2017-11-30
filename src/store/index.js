@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const IS_MUSIC = 0;
 const IS_RADIO = 1;
 
-import { formatMusicData, formatDjData } from './js/formatDate.js';
+import { formatMusicData, formatDjData } from './js/formatData.js';
 import Storage from './js/storage.js';
 
 export default new Vuex.Store({

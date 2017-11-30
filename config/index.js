@@ -59,6 +59,9 @@ module.exports = {
       '/playlist': {
         target: 'http://localhost:3000',
         changeOrigin: true
+      },
+      "/comment": {
+        target: 'http://localhost:3000'
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

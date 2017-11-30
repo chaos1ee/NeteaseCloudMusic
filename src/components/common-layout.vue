@@ -1,6 +1,6 @@
 <template>
-    <div class="module clearfix">
-        <div class="module-bg">
+    <div class="module">
+        <div class="module-bg clearfix">
             <div class="m-left">
                 <div class="wr">
                     <div class="wr2">
@@ -12,7 +12,6 @@
                 <slot name="right"></slot>
             </div>
         </div>
-
     </div>
 </template>
 
