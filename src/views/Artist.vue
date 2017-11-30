@@ -5,13 +5,13 @@
 </template>
 
 <style lang="scss" scoped>
-.artist {
-  min-height: 700px;
-}
+  .artist {
+    min-height: calc(100vh - 291px);
+  }
 </style>
 
 <script>
-export default {};
+  export default {};
 </script>
 
 

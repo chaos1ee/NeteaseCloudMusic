@@ -4,14 +4,16 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+  .musician {
+    min-height: calc(100vh - 291px);
+  }
+</style>
+
 <script>
   export default {
     name: "musician"
   };
 </script>
 
-<style lang="scss" scoped>
-  .musician {
-    min-height: 700px;
-  }
-</style>
+

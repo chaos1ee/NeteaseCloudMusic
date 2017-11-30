@@ -7,12 +7,10 @@
     name: "download",
     components: {}
   };
-
 </script>
 
 <style lang="scss" scoped>
   .download {
-    min-height: 700px;
+    min-height: calc(100vh - 291px);
   }
-
 </style>

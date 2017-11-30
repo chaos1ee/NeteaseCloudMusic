@@ -4,14 +4,16 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+  .toplist {
+    min-height: calc(100vh - 291px);
+  }
+</style>
+
 <script>
-export default {
-  name: "toplist"
-};
+  export default {
+    name: "toplist"
+  };
 </script>
 
-<style lang="scss" scoped>
-.toplist {
-  min-height: 700px;
-}
-</style>
+

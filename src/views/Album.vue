@@ -4,14 +4,16 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+  .album {
+    min-height: calc(100vh - 291px);
+  }
+</style>
+
 <script>
-export default {
-  name: "album"
-};
+  export default {
+    name: "album"
+  };
 </script>
 
-<style lang="scss" scoped>
-.album {
-  min-height: 700px;
-}
-</style>
+

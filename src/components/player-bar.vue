@@ -312,6 +312,7 @@
       clear: both;
       width: 32px;
       height: 113px;
+      z-index: 999;
       background-position: 0 -503px;
       .el-slider__runway {
         position: absolute;
@@ -389,7 +390,7 @@
 
 <script>
   import { mapState, mapMutations } from "vuex";
-  import format from "./js/format.js";
+  import formatTime from "../assets/js/formatTime";
   import PlayerMenu from "./player-menu";
 
   const PROGRESS_LENGTH = 493;
@@ -414,9 +415,6 @@
     },
     created() {
       this.initAudio();
-      this.$on("hideMenu", a => {
-        console.log(a);
-      });
     },
     computed: {
       ...mapState(["playList", "index"]),
@@ -430,9 +428,9 @@
         return this.playList.length > 0 ? this.playList[this.index].name : null;
       },
       duration() {
-        return this.playList.length > 0 ?
-          this.playList[this.index].duration :
-          null;
+        return this.playList.length > 0
+          ? this.playList[this.index].duration
+          : null;
       }
     },
     watch: {
@@ -447,7 +445,7 @@
     },
     filters: {
       timeFormat(time) {
-        return format(time);
+        return formatTime(time);
       }
     },
     methods: {

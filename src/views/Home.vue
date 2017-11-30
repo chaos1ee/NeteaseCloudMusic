@@ -21,6 +21,7 @@
 
 <style lang="scss" scoped>
   .home {
+    min-height: calc(100vh - 291px);
     .login {
       height: 126px;
       background: url("../assets/image/index.png") no-repeat 0 0;
@@ -133,10 +134,10 @@
         );
       },
       /** @description 移动数组中的项 
-                     * @param {array} arr - 给定数组 
-                     * @param {number} to - 该项在数组中要移到的位置
-                     * @param {number} from- 该项在数组中的起始位置
-                     */
+                         * @param {array} arr - 给定数组 
+                         * @param {number} to - 该项在数组中要移到的位置
+                         * @param {number} from- 该项在数组中的起始位置
+                         */
       moveItem(arr, to, from) {
         arr.splice(to, 0, ...arr.splice(from, 1));
       }

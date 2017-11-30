@@ -210,7 +210,7 @@
 </style>
 
 <script>
-  import format from "./js/format.js";
+  import formatTime from "../assets/js/formatTime";
 
   export default {
     name: "PlaylistContent",
@@ -222,7 +222,7 @@
     },
     filters: {
       timeFormat(time) {
-        return format(time / 1000);
+        return formatTime(time / 1000);
       }
     },
     methods: {

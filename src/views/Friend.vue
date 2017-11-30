@@ -4,9 +4,10 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .friend {
-    min-height: 700px;
+    min-height: calc(100vh - 291px);
+    box-sizing: border-box;
   }
 </style>
 

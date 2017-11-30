@@ -25,7 +25,7 @@
 
 <style lang="scss" scoped>
   .playlist-detail {
-    min-height: 700px;
+    min-height: calc(100vh - 291px);
     width: 100%;
     .loading,
     .error {

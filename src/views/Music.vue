@@ -12,6 +12,6 @@
 
 <style lang="scss" scoped>
   .music {
-    min-height: 700px;
+    min-height: calc(100vh - 291px);
   }
 </style>

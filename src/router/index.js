@@ -13,6 +13,8 @@ import DJRadio from 'views/DJRadio'
 import Artist from 'views/Artist'
 import Album from 'views/Album'
 import PlaylistDetail from 'views/PlaylistDetail'
+import NotFound from 'views/NotFound'
+
 
 Vue.use(Router)
 
@@ -83,5 +85,8 @@ export default new Router({
   {
     path: '/playlist/:id',
     component: PlaylistDetail
+  }, {
+    path: '*',
+    component: NotFound
   }]
 })

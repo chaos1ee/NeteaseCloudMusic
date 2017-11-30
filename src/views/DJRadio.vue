@@ -5,11 +5,11 @@
 </template>
 
 <script>
-export default {};
+  export default {};
 </script>
 
 <style lang="scss" scoped>
-.djradio {
-  min-height: 700px;
-}
+  .djradio {
+    min-height: calc(100vh - 291px);
+  }
 </style>

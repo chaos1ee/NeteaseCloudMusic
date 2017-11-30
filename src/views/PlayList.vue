@@ -6,7 +6,7 @@
 
 <style lang="scss" scoped>
   .playlist {
-    min-height: 700px;
+    min-height: calc(100vh - 291px);
   }
 </style>
 

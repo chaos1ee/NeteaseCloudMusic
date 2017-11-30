@@ -1,18 +1,18 @@
 <template>
-<div class="shop">
+  <div class="shop">
 
-</div>
+  </div>
 </template>
-
+<style lang="scss" scoped>
+  .shop {
+    min-height: calc(100vh - 291px);
+  }
+</style>
 <script>
-export default {
-  name: "shop",
-  components: {}
-};
+  export default {
+    name: "shop",
+    components: {}
+  };
 </script>
 
-<style lang="scss" scoped>
-.shop {
-  min-height: 700px;
-}
-</style>
+

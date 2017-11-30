@@ -37,6 +37,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    // 根据id检查localstorage中是否存在歌单，不存在的时候才向服务器请求
     getMusicList({ commit, state }, item) {
       if (Storage.get(item.id) !== null) {
         commit('updateList', JSON.parse(Storage.get(item.id)));
