@@ -10,7 +10,7 @@ import VueVirtualScroller from 'vue-virtual-scroller'
 // 自定义element-ui样式表
 import './assets/style/element-variables.scss'
 // 按需引入element-ui组件
-import { Menu, MenuItem, Dropdown, DropdownMenu, DropdownItem, Carousel, CarouselItem, Slider } from 'element-ui'
+import { Menu, MenuItem, Dropdown, DropdownMenu, DropdownItem, Carousel, CarouselItem, Slider, Pagination } from 'element-ui'
 
 Vue.use(VueAxios, axios)
 Vue.use(VueVirtualScroller)
@@ -22,6 +22,7 @@ Vue.use(DropdownItem)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
 Vue.use(Slider)
+Vue.use(Pagination)
 
 Vue.config.productionTip = false
 
