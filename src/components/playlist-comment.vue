@@ -24,8 +24,11 @@
               </div>
               <p>：{{comment.beReplied[0].content}}</p>
             </div>
-            <div class="footer">
+            <div class="footer clearfix">
               <span class="ago">{{comment.time | formatTime }}</span>
+              <a class="rep" href="javascript:void(0)">回复</a>
+              <span class="likedCount" v-if="comment.likedCount > 0">({{comment.likedCount}})</span>
+              <a class="thumb-up" href="javascript:void(0)">赞</a>
             </div>
           </div>
         </li>
@@ -103,10 +106,38 @@
             border: 1px solid #dedede;
             color: #888;
           }
+          .footer {
+            margin-top: 15px;
+            color: #888;
+            .ago {
+              float: left;
+            }
+            .thumb-up,
+            .rep,
+            .likedCount {
+              float: right;
+              color: #888;
+            }
+            .thumb-up {
+              width: 15px;
+              height: 14px;
+              text-indent: -999px;
+              margin-right: 10px;
+              background: url("../assets/image/icon2.png") no-repeat -150px 0;
+            }
+            .likedCount {
+              height: 20px;
+              line-height: 15px;
+              color: #000;
+              margin-right: 10px;
+            }
+          }
         }
       }
     } // 分页
     .pagination {
+      margin-top: 50px;
+      margin-bottom: 30px;
       text-align: center;
     }
   }
@@ -175,6 +206,7 @@
       }
     },
     methods: {
+      // 切换页面时更新偏移量，然后根据id与偏移量请求对应评论
       handleCurrentChange(val) {
         this.offset = val - 1;
         this.fetchComment();
