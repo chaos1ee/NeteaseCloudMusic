@@ -5,7 +5,7 @@
 </template>
 <style lang="scss" scoped>
   .shop {
-    min-height: calc(100vh - 291px);
+    min-height: calc(100vh - 216px);
   }
 </style>
 <script>

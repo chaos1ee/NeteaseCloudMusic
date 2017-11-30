@@ -6,7 +6,7 @@
 
 <style lang="scss" scoped>
   .toplist {
-    min-height: calc(100vh - 291px);
+    min-height: calc(100vh - 246px);
   }
 </style>
 

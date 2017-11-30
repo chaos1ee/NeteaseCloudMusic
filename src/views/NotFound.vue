@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
     .not-found {
       width: 100%;
-      min-height: calc(100vh - 291px);
+      min-height: calc(100vh - 246px);
       background-color: #f5fdff;
       text-align: center;
       a {

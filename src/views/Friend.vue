@@ -6,7 +6,7 @@
 
 <style lang="scss">
   .friend {
-    min-height: calc(100vh - 291px);
+    min-height: calc(100vh - 216px);
     box-sizing: border-box;
   }
 </style>

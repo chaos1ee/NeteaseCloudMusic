@@ -10,6 +10,6 @@
 
 <style lang="scss" scoped>
   .djradio {
-    min-height: calc(100vh - 291px);
+    min-height: calc(100vh - 246px);
   }
 </style>
