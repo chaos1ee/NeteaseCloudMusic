@@ -33,34 +33,30 @@ module.exports = {
     // 设置代理
     proxyTable: {
       '/banner': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
+        target: 'http://localhost:3000'
       },
       '/personalized': {
         target: 'http://localhost:3000',
-        changeOrigin: true
       },
       '/personalized/djprogram': {
         target: 'http://localhost:3000',
-        changeOrigin: true,
       },
       '/top': {
         target: 'http://localhost:3000',
-        changeOrigin: true
       },
       '/music': {
         target: 'http://localhost:3000',
-        changeOrigin: true
       },
       '/lyric': {
         target: 'http://localhost:3000',
-        changeOrigin: true
       },
       '/playlist': {
         target: 'http://localhost:3000',
-        changeOrigin: true
       },
       "/comment": {
+        target: 'http://localhost:3000'
+      },
+      "/login": {
         target: 'http://localhost:3000'
       }
     },

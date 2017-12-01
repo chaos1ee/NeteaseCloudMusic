@@ -13,7 +13,8 @@
   import MyHeader from "./components/header";
   import MyFooter from "./components/footer";
   import PlayerBar from "./components/player-bar";
-  import { mapActions } from "vuex";
+  import { mapMutations } from "vuex";
+  import Strorage from "./assets/js/storage";
 
   export default {
     name: "home",
@@ -21,6 +22,14 @@
       MyHeader,
       MyFooter,
       PlayerBar
+    },
+    methods: {
+      ...mapMutations(["login"]),
+      checkLogin() {
+        if (Strorage.get("login") != null) {
+          this.$store.commit("login");
+        }
+      }
     }
   };
 </script>

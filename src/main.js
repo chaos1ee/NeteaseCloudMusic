@@ -10,10 +10,15 @@ import VueVirtualScroller from 'vue-virtual-scroller'
 // 自定义element-ui样式表
 import './assets/style/element-variables.scss'
 // 按需引入element-ui组件
-import { Menu, MenuItem, Dropdown, DropdownMenu, DropdownItem, Carousel, CarouselItem, Slider, Pagination } from 'element-ui'
+import { Dialog, Form, FormItem, Button, Input, Menu, MenuItem, Dropdown, DropdownMenu, DropdownItem, Carousel, CarouselItem, Slider, Pagination } from 'element-ui'
 
 Vue.use(VueAxios, axios)
-Vue.use(VueVirtualScroller)
+
+Vue.use(Dialog)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Button)
+Vue.use(Input)
 Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Dropdown)

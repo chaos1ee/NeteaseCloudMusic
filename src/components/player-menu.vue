@@ -262,7 +262,6 @@
         top1: 0
       };
     },
-    computed: {},
     watch: {
       playList() {
         this.lyricRoll(this.index);

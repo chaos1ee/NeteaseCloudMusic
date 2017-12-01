@@ -10,12 +10,13 @@
       <div slot="right">
         <div class="login">
           <p>登录网易云音乐，可以享受无限收藏的乐趣，并且无限同步到手机</p>
-          <a href="javscript:void(0)">用户登录</a>
+          <a @click="openDialog">用户登录</a>
         </div>
         <div class="singer">
         </div>
       </div>
     </common-layout>
+    <login-dialog></login-dialog>
   </div>
 </template>
 
@@ -57,7 +58,7 @@
   import HotRecommend from "../components/hot-recommend";
   import NewAlbum from "../components/new-album";
   import Bill from "../components/bill";
-
+  import LoginDialog from "../components/login-dialog";
   import { mapState, mapMutations } from "vuex";
 
   const API = {
@@ -76,7 +77,8 @@
       CommonLayout,
       HotRecommend,
       NewAlbum,
-      Bill
+      Bill,
+      LoginDialog
     },
     data() {
       return {
@@ -91,6 +93,7 @@
       this.fetchData();
     },
     methods: {
+      ...mapMutations(["openDialog"]),
       // 访问对象API中的全部接口
       accessAll() {
         let temp = [];
@@ -133,11 +136,6 @@
           )
         );
       },
-      /** @description 移动数组中的项 
-                           * @param {array} arr - 给定数组 
-                           * @param {number} to - 该项在数组中要移到的位置
-                           * @param {number} from- 该项在数组中的起始位置
-                           */
       moveItem(arr, to, from) {
         arr.splice(to, 0, ...arr.splice(from, 1));
       }
