@@ -7,8 +7,8 @@ import Friend from 'views/Friend'
 import Shop from 'views/Shop'
 import Musician from 'views/Musician'
 import Download from 'views/Download'
-import TopList from 'views/TopList'
-import PlayList from 'views/PlayList'
+import Toplist from 'views/Toplist'
+import Playlist from 'views/Playlist'
 import DJRadio from 'views/DJRadio'
 import Artist from 'views/Artist'
 import Album from 'views/Album'
@@ -59,13 +59,13 @@ export default new Router({
   },
   {
     path: '/discover/toplist',
-    name: 'TopList',
-    component: TopList
+    name: 'Toplist',
+    component: Toplist
   },
   {
     path: '/discover/playlist',
-    name: 'PlayList',
-    component: PlayList
+    name: 'Playlist',
+    component: Playlist
   },
   {
     path: '/discover/djradio',
