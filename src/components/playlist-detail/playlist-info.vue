@@ -1,5 +1,5 @@
 <template>
-  <div class="cloud-info clearfix">
+  <div class="playlist-info clearfix">
     <div class="pl-avatar">
       <img :src="info.coverImgUrl">
     </div>
@@ -39,7 +39,7 @@
 </template>
 
 <style lang="scss" scoped>
-  .cloud-info {
+  .playlist-info {
     height: 100%;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -70,7 +70,7 @@
           display: inline-block;
           width: 64px;
           height: 24px;
-          background: url("../assets/image/icon.png") no-repeat 0 -243px;
+          background: url("../../assets/image/icon.png") no-repeat 0 -243px;
         }
         span {
           display: table-cell;
@@ -118,7 +118,7 @@
           overflow: hidden;
           text-align: center;
           cursor: pointer;
-          background: url("../assets/image/button2.png") no-repeat right -428px;
+          background: url("../../assets/image/button2.png") no-repeat right -428px;
           i {
             display: inline-block;
             height: 31px;
@@ -127,7 +127,7 @@
             vertical-align: top;
             text-align: center;
             cursor: pointer;
-            background: url("../assets/image/button2.png") no-repeat 0 -387px;
+            background: url("../../assets/image/button2.png") no-repeat 0 -387px;
           }
         }
       }
@@ -139,7 +139,7 @@
           display: inline-block;
           margin-right: 10px;
           padding-right: 10px;
-          background: url("../assets/image/button2.png") no-repeat right -27px;
+          background: url("../../assets/image/button2.png") no-repeat right -27px;
           &:hover {
             background-position: right -1430px;
             em {
@@ -151,7 +151,7 @@
             height: 22px;
             padding-left: 10px;
             line-height: 22px;
-            background: url("../assets/image/button2.png") no-repeat 0 0;
+            background: url("../../assets/image/button2.png") no-repeat 0 0;
           }
         }
       }
@@ -177,7 +177,7 @@
 <script>
   import { format } from "date-fns";
   export default {
-    name: "CloudInfo",
+    name: "PlaylistInfo",
     props: ["info"],
     data() {
       return {

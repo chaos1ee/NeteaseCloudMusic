@@ -1,7 +1,7 @@
 <template>
   <div class="cover">
     <img class="cp" :src="item.picUrl"></img>
-    <router-link class="msk" :to="'/playlist/' + item.id" tag="a"></router-link>
+    <router-link class="msk" :to="{name: 'PlaylistDetail', params: {id: item.id}}" tag="a"></router-link>
     <div class="bottom">
       <span @click="updateList" class="icon-play"></span>
       <span class="icon-headset"></span>

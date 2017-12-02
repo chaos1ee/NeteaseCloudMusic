@@ -9,7 +9,9 @@
     <div class="content" v-if="album">
       <common-layout>
         <div class="left-wrapper" slot="left">
-
+          <album-info :album="album.album"></album-info>
+          <list :list="album.songs"></list>
+          <comment :id="album.album.id" :type="2"></comment>
         </div>
         <div slot="right">
           <div class="pl-aside"></div>
@@ -44,11 +46,16 @@
 
 <script>
   import CommonLayout from "../components/common-layout";
-
+  import AlbumInfo from "../components/album-detail/album-info";
+  import List from "../components/list";
+  import Comment from "../components/comment";
   export default {
     name: "AlbumDetail",
     components: {
-      CommonLayout
+      CommonLayout,
+      AlbumInfo,
+      List,
+      Comment
     },
     data() {
       return {

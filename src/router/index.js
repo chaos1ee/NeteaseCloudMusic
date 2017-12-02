@@ -85,10 +85,12 @@ export default new Router({
   },
   {
     path: '/playlist/:id',
+    name: "PlaylistDetail",
     component: PlaylistDetail
   },
   {
     path: '/album/:id',
+    name: "AlbumDetail",
     component: AlbumDetail
   },
   {

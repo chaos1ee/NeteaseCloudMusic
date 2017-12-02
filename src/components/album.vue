@@ -2,8 +2,8 @@
   <div class="album">
     <div class="album-cover" @mouseover="showPlayBtn" @mouseout="hidePlayBtn">
       <img class="album-img" :src="album.picUrl">
-      <router-link class="album-msk" :to="'/album/' + album.id" tag="a"></router-link>
-      <router-link class="play-btn" v-show="playBtnShow" :to="'/album' + album.id" tag="a"></router-link>
+      <router-link class="album-msk" :to="{name: 'AlbumDetail' , params: {id: album.id}}" tag="a" replace></router-link>
+      <a class="play-btn" v-show="playBtnShow" href="javscript:void(0)"></a>
     </div>
     <p class="album-name ft-brk">{{ album.name }}</p>
     <p class="album-artist ft-brk">{{ album.artist.name}}</p>

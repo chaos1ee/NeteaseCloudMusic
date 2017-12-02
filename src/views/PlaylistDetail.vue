@@ -9,9 +9,9 @@
     <div class="content" v-if="playlist">
       <common-layout>
         <div class="left-wrapper" slot="left">
-          <cloud-info :info="playlist.playlist"></cloud-info>
-          <cloud-tabel :table="playlist.playlist"></cloud-tabel>
-          <cloud-comment :comment="playlist.playlist"></cloud-comment>
+          <playlist-info :info="playlist.playlist"></playlist-info>
+          <list :list="playlist.playlist.tracks" :count="playlist.playlist.playCount"></list>
+          <comment :id="playlist.playlist.id" :type="1"></comment>
         </div>
         <div slot="right">
           <div class="pl-aside"></div>
@@ -46,17 +46,17 @@
 
 <script>
   import CommonLayout from "../components/common-layout";
-  import CloudInfo from "../components/cloud-info";
-  import CloudTabel from "../components/cloud-table";
-  import CloudComment from "../components/cloud-comment.vue";
+  import PlaylistInfo from "../components/playlist-detail/playlist-info";
+  import List from "../components/list";
+  import Comment from "../components/comment.vue";
 
   export default {
     name: "PlaylistDetail",
     components: {
       CommonLayout,
-      CloudInfo,
-      CloudTabel,
-      CloudComment
+      PlaylistInfo,
+      List,
+      Comment
     },
     data() {
       return {
