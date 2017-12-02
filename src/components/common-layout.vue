@@ -21,7 +21,7 @@
       background: #f5f5f5;
       .module-bg {
         width: 980px;
-        min-height: 700px;
+        min-height: calc(100vh - 216px);
         margin: 0 auto;
         border: 1px solid #d3d3d3;
         border-width: 0 1px;

@@ -1,17 +1,15 @@
 <template>
-  <div class="playlist-detail">
+  <div class="album-detail">
     <div class="loading" v-if="loading">
       加载中，请稍候...
     </div>
     <div class="error" v-if="error">
       加载出错，请返回...
     </div>
-    <div class="content" v-if="playlist">
+    <div class="content" v-if="album">
       <common-layout>
         <div class="left-wrapper" slot="left">
-          <cloud-info :info="playlist.playlist"></cloud-info>
-          <cloud-tabel :table="playlist.playlist"></cloud-tabel>
-          <cloud-comment :comment="playlist.playlist"></cloud-comment>
+
         </div>
         <div slot="right">
           <div class="pl-aside"></div>
@@ -22,7 +20,7 @@
 </template>
 
 <style lang="scss" scoped>
-  .playlist-detail {
+  .album-detail {
     min-height: calc(100vh - 246px);
     width: 100%;
     .loading,
@@ -46,43 +44,36 @@
 
 <script>
   import CommonLayout from "../components/common-layout";
-  import CloudInfo from "../components/cloud-info";
-  import CloudTabel from "../components/cloud-table";
-  import CloudComment from "../components/cloud-comment.vue";
 
   export default {
-    name: "PlaylistDetail",
+    name: "AlbumDetail",
     components: {
-      CommonLayout,
-      CloudInfo,
-      CloudTabel,
-      CloudComment
+      CommonLayout
     },
     data() {
       return {
         loading: false,
         error: null,
-        playlist: null
+        album: null
       };
     },
     created() {
-      this.fetchList();
+      this.fetchAlbum();
     },
     watch: {
-      $route: "fetchList"
+      $route: "fetchAlbum"
     },
     methods: {
-      fetchList() {
-        this.error = this.playlist = null;
+      fetchAlbum() {
+        this.error = this.album = null;
         this.loading = true;
         this.axios
-          .get("/playlist/detail?id=" + this.$route.params.id)
+          .get("/album?id=" + this.$route.params.id)
           .then(res => {
             this.loading = false;
-            this.playlist = res.data;
+            this.album = res.data;
           })
           .catch(err => {
-            this.error = err.toString();
             console.error(err.message);
           });
       }

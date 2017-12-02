@@ -1,17 +1,17 @@
 <template>
-  <div class="playlist-top clearfix">
+  <div class="cloud-info clearfix">
     <div class="pl-avatar">
-      <img :src="playlist.playlist.coverImgUrl">
+      <img :src="info.coverImgUrl">
     </div>
     <div class="pl-bl">
       <div class="pl-title">
         <div class="logo"></div>
-        <span>{{ playlist.playlist.name }}</span>
+        <span>{{ info.name }}</span>
       </div>
       <div class="pl-creator">
-        <img class="creator-icon" :src="playlist.playlist.creator.avatarUrl" alt="">
-        <span class="nickname ft-brk">{{playlist.playlist.creator.nickname}}</span>
-        <span class="create-time">{{ playlist.playlist.createTime | timeFormat }}创建</span>
+        <img class="creator-icon" :src="info.creator.avatarUrl" alt="">
+        <span class="nickname ft-brk">{{info.creator.nickname}}</span>
+        <span class="create-time">{{ info.createTime | timeFormat }}创建</span>
       </div>
       <div class="pl-btns">
         <a class="pl-btn-play">
@@ -20,18 +20,18 @@
           </i>
         </a>
         <a class="pl-btn-add_to_list" href="javascrpt:void(0)"></a>
-        <a class="pl-btn-add_to_collection" href="javascrpt:void(0)">收藏数:{{playlist.playlist.subscribedCount}}</a>
-        <a class="pl-btn-share" href="javascrpt:void(0)"> 分享数:{{ playlist.playlist.shareCount}}</a>
-        <a class="pl-btn-comment" href="javascrpt:void(0)"> 评论数:{{ playlist.playlist.commentCount}}</a>
+        <a class="pl-btn-add_to_collection" href="javascrpt:void(0)">收藏数:{{info.subscribedCount}}</a>
+        <a class="pl-btn-share" href="javascrpt:void(0)"> 分享数:{{ info.shareCount}}</a>
+        <a class="pl-btn-comment" href="javascrpt:void(0)"> 评论数:{{ info.commentCount}}</a>
       </div>
       <div class="pl-tags">
         <span>标签：</span>
-        <a class="pl-tag-name" href="javascript:void(0)" v-for="(tag,index) in playlist.playlist.tags" :key="index">
+        <a class="pl-tag-name" href="javascript:void(0)" v-for="(tag,index) in info.tags" :key="index">
           <em>{{ tag }}</em>
         </a>
       </div>
-      <pre class="pl-intro-dot" v-if="collapse">介绍：{{ playlist.playlist.description | textFormat }}</pre>
-      <pre class="pl-intro-more" v-else>介绍：{{ playlist.playlist.description |textFormat }}</pre>
+      <pre class="pl-intro-dot" v-if="collapse">介绍：{{ info.description | textFormat }}</pre>
+      <pre class="pl-intro-more" v-else>介绍：{{ info.description |textFormat }}</pre>
       <a class="pl-intro-switch" href="javascript:void(0)" @click="toggle">{{ collapse ? '展开 ↓' : '收起 ↑' }}</a>
     </div>
 
@@ -39,7 +39,7 @@
 </template>
 
 <style lang="scss" scoped>
-  .playlist-top {
+  .cloud-info {
     height: 100%;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -177,8 +177,8 @@
 <script>
   import { format } from "date-fns";
   export default {
-    name: "PlaylistTop",
-    props: ["playlist"],
+    name: "CloudInfo",
+    props: ["info"],
     data() {
       return {
         collapse: true

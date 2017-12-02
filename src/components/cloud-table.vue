@@ -1,10 +1,10 @@
 <template>
-  <div class="playlist-content">
+  <div class="cloud-table">
     <div class="title">
       <h2>歌曲列表</h2>
-      <span class="trackcount">{{playlist.playlist.trackCount }}首歌</span>
-      <div class="playcount">播放:
-        <span>{{ playlist.playlist.playCount}}</span>
+      <span class="trackcount">{{table.trackCount }}首歌</span>
+      <div class="playcount" v-if="table.playCount">播放:
+        <span>{{ table.playCount}}</span>
         次
       </div>
     </div>
@@ -20,7 +20,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(track, index) in playlist.playlist.tracks" :key="track.id">
+          <tr v-for="(track, index) in table.tracks" :key="track.id">
             <td>
               <span class="num">{{index+1}}</span>
               <i class="icon tab-icon-play"></i>
@@ -57,7 +57,7 @@
 </template>
 
 <style lang="scss" scoped>
-  .playlist-content {
+  .cloud-table {
     width: 100%;
     .icon {
       float: left;
@@ -213,8 +213,8 @@
   import formatTime from "../assets/js/formatTime";
 
   export default {
-    name: "PlaylistContent",
-    props: ["playlist"],
+    name: "CloudTable",
+    props: ["table"],
     data() {
       return {
         itemIndex: -1

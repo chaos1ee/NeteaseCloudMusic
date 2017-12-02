@@ -11,8 +11,9 @@ import Toplist from 'views/Toplist'
 import Playlist from 'views/Playlist'
 import DJRadio from 'views/DJRadio'
 import Artist from 'views/Artist'
-import Album from 'views/Album'
+import NewAlbum from 'views/NewAlbum'
 import PlaylistDetail from 'views/PlaylistDetail'
+import AlbumDetail from "views/AlbumDetail"
 import NotFound from 'views/NotFound'
 
 
@@ -80,12 +81,17 @@ export default new Router({
   {
     path: '/discover/album',
     name: 'Album',
-    component: Album
+    component: NewAlbum
   },
   {
     path: '/playlist/:id',
     component: PlaylistDetail
-  }, {
+  },
+  {
+    path: '/album/:id',
+    component: AlbumDetail
+  },
+  {
     path: '*',
     component: NotFound
   }]

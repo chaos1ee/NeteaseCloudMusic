@@ -1,5 +1,5 @@
 <template>
-  <div class="playlist-comment">
+  <div class="cloud-comment">
     <div class="header clearfix">
       <h3 class="title">评论</h3>
       <span class="total">共{{comments.total}}条评论</span>
@@ -41,7 +41,7 @@
 </template>
 
 <style lang="scss" scoped>
-  .playlist-comment {
+  .cloud-comment {
     padding-top: 50px;
     .header {
       height: 30px;
@@ -155,8 +155,8 @@
   } from "date-fns";
 
   export default {
-    name: "PlaylistComment",
-    props: ["playlist"],
+    name: "CloudComment",
+    props: ["comment"],
     data() {
       return {
         comments: {},
@@ -217,7 +217,7 @@
         this.axios
           .get("/comment/playlist", {
             params: {
-              id: this.playlist.playlist.id,
+              id: this.comment.id,
               offset: this.offset * 20
             }
           })
