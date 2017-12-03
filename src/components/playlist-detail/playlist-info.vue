@@ -13,17 +13,6 @@
         <span class="nickname ft-brk">{{info.creator.nickname}}</span>
         <span class="create-time">{{ info.createTime | timeFormat }}创建</span>
       </div>
-      <div class="pl-btns">
-        <a class="pl-btn-play">
-          <i>
-            <em>播放</em>
-          </i>
-        </a>
-        <a class="pl-btn-add_to_list" href="javascrpt:void(0)"></a>
-        <a class="pl-btn-add_to_collection" href="javascrpt:void(0)">收藏数:{{info.subscribedCount}}</a>
-        <a class="pl-btn-share" href="javascrpt:void(0)"> 分享数:{{ info.shareCount}}</a>
-        <a class="pl-btn-comment" href="javascrpt:void(0)"> 评论数:{{ info.commentCount}}</a>
-      </div>
       <div class="pl-tags">
         <span>标签：</span>
         <a class="pl-tag-name" href="javascript:void(0)" v-for="(tag,index) in info.tags" :key="index">
@@ -131,65 +120,23 @@
           }
         }
       }
-      .pl-tags {
-        width: 400px;
-        height: 40px;
-        overflow: hidden;
-        .pl-tag-name {
-          display: inline-block;
-          margin-right: 10px;
-          padding-right: 10px;
-          background: url("../../assets/image/button2.png") no-repeat right -27px;
-          &:hover {
-            background-position: right -1430px;
-            em {
-              background-position: 0 -1400px;
-            }
-          }
-          em {
-            display: block;
-            height: 22px;
-            padding-left: 10px;
-            line-height: 22px;
-            background: url("../../assets/image/button2.png") no-repeat 0 0;
-          }
-        }
-      }
-      pre {
-        width: 410px;
-        line-height: 15px;
-        white-space: pre-wrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-      .pl-intro-dot {
-        height: 45px;
-      }
-      .pl-intro-switch {
-        float: right;
-        margin-top: 10px;
-        color: #0c73c2;
-      }
     }
   }
 </style>
 
 <script>
+  import ButtonGroup from "";
   import { format } from "date-fns";
   export default {
     name: "PlaylistInfo",
-    props: ["info"],
     data() {
       return {
-        collapse: true
+        collapsed: true
       };
     },
     filters: {
       timeFormat(time) {
         return format(time, "YYYY-MM-DD ");
-      },
-      textFormat(text) {
-        return text;
       }
     },
     methods: {

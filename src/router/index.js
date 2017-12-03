@@ -14,6 +14,7 @@ import Artist from 'views/Artist'
 import NewAlbum from 'views/NewAlbum'
 import PlaylistDetail from 'views/PlaylistDetail'
 import AlbumDetail from "views/AlbumDetail"
+import Song from "views/Song"
 import NotFound from 'views/NotFound'
 
 
@@ -92,6 +93,11 @@ export default new Router({
     path: '/album/:id',
     name: "AlbumDetail",
     component: AlbumDetail
+  },
+  {
+    path: '/song/:id',
+    name: "Song",
+    component: Song
   },
   {
     path: '*',
