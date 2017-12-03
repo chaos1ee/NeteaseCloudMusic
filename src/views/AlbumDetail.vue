@@ -8,8 +8,30 @@
     </div>
     <div class="content" v-if="album">
       <common-layout>
-        <div class="left-wrapper" slot="left">
-          <album-info :album="album.album"></album-info>
+        <div class="wrapper" slot="left">
+          <div class="info clearfix">
+            <div class="top clearfix">
+              <div class="avatar">
+                <img :src="album.album.picUrl">
+              </div>
+              <div class="cnt">
+                <my-title :name="album.album.name"></my-title>
+                <div class="singer">
+                  歌手：
+                  <span>{{album.album.artist.name}}</span>
+                </div>
+                <div class="time">发行时间：{{ album.album.publishTime | timeFormat }}</div>
+                <button-group>
+                  <span slot="collect">{{ album.album.subscribedCount}}</span>
+                  <span slot="share">{{ album.album.shareCount}}</span>
+                  <span slot="comment">{{ album.album.commentCount }}</span>
+                </button-group>
+              </div>
+            </div>
+            <introduction :intro="album.album.description">
+              <p class="intro-title" slot="title">专辑介绍：</p>
+            </introduction>
+          </div>
           <list :list="album.songs"></list>
           <comment :id="album.album.id" :type="2"></comment>
         </div>
@@ -33,8 +55,37 @@
       font-size: 16px;
       text-align: center;
     }
-    .left-wrapper {
-      padding: 0 20px;
+    .wrapper {
+      padding: 40px 30px 0;
+      .info {
+        padding-bottom: 40px;
+      }
+      .avatar {
+        float: left;
+        width: 194px;
+        height: 194px;
+        padding: 2px;
+        border: 1px solid #ccc;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .cnt {
+        float: left;
+        width: 408px;
+        margin-left: 20px;
+      }
+    }
+    .intro {
+      width: 100%;
+      margin-top: 20px;
+      .intro-title{
+        height: 30px;
+        line-height: 30px;
+        font-size: 12px;
+        font-weight: 700;
+      }
     }
     .pl-aside {
       float: right;
@@ -46,14 +97,20 @@
 
 <script>
   import CommonLayout from "../components/common-layout";
-  import AlbumInfo from "../components/album-detail/album-info";
+  import MyTitle from "../components/my-title";
+  import ButtonGroup from "../components/button-group";
+  import Introduction from "../components/introduction";
   import List from "../components/list";
   import Comment from "../components/comment";
+  import { format } from "date-fns";
+
   export default {
     name: "AlbumDetail",
     components: {
       CommonLayout,
-      AlbumInfo,
+      MyTitle,
+      ButtonGroup,
+      Introduction,
       List,
       Comment
     },
@@ -69,6 +126,11 @@
     },
     watch: {
       $route: "fetchAlbum"
+    },
+    filters: {
+      timeFormat(time) {
+        return format(time, "YYYY-MM-DD");
+      }
     },
     methods: {
       fetchAlbum() {

@@ -1,7 +1,7 @@
 <template>
   <div class="intro">
-    <pre class="collapased" v-if="collapased">介绍：{{ intro }}</pre>
-    <pre v-else >介绍：{{ intro }}</pre>
+    <pre class="collapased" v-if="collapased"><slot name="title"></slot>{{ intro }}</pre>
+    <pre v-else ><slot name="title"></slot>{{ intro }}</pre>
     <a class="switch" href="javascript:void(0)" @click="toggle">{{ collapased ? '展开 ↓' : '收起 ↑' }}</a>
   </div>
 </template>
@@ -10,7 +10,8 @@
   .intro {
     width: 400px;
     pre {
-      line-height: 15px;
+      line-height: 22px;
+      color: #333;
       white-space: pre-wrap;
       text-overflow: ellipsis;
       overflow: hidden;
