@@ -16,10 +16,12 @@
         </title-bar>
         <ul class="bc clearfix">
             <li v-for="(item,key) in covers" :key="key">
-                <cover :item="item"></cover>
+                <cover :id="item.id">
+                    <img :src="item.picUrl" slot="cover">
+                </cover>
                 <div class="desc">
                     <i class="radio-icon" v-if="item.type == 1"></i>
-                    <a slot="desc" :href="'/playlist?'+item.id">{{item.name}}</a>
+                    <router-link :to="{name: 'PlaylistDetail', params: {id: item.id}}">{{item.name}}</router-link>
                 </div>
             </li>
         </ul>

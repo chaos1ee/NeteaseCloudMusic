@@ -4,7 +4,7 @@
       <slot name="cover"></slot>
       <router-link class="msk" :to="{name: 'PlaylistDetail', params: {id: id}}" tag="a"></router-link>
       <div class="bottom">
-        <span @click="updateList" class="icon-play"></span>
+        <span @click="fetchPlaylist(id)" class="icon-play"></span>
         <span class="icon-headset"></span>
         <slot name="count"></slot>
       </div>
@@ -98,7 +98,7 @@
 </style>
 
 <script>
-  import { mapMutations, mapActions } from "vuex";
+  import { mapActions } from "vuex";
   import Storage from "../assets/js/storage";
 
   const IS_MUSIC = 0;
@@ -108,11 +108,7 @@
     name: "Cover",
     props: ["id"],
     methods: {
-      ...mapMutations(["addToPlayList"]),
-      ...mapActions(["fetchList"]),
-      updateList() {
-
-      }
+      ...mapActions(["fetchPlaylist"])
     }
   };
 </script>

@@ -10,7 +10,7 @@
         <div class="b-list">
             <dl class="b-block" v-for="(item ,index) in bills" :key="item.id">
                 <dt class="top">
-                    <div class="b-cover cover">
+                    <div class="b-cover">
                         <img :src="item.coverImgUrl">
                         <a class="b-msk msk" href="javascript:void(0)"></a>
                     </div>
@@ -61,6 +61,10 @@
         width: 80px;
         height: 80px;
         position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+        }
         .b-msk {
           background-position: -145px -57px;
         }

@@ -22,27 +22,27 @@ export default new Vuex.Store({
       state.index = index;
     },
     // 更新播放列表
-    updateList(state, list) {
+    update(state, list) {
       state.index = 0;
       state.playList = list;
     }
   },
   actions: {
     // 根据id检查localstorage中是否存在歌单，不存在的时候才向服务器请求
-    getMusicList({ commit, state }, item) {
-      if (Storage.get(item.id) !== null) {
-        commit('updateList', JSON.parse(Storage.get(item.id)));
+    fetchPlaylist({ commit, state }, id) {
+      if (Storage.get(id) !== null) {
+        commit('update', JSON.parse(Storage.get(id)));
       } else {
         this._vm.axios
-          .get("/playlist/detail?id=" + item.id)
+          .get("/playlist/detail?id=" + id)
           .then(res => {
             if (res.data.playlist.tracks != undefined) {
               let temp = [];
               _.forEach(res.data.playlist.tracks, track => {
                 temp.push(formatMusicData(track));
               });
-              commit('updateList', temp);
-              Storage.save(item.id, JSON.stringify(temp));
+              commit('update', temp);
+              Storage.save(id, JSON.stringify(temp));
             }
           })
           .catch(err => {
