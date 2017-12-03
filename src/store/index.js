@@ -11,45 +11,20 @@ import Storage from '../assets/js/storage';
 
 export default new Vuex.Store({
   state: {
-    // 是否登录
-    ifLogin: false,
-    // 登录框显示与否
-    dialogVisible: false,
     // 播放列表
     playList: [],
     // 正在播放的歌曲在播放列表中的索引
     index: 0
   },
   mutations: {
-    openDialog(state, dialogVisible) {
-      state.dialogVisible = true;
-    },
-    closeDialog(state, dialogVisible) {
-      state.dialogVisible = false;
-    },
-    login(state, ifLogin) {
-      state.ifLogin = true;
-    },
-    logout(state, ifLogin) {
-      state.ifLogin = false;
-    },
     // 更新索引
     changeIndex(state, index) {
       state.index = index;
-    },
-    // 在播放列表中注入项
-    getRadio(state, item) {
-      state.playList.push(formatDjData(item));
-      state.index = state.playList.length - 1;
     },
     // 更新播放列表
     updateList(state, list) {
       state.index = 0;
       state.playList = list;
-    },
-    // 清空播放列表
-    clearList(state) {
-      state.playList = [];
     }
   },
   actions: {

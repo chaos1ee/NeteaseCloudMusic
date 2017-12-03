@@ -87,7 +87,7 @@
               <em>排行榜</em>
             </span>
           </el-menu-item>
-          <el-menu-item index="/discover/playlist">
+          <el-menu-item index="/discover/playlist/0">
             <span>
               <em>歌单</em>
             </span>

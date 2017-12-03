@@ -12,14 +12,17 @@
           <h1 class="title">全部新碟</h1>
         </div>
         <div class="content clearfix">
-          <cover v-for="playlist in  playlists.playlists" :key="playlist.id" :playlistId="playlist.id">
+          <cover v-for="playlist in  playlists.playlists" :key="playlist.id" :id="playlist.id">
             <img slot="cover" :src="playlist.coverImgUrl">
-            <span class="count" slot="count">{{playlist.playCount}}</span>
-            <p class="pl-title" slot="desc">1111</p>
+            <span class="count" slot="count">{{ playlist.playCount}}</span>
+            <div class="info" slot="desc">
+              <p class="title">{{ playlist.name }}</p>
+              <p class="by">by:<a class="creator" href="javascript:void(0)">{{playlist.creator.nickname }}</a></p>
+            </div>
           </cover>
         </div>
         <div class="pagination">
-          <el-pagination background @current-change="handleCurrentChange" :page-size="35" layout="prev, pager,next" :total="playlists.playlists.total" prev-text="上一页" next-text="下一页"></el-pagination>
+          <el-pagination background @current-change="handleCurrentChange" :current-page="offset+1" :page-size="35" layout="prev, pager,next" :total="playlists.total" prev-text="上一页" next-text="下一页"></el-pagination>
         </div>
       </div>
     </div>
@@ -64,9 +67,27 @@
         margin-bottom: 20px;
         margin-right: 45px;
       }
-      .pl-title {
-        font-size: 18px;
-        font-weight: 500;
+      .info {
+        width: 140px;
+        height: 50px;
+        .title {
+          width: 100%;
+          height: 30px;
+          line-height: 30px;
+          font-size: 14px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .by {
+          color: #999;
+          a{
+            color: #333;
+            &:hover{
+              text-decoration: underline;
+            }
+          }
+        }
       }
       .pagination {
         text-align: center;
@@ -85,7 +106,7 @@
     },
     data() {
       return {
-        pLaylists: null,
+        playlists: null,
         loading: true,
         error: null,
         offset: 0

@@ -65,7 +65,7 @@ export default new Router({
     component: Toplist
   },
   {
-    path: '/discover/playlist',
+    path: '/discover/playlist/:index',
     name: 'Playlist',
     component: Playlist
   },
