@@ -119,6 +119,7 @@
       // 切换页面时更新偏移量，然后根据id与偏移量请求对应评论
       handleCurrentChange(val) {
         this.offset = val - 1;
+        this.$router.push({name: "Playlist", params: {index: this.offset}})
         this.fetchPlaylists();
       },
       // 通过歌单id获取歌单评论
