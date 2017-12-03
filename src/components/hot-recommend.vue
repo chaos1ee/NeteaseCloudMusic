@@ -74,17 +74,16 @@
       },
       filters: {
           numFormat(item) {
+            function trans(num) {
+                num = _.floor(num);
+                return num > 100000 ? _.floor(num / 10000) + "万" : num;
+            }
             if(item.playCount != undefined) {
-                return this.$_trans(item.playCount);
+                return trans(item.playCount);
             }
             if(item.program.listenerCount) {
-                return this.$_trans(item.program.listenerCount);
+                return trans(item.program.listenerCount);
             }
-          }
-      },
-      methods: {
-          $_trans(num) {
-              return num > 10000 ? _.floor(num / 100000) + "万" : num;
           }
       }
     };
