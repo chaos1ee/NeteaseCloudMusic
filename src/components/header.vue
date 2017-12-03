@@ -102,7 +102,7 @@
               <em>歌手</em>
             </span>
           </el-menu-item>
-          <el-menu-item index="/discover/album">
+          <el-menu-item index="/discover/album/0">
             <span>
               <em>新碟上架</em>
             </span>

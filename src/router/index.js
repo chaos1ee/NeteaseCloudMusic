@@ -80,7 +80,7 @@ export default new Router({
     component: Artist
   },
   {
-    path: '/discover/album',
+    path: '/discover/album/:index',
     name: 'Album',
     component: NewAlbum
   },

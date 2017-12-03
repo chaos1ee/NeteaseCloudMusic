@@ -1,13 +1,19 @@
 <template>
   <div class="new-albums">
-    <div class="a-bg">
+    <div class="loading" v-if="loading">
+      加载中，请稍候...
+    </div>
+    <div class="error" v-if="error">
+      加载出错，请返回...
+    </div>
+    <div class="a-bg" v-if="albums">
       <div class="inner">
         <div class="header">
           <h1 class="title">全部新碟</h1>
         </div>
         <album v-for="album in albums.albums" :key="album.id" :album="album"></album>
         <div class="pagination">
-          <el-pagination background @current-change="handleCurrentChange" :page-size="35" layout="prev, pager,next" :total="albums.total" prev-text="上一页" next-text="下一页"></el-pagination>
+          <el-pagination background @current-change="handleCurrentChange" :current-page="offset+1" :page-size="35" layout="prev, pager,next" :total="albums.total" prev-text="上一页" next-text="下一页"></el-pagination>
         </div>
       </div>
     </div>
@@ -17,6 +23,14 @@
 <style lang="scss">
   .new-albums {
     min-height: calc(100vh - 246px);
+    .loading,
+    .error {
+      min-height: 700px;
+      line-height: 700px;
+      color: red;
+      font-size: 16px;
+      text-align: center;
+    }
     .a-bg {
       width: 980px;
       min-height: 700px;
@@ -79,22 +93,29 @@
     },
     data() {
       return {
-        albums: {},
+        loading: true,
+        error: false,
+        albums: null,
         offset: 0
       };
     },
     created() {
       this.fetchAlbums();
     },
+    watch: {
+      $route: "fetchAlbums"
+    },
     methods: {
       // 切换页面时更新偏移量，然后根据id与偏移量请求对应评论
       handleCurrentChange(val) {
         this.offset = val - 1;
+        this.$router.push({name: 'Album', params: {index: this.offset}});
         this.fetchAlbums();
       },
       // 通过歌单id获取歌单评论
       fetchAlbums() {
-        this.offset;
+        this.error = this.albums = null;
+        this.loading  =true;
         this.axios
           .get("/top/album", {
             params: {
@@ -103,9 +124,11 @@
             }
           })
           .then(res => {
+            this.loading = false;
             this.albums = res.data;
           })
           .catch(err => {
+            this.error = err.toString();
             console.error(err.message);
           });
       }
