@@ -1,7 +1,7 @@
 # NeteaseCloudMusic 网易云音乐
 
 
-这是一个仿网易云音乐的PC端SPA项目，使用的框架与库主要包括vue、vuex、vue-router、element-ui、aixos。本项目现已部署到服务器，可以访问地址[http://lihaocloudmusic.co](http://lihaocloudmusic.co)预览。
+这是一个仿网易云音乐的PC端SPA项目，使用的框架与库主要包括vue、vuex、vue-router、element-ui、lodash、aixos。本项目现已部署到服务器，可以访问地址[http://lihaocloudmusic.co](http://lihaocloudmusic.co)预览。
 
 ![shot](/shot.png)
 
@@ -45,7 +45,7 @@ npm run build
 - [ ] 音乐人 - Musician.vue
 - [ ] 下载客户端 - Download.vue
 - [ ] 排行榜 - Toplist.vue
-- [ ] 歌单 - Playlist.vue
+- [X] 歌单 - Playlist.vue
 - [ ] 主播电台 - DJRadio.vue
 - [ ] 歌手 - Artist.vue
 - [ ] 新碟上架 -Album.vue

@@ -449,7 +449,7 @@
       }
     },
     methods: {
-      ...mapMutations(["changeIndex"]),
+      ...mapMutations(["switchMusic"]),
       playerShow() {
         if (!this.isLocked) {
           this.isActive = true;
@@ -508,13 +508,13 @@
         let index = this.index;
         let len = this.playList.length;
         index == len - 1 ? (index = 0) : index++;
-        this.$store.commit("changeIndex", index);
+        this.$store.commit("switchMusic", index);
       },
       playPrev() {
         let index = this.index;
         let len = this.playList.length;
         index == 0 ? (index = len - 1) : index--;
-        this.$store.commit("changeIndex", index);
+        this.$store.commit("switchMusic", index);
       },
       // 通过音乐Id获取音乐url
       fetchAudioAndPlay(id) {

@@ -17,11 +17,9 @@ export default new Vuex.Store({
     index: 0
   },
   mutations: {
-    // 更新索引
-    changeIndex(state, index) {
+    switchMusic(state, index) {
       state.index = index;
     },
-    // 更新播放列表
     update(state, list) {
       state.index = 0;
       state.playList = list;

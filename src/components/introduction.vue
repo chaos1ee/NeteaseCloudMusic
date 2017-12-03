@@ -17,7 +17,7 @@
       overflow: hidden;
     }
     .collapased {
-      height: 75px;;
+      height: 66px;;
     }
     .switch {
       float: right;
