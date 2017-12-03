@@ -18,6 +18,7 @@
             <li v-for="(item,key) in covers" :key="key">
                 <cover :id="item.id">
                     <img :src="item.picUrl" slot="cover">
+                    <span class="count" slot="count">{{item | numFormat}}</span>
                 </cover>
                 <div class="desc">
                     <i class="radio-icon" v-if="item.type == 1"></i>
@@ -70,6 +71,21 @@
       components: {
         TitleBar,
         Cover
+      },
+      filters: {
+          numFormat(item) {
+            if(item.playCount != undefined) {
+                return this.$_trans(item.playCount);
+            }
+            if(item.program.listenerCount) {
+                return this.$_trans(item.program.listenerCount);
+            }
+          }
+      },
+      methods: {
+          $_trans(num) {
+              return num > 10000 ? _.floor(num / 100000) + "万" : num;
+          }
       }
     };
 </script>
