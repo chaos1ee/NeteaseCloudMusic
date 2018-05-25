@@ -1,11 +1,11 @@
 # NeteaseCloudMusic 网易云音乐
 
 
-这是一个仿网易云音乐的PC端SPA项目，使用的框架与库主要包括vue、vuex、vue-router、element-ui、lodash、aixos。本项目现已部署到服务器，可以访问地址[http://lihaocloudmusic.co](http://lihaocloudmusic.co)预览。
+这是一个仿网易云音乐的PC端SPA项目，使用的框架与库主要包括vue、vuex、vue-router、element-ui、lodash、aixos。~~本项目现已部署到服务器，可以访问地址[http://lihaocloudmusic.co](http://lihaocloudmusic.co)预览。~~
 
 ![shot](/shot.png)
 
-项目中的数据来源于[Binaryify](https://github.com/Binaryify)提供的接口，所以本项目不能单独运行，需先运行API服务。
+项目中的数据来源于[Binaryify](https://github.com/Binaryify)提供的接口，所以本项目不能单独运行，需先运行API服务。可以clone仓库[vltur](https://github.com/maybeeee/vultr)，在本地运行预览。
 
 [API仓库地址](https://github.com/Binaryify/NeteaseCloudMusicApi)
 
@@ -33,6 +33,15 @@ npm run dev
 npm run build
 
 ```
+
+项目使用H5提供的Audio API播放音乐，对不支持Audio的浏览器无法播放音乐。
+与登陆有关的功能暂不支持。
+
+## 功能介绍
+
+1. 添加歌单到播放器列表（点击首页专辑封面的播放按钮:arrow_forward:，其他页面暂时不支持该功能）。
+2. 歌曲、歌词切换播放，音量调节。
+3. 歌单评论列表获取，分页展示。 
 
 ## 项目进度
 
