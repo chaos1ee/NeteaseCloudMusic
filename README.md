@@ -1,5 +1,8 @@
 # NeteaseCloudMusic 网易云音乐
 
+***
+本项目长时间没有维护，由于接口变动的原因，可能造成呈现或功能的差异或异常。
+***
 
 这是一个仿网易云音乐的PC端SPA项目，使用的框架与库主要包括vue、vuex、vue-router、element-ui、lodash、aixos。~~本项目现已部署到服务器，可以访问地址[http://lihaocloudmusic.co](http://lihaocloudmusic.co)预览。~~
 
@@ -42,6 +45,8 @@ npm run build
 1. 添加歌单到播放器列表（点击首页专辑封面的播放按钮:arrow_forward:，其他页面暂时不支持该功能）。
 2. 歌曲、歌词切换播放，音量调节。
 3. 歌单评论列表获取，分页展示。 
+4. 焦点图轮播。
+5. css动画。
 
 ## 项目进度
 
